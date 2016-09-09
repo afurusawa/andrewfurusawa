@@ -1,0 +1,210 @@
+@import 'https://fonts.googleapis.com/css?family=Dosis:300,400,700';
+@import 'https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,500,600';
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,700';
+
+html, table {
+  font-weight: normal;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input {
+  outline: none;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+  color: #555;
+}
+
+.intro {
+
+  /* The image used */
+  background-image: url("parallax.jpg");
+
+  /* Set a specific height */
+  min-height: 100vh;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+}
+.intro-text {
+
+    width: 100%;
+    position: absolute;
+    top: 20%;
+    text-align: center;
+    padding: 25px 0;
+    background-color: rgba(255, 255, 255, .2);
+
+    h1 {
+      margin: 0;
+
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 70px;
+      color: #333;
+    }
+}
+
+.about {
+
+  /* The image used */
+  background-image: url("cover.jpg");
+
+  /* Set a specific height */
+  min-height: 50vh;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.about-text {
+  //color: white;
+  //background-color: #e05252;
+
+  color: #000;
+  background-color: #fff;
+
+  text-align: center;
+
+  width: 100%;
+  margin: 0 auto;
+  padding: 50px 0;
+
+  h2, p {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 1.7em;
+    padding: 15px 0;
+  }
+}
+
+.work {
+
+  /* The image used */
+  //background-image: url("about.jpg");
+  //background-color: #ffc853;
+
+  color: #000;
+  background-color: #fff;
+
+  /* Set a specific height */
+  //min-height: 100vh;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  & > div {
+    display: inline-block;
+    padding: 80px 0;
+  }
+
+  h2 {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 35px;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: 'Open Sans', serif;
+    font-weight: 600;
+    font-size: 22px;
+  }
+
+  p {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7em;
+  }
+
+  .work__profile {
+    width: 50%;
+    text-align: center;
+
+    img {
+      width: 80%;
+    }
+  }
+  .work__description {
+    width: 50%;
+    vertical-align: top;
+  }
+
+  .work__social {
+
+    padding-top: 20px;
+
+    a {
+      color: #555;
+      font-size: 30px;
+
+      &:hover {
+
+      }
+      &:visited {
+        color: black;
+      }
+    }
+  }
+}
+
+.parallax {
+  /* The image used */
+  background-image: url("about.jpg");
+
+  /* Set a specific height */
+  min-height: 100vh;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+footer {
+  text-align: center;
+  padding: 25px 0;
+  width: 100%;
+
+  font-size: 14px;
+  color: #555;
+
+  p {
+    font-size: 14px;
+  }
+
+
+  .footer__social {
+    padding: 10px 0;
+  }
+}

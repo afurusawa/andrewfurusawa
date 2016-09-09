@@ -1,0 +1,20 @@
+{
+  "name": "andrewfurusawa",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "~1.0.0",
+    "express": "^4.14.0",
+    "hover.css": "^2.0.2",
+    "pug": "^0.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.0.3",
+    "grunt": "~0.4.5",
+    "grunt-contrib-pug": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-postcss": "^0.6.0",
+    "grunt-sass": "^1.0.0",
+    "matchdep": "~0.3.0"
+  }
+}
