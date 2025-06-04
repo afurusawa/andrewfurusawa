@@ -17,29 +17,29 @@ export default function ContactSection() {
             </p>
             <div className="flex flex-col gap-6">
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:andrewfurusawa@gmail.com"
                 className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
                 <SiGmail className="w-6 h-6" />
-                <span>your.email@example.com</span>
+                <span>andrewfurusawa@gmail.com</span>
               </a>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/afurusawa"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
                 <SiGithub className="w-6 h-6" />
-                <span>github.com/yourusername</span>
+                <span>github.com/afurusawa</span>
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/afurusawa"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
                 <SiLinkedin className="w-6 h-6" />
-                <span>linkedin.com/in/yourusername</span>
+                <span>linkedin.com/in/afurusawa</span>
               </a>
             </div>
           </div>
