@@ -1,7 +1,5 @@
-'use client';
-
 import React from 'react';
-import { SiNextdotjs, SiTailwindcss, SiPayloadcms, SiMongodb, SiGraphql } from 'react-icons/si';
+import { SiNextdotjs, SiTailwindcss, SiVercel } from 'react-icons/si';
 
 export default function Footer() {
   return (
@@ -31,31 +29,13 @@ export default function Footer() {
               <SiTailwindcss className="w-6 h-6" />
             </a>
             <a
-              href="https://payloadcms.com"
+              href="https://vercel.com"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[var(--color-secondary)] transition-colors duration-200"
-              title="Payload CMS"
+              title="Vercel"
             >
-              <SiPayloadcms className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.mongodb.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[var(--color-secondary)] transition-colors duration-200"
-              title="MongoDB"
-            >
-              <SiMongodb className="w-6 h-6" />
-            </a>
-            <a
-              href="https://graphql.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[var(--color-secondary)] transition-colors duration-200"
-              title="GraphQL"
-            >
-              <SiGraphql className="w-6 h-6" />
+              <SiVercel className="w-6 h-6" />
             </a>
           </div>
         </div>

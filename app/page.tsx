@@ -1,6 +1,11 @@
 'use client';
 
 import React from 'react';
+import { SiGithub, SiLinkedin } from 'react-icons/si';
+import SkillsSection from './components/SkillsSection';
+import ContactSection from './components/ContactSection';
+import Footer from './components/Footer';
+
 export default function Home() {
   return (
     <div className="container mx-auto p-16 border-2 border-[var(--color-primary)]  bg-white/5 backdrop-blur-sm shadow-lg">
@@ -21,16 +26,20 @@ export default function Home() {
             Front-End Developer
           </h3>
           <a href="https://github.com" className="transition-all duration-300 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200">
-            icon
+            <SiGithub className="w-8 h-8" />
           </a>
           <a href="https://linkedin.com" className="transition-all duration-300 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
-            icon
+            <SiLinkedin className="w-8 h-8" />
           </a>
         </div>
         <p className="text-2xl">
-          With over 12 years of front-end development experience, I enjoy building web applications, from discovery to production. I&apos;ve been a key player in all phases of the development process including usability testing, discovery and requirements gathering, prototyping, development, and deployment as well as release management and maintenance.
+          With over 12 years of front-end development experience, I enjoy building web applications from discovery to production. I&apos;ve been a key player in all phases of the development process including discovery and requirements gathering, usability testing, prototyping, development, and deployment as well as release management and maintenance.
         </p>
       </section>
+
+      <SkillsSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 }

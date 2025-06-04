@@ -1,17 +1,9 @@
 import React from 'react';
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { fonts } from './config/fonts';
+import BackgroundAnimation from './components/BackgroundAnimation';
+import ThemeToggle from './components/ThemeToggle';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://andrewfurusawa.com'),
@@ -25,11 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className={Object.values(fonts).map(font => font.variable).join(' ')}>
+      <body>
+      <BackgroundAnimation />
+        <main className="min-h-screen p-16">
+          <ThemeToggle />
+          {children}
+        </main>
       </body>
     </html>
   );

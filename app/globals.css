@@ -1,26 +1,114 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-header: 'DM Serif Display', serif;
+  --font-header-style: italic;
+  --font-header-weight: bold;
+  --font-h3: 'Contrail One', serif;
+  --font-h3-style: italic;
+  --font-h3-weight: normal;
+  --font-body: 'Spectral', serif;
+  --font-body-style: normal;
+  --font-body-weight: normal;
+  --letter-spacing: 0em;
+  --text-transform: none;
+  --color-primary: #111f27;
+  --color-secondary: #FF4A1C;
+}
+
+.dark {
+  --font-header: 'VT323', monospace;
+  --font-header-style: normal;
+  --font-header-weight: lighter;
+  --font-h3: 'Contrail One', serif;
+  --font-h3-style: normal;
+  --font-h3-weight: lighter;
+  --font-body: 'VT323', monospace;
+  --font-body-style: normal;
+  --font-body-weight: normal;
+  --letter-spacing: 0.05em;
+  --text-transform: uppercase;
+  --color-primary: #2ac932;
+  --color-secondary: #0F1A20;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  /* --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-geist-mono); */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* --background: #0a0a0a;
+    --foreground: #ededed; */
   }
+}
+
+
+@keyframes swirl {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-swirl {
+  animation: swirl 15s ease infinite;
+  background: linear-gradient(45deg, #FCFAF3, #E6EFFF, #F3E8FF, #FFF5E6, #FCFAF3);
+  background-size: 400%;
+}
+
+.dark .animate-swirl {
+  background: linear-gradient(45deg, #0d1111, #10171f, #1d1527, #1a130e, #0d1111);
+  background-size: 400%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2 {
+  color: var(--color-primary);
+  font-family: var(--font-header);
+  font-style: var(--font-header-style);
+  font-weight: var(--font-header-weight);
+  letter-spacing: var(--letter-spacing);
+  text-transform: var(--text-transform);
+}
+
+h3 {
+  font-family: var(--font-h3);
+  font-style: var(--font-h3-style);
+  font-weight: var(--font-h3-weight);
+  text-transform: uppercase;
+}
+
+p {
+  font-family: var(--font-body);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  letter-spacing: var(--letter-spacing);
+  text-transform: var(--text-transform);
+}
+
+input {
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  letter-spacing: var(--letter-spacing);
+  text-transform: var(--text-transform);
+  border-color: var(--color-primary);
 }
