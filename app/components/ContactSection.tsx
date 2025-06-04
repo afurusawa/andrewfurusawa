@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Mail, Github, Linkedin } from 'lucide-react';
+import { SiGmail, SiGithub, SiLinkedin } from 'react-icons/si';
 
 export default function ContactSection() {
   return (
@@ -20,7 +20,7 @@ export default function ContactSection() {
                 href="mailto:your.email@example.com"
                 className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
-                <Mail className="w-6 h-6" />
+                <SiGmail className="w-6 h-6" />
                 <span>your.email@example.com</span>
               </a>
               <a
@@ -29,7 +29,7 @@ export default function ContactSection() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
-                <Github className="w-6 h-6" />
+                <SiGithub className="w-6 h-6" />
                 <span>github.com/yourusername</span>
               </a>
               <a
@@ -38,7 +38,7 @@ export default function ContactSection() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
-                <Linkedin className="w-6 h-6" />
+                <SiLinkedin className="w-6 h-6" />
                 <span>linkedin.com/in/yourusername</span>
               </a>
             </div>
