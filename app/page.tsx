@@ -32,7 +32,7 @@ export default function Home() {
             <SiLinkedin className="w-8 h-8" />
           </a>
         </div>
-        <p className="text-2xl">
+        <p className="text-2xl text-[var(--color-primary)]">
           With over 12 years of front-end development experience, I enjoy building web applications from discovery to production. I&apos;ve been a key player in all phases of the development process including discovery and requirements gathering, usability testing, prototyping, development, and deployment as well as release management and maintenance.
         </p>
       </section>

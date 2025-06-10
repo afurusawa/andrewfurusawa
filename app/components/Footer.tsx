@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="py-16 border-t border-[var(--color-primary)]">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center gap-4">
-          <p className="text-md uppercase tracking-wider p-4">
+          <p className="text-md  text-[var(--color-primary)] uppercase tracking-wider p-4">
             Handmade with ❤️ by Me using
           </p>
           <div className="flex items-center gap-6">

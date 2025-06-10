@@ -39,13 +39,6 @@
   --font-mono: var(--font-geist-mono); */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --background: #0a0a0a;
-    --foreground: #ededed; */
-  }
-}
-
 
 @keyframes swirl {
   0% {
@@ -111,4 +104,21 @@ input {
   letter-spacing: var(--letter-spacing);
   text-transform: var(--text-transform);
   border-color: var(--color-primary);
+}
+
+/* Dark mode icon and element styling */
+.dark svg {
+  color: #2ac932;
+}
+
+.dark h3 {
+  color: #2ac932;
+}
+
+.dark button svg {
+  transition: color 0.2s ease;
+}
+
+.dark button:hover svg {
+  color: #22c55e;
 }

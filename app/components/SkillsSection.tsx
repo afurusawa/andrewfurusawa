@@ -217,9 +217,9 @@ export default function SkillsSection() {
         {skills.map((skill) => (
           <div key={skill.name} className="flex flex-col items-center justify-center border-0 border-red-500 w-32 h-32">
             <div className="flex items-center justify-center">
-              {React.cloneElement(skill.icon, { className: 'w-20 h-20' })}
+              {React.cloneElement(skill.icon, { className: 'w-20 h-20 text-[var(--color-primary)]' })}
             </div>
-            <p className="text-md uppercase mt-2">{skill.name}</p>
+            <p className="text-md uppercase mt-2 text-[var(--color-primary)]">{skill.name}</p>
           </div>
         ))}
       </div>

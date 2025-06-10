@@ -11,14 +11,14 @@ export default function ContactSection() {
           Connect with me
         </h2>
         <div className="max-w-2xl mx-auto">
-          <div className="p-8 border-2 border-[var(--color-primary)] dark:border-[var(--color-primary)] bg-white/5 backdrop-blur-sm shadow-lg">
+          <div className="p-8 border-2 border-[var(--color-primary)] text-[var(--color-primary)] dark:border-[var(--color-primary)] bg-white/5 backdrop-blur-sm shadow-lg">
             <p className="text-2xl mb-8">
               I&apos;m always open to new opportunities and collaborations. Feel free to reach out through any of the channels below.
             </p>
             <div className="flex flex-col gap-6">
               <a
                 href="mailto:andrewfurusawa@gmail.com"
-                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
+                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
                 <SiGmail className="w-6 h-6" />
                 <span>andrewfurusawa@gmail.com</span>
@@ -27,7 +27,7 @@ export default function ContactSection() {
                 href="https://github.com/afurusawa"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
+                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
                 <SiGithub className="w-6 h-6" />
                 <span>github.com/afurusawa</span>
@@ -36,7 +36,7 @@ export default function ContactSection() {
                 href="https://linkedin.com/in/afurusawa"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
+                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
               >
                 <SiLinkedin className="w-6 h-6" />
                 <span>linkedin.com/in/afurusawa</span>
