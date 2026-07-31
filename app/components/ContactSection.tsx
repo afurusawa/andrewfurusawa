@@ -1,7 +1,5 @@
-'use client';
-
-import React from 'react';
-import { SiGmail, SiGithub, SiLinkedin } from 'react-icons/si';
+import React from "react";
+import { SiGmail, SiGithub, SiLinkedin } from "react-icons/si";
 
 export default function ContactSection() {
   return (
@@ -47,4 +45,4 @@ export default function ContactSection() {
       </div>
     </section>
   );
-} 
+}

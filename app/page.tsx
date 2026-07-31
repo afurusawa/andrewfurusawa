@@ -1,10 +1,8 @@
-'use client';
-
-import React from 'react';
-import { SiGithub, SiLinkedin } from 'react-icons/si';
-import SkillsSection from './components/SkillsSection';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
+import React from "react";
+import { SiGithub, SiLinkedin } from "react-icons/si";
+import SkillsSection from "./components/SkillsSection";
+import ContactSection from "./components/ContactSection";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
