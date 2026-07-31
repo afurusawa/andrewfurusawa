@@ -1,35 +1,11 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { filterSkills } from "../lib/filterSkills";
-import { skillDomId } from "../lib/skillDomId";
+import React from "react";
+import { useSkillsFilter } from "./SkillsFilterContext";
 
-type SkillsFilterProps = {
-  skillNames: readonly string[];
-};
-
-export default function SkillsFilter({ skillNames }: SkillsFilterProps) {
-  const [query, setQuery] = useState("");
-
-  const matchedNames = useMemo(
-    () =>
-      new Set(
-        filterSkills(
-          skillNames.map((name) => ({ name })),
-          query,
-        ).map((skill) => skill.name),
-      ),
-    [query, skillNames],
-  );
-
-  useEffect(() => {
-    for (const name of skillNames) {
-      const el = document.getElementById(skillDomId(name));
-      if (el) {
-        el.hidden = !matchedNames.has(name);
-      }
-    }
-  }, [matchedNames, skillNames]);
+/** Filter control; matched visibility is applied by SkillTile via shared context. */
+export default function SkillsFilter() {
+  const { query, setQuery, emptyQuery } = useSkillsFilter();
 
   return (
     <>
@@ -47,12 +23,12 @@ export default function SkillsFilter({ skillNames }: SkillsFilterProps) {
           autoComplete="off"
         />
       </div>
-      {query.trim() !== "" && matchedNames.size === 0 ? (
+      {emptyQuery !== null ? (
         <p
           role="status"
           className="basis-full w-full text-lg text-[var(--color-primary)] mt-4 sm:mt-0"
         >
-          No skills match &ldquo;{query}&rdquo;.
+          No skills match &ldquo;{emptyQuery}&rdquo;.
         </p>
       ) : null}
     </>

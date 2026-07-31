@@ -1,8 +1,8 @@
 import React from "react";
-import { SiGithub, SiLinkedin } from "react-icons/si";
 import SkillsSection from "./components/SkillsSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import { socialProfileLinks } from "./config/profileLinks";
 
 export default function Home() {
   return (
@@ -15,24 +15,21 @@ export default function Home() {
           <p className="hero-role text-2xl sm:text-3xl md:text-4xl leading-none font-bold mr-0 sm:mr-4 mt-1">
             Front-End Developer
           </p>
-          <a
-            href="https://github.com/afurusawa"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Andrew Furusawa on GitHub"
-            className="transition-all duration-300 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
-          >
-            <SiGithub className="w-8 h-8" aria-hidden="true" />
-          </a>
-          <a
-            href="https://linkedin.com/in/afurusawa"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Andrew Furusawa on LinkedIn"
-            className="transition-all duration-300 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-          >
-            <SiLinkedin className="w-8 h-8" aria-hidden="true" />
-          </a>
+          {socialProfileLinks.map((link) => {
+            const Icon = link.Icon;
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                target={link.openInNewTab ? "_blank" : undefined}
+                rel={link.openInNewTab ? "noopener noreferrer" : undefined}
+                aria-label={link.ariaLabel}
+                className={link.heroClassName}
+              >
+                <Icon className="w-8 h-8" aria-hidden="true" />
+              </a>
+            );
+          })}
         </div>
         <p className="text-lg sm:text-xl md:text-2xl text-[var(--color-primary)]">
           With over 12 years of front-end development experience, I enjoy building web applications from discovery to production. I&apos;ve been a key player in all phases of the development process including discovery and requirements gathering, usability testing, prototyping, development, and deployment as well as release management and maintenance.

@@ -1,17 +1,14 @@
-export type NamedSkill = {
-  name: string;
-};
-
-export function filterSkills<T extends NamedSkill>(
-  skills: readonly T[],
+/**
+ * Filter skill names against a query, always starting from the full collection.
+ */
+export function filterSkillNames(
+  names: readonly string[],
   query: string,
-): T[] {
+): string[] {
   const normalized = query.trim().toLowerCase();
   if (normalized === "") {
-    return [...skills];
+    return [...names];
   }
 
-  return skills.filter((skill) =>
-    skill.name.toLowerCase().includes(normalized),
-  );
+  return names.filter((name) => name.toLowerCase().includes(normalized));
 }

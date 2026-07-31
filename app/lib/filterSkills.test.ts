@@ -1,33 +1,25 @@
 import { describe, expect, it } from "vitest";
-import { filterSkills } from "./filterSkills";
+import { filterSkillNames } from "./filterSkills";
 
-const skills = [
-  { name: "React" },
-  { name: "ReactiveX" },
-  { name: "Angular" },
-  { name: "Next.js" },
-];
+const skills = ["React", "ReactiveX", "Angular", "Next.js"];
 
-describe("filterSkills", () => {
+describe("filterSkillNames", () => {
   it("returns the full collection when the query is empty", () => {
-    expect(filterSkills(skills, "")).toEqual(skills);
+    expect(filterSkillNames(skills, "")).toEqual(skills);
   });
 
   it("matches skills case-insensitively against the full collection", () => {
-    expect(filterSkills(skills, "react")).toEqual([
-      { name: "React" },
-      { name: "ReactiveX" },
-    ]);
+    expect(filterSkillNames(skills, "react")).toEqual(["React", "ReactiveX"]);
   });
 
   it("replacing one query with another searches the complete collection", () => {
-    const afterReact = filterSkills(skills, "react");
-    expect(afterReact).toEqual([{ name: "React" }, { name: "ReactiveX" }]);
+    const afterReact = filterSkillNames(skills, "react");
+    expect(afterReact).toEqual(["React", "ReactiveX"]);
 
-    expect(filterSkills(skills, "angular")).toEqual([{ name: "Angular" }]);
+    expect(filterSkillNames(skills, "angular")).toEqual(["Angular"]);
   });
 
   it("returns an empty list when nothing matches", () => {
-    expect(filterSkills(skills, "cobol")).toEqual([]);
+    expect(filterSkillNames(skills, "cobol")).toEqual([]);
   });
 });
