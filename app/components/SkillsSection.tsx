@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { 
   FaAngular,
   FaReact,
@@ -40,8 +40,9 @@ import {
 } from "react-icons/si";
 import { RiNextjsFill } from "react-icons/ri";
 import { TbBrandOauth } from 'react-icons/tb';
+import { filterSkills } from '../lib/filterSkills';
 
-const data = [
+const allSkills = [
   {
     name: 'HTML',
     icon: <FaHtml5 />
@@ -185,44 +186,46 @@ const data = [
 ];
 
 export default function SkillsSection() {
-  const [skills, setSkills] = useState(data);
-
-  const handleFilterSkills = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const filteredSkills = e.target.value === '' 
-      ? data 
-      : skills.filter(skill => {
-          return skill.name.toLowerCase().includes(e.target.value.toLowerCase())
-        });
-    setSkills(filteredSkills);
-  }
+  const [query, setQuery] = useState('');
+  const skills = useMemo(() => filterSkills(allSkills, query), [query]);
 
   return (
-    <section id="skills">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-5xl">
+    <section id="skills" aria-labelledby="skills-heading">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+        <h2 id="skills-heading" className="text-4xl sm:text-5xl">
           Skills
         </h2>
-        <div className="relative">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="FILTER"
-              className="pr-4 pl-2 py-2 border-b-2 focus:outline-none text-xl font-spectral tracking-wider transition-colors duration-200"
-              onChange={handleFilterSkills}
-            />
-          </div>
+        <div className="relative w-full sm:w-auto min-w-0">
+          <label htmlFor="skills-filter" className="sr-only">
+            Filter skills
+          </label>
+          <input
+            id="skills-filter"
+            type="search"
+            placeholder="FILTER"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full sm:w-auto max-w-full pr-4 pl-2 py-2 border-b-2 text-xl font-spectral tracking-wider transition-colors duration-200"
+            autoComplete="off"
+          />
         </div>
       </div>
-      <div className="flex flex-wrap gap-4">
-        {skills.map((skill) => (
-          <div key={skill.name} className="flex flex-col items-center justify-center border-0 border-red-500 w-32 h-32">
-            <div className="flex items-center justify-center">
-              {React.cloneElement(skill.icon, { className: 'w-20 h-20 text-[var(--color-primary)]' })}
+      {skills.length === 0 ? (
+        <p role="status" className="text-lg text-[var(--color-primary)]">
+          No skills match &ldquo;{query}&rdquo;.
+        </p>
+      ) : (
+        <div className="flex flex-wrap gap-4 justify-center sm:justify-start">
+          {skills.map((skill) => (
+            <div key={skill.name} className="flex flex-col items-center justify-center w-28 h-28 sm:w-32 sm:h-32">
+              <div className="flex items-center justify-center" aria-hidden="true">
+                {React.cloneElement(skill.icon, { className: 'w-16 h-16 sm:w-20 sm:h-20 text-[var(--color-primary)]' })}
+              </div>
+              <p className="text-sm sm:text-md uppercase mt-2 text-[var(--color-primary)] text-center">{skill.name}</p>
             </div>
-            <p className="text-md uppercase mt-2 text-[var(--color-primary)]">{skill.name}</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
-} 
+}

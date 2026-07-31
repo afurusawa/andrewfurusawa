@@ -65,6 +65,31 @@
   background-size: 400%;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-swirl {
+    animation: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -81,7 +106,8 @@ h2 {
   text-transform: var(--text-transform);
 }
 
-h3 {
+h3,
+.hero-role {
   font-family: var(--font-h3);
   font-style: var(--font-h3-style);
   font-weight: var(--font-h3-weight);
@@ -94,6 +120,14 @@ p {
   font-weight: var(--font-body-weight);
   letter-spacing: var(--letter-spacing);
   text-transform: var(--text-transform);
+}
+
+p.hero-role {
+  font-family: var(--font-h3);
+  font-style: var(--font-h3-style);
+  font-weight: var(--font-h3-weight);
+  letter-spacing: normal;
+  text-transform: uppercase;
 }
 
 input {
@@ -111,7 +145,8 @@ input {
   color: #2ac932;
 }
 
-.dark h3 {
+.dark h3,
+.dark .hero-role {
   color: #2ac932;
 }
 

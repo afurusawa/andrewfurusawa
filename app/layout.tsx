@@ -19,8 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={Object.values(fonts).map(font => font.variable).join(' ')}>
       <body>
-      <BackgroundAnimation />
-        <main className="min-h-screen p-16">
+        <BackgroundAnimation />
+        <main className="min-h-screen p-4 sm:p-8 lg:p-16">
           <ThemeToggle />
           {children}
         </main>

@@ -5,9 +5,9 @@ import { SiGmail, SiGithub, SiLinkedin } from 'react-icons/si';
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-5xl mb-8 text-center">
+    <section id="contact" className="py-12 sm:py-20" aria-labelledby="contact-heading">
+      <div className="container mx-auto px-0 sm:px-4 max-w-full">
+        <h2 id="contact-heading" className="text-4xl sm:text-5xl mb-8 text-center">
           Connect with me
         </h2>
         <div className="max-w-2xl mx-auto">
@@ -18,28 +18,28 @@ export default function ContactSection() {
             <div className="flex flex-col gap-6">
               <a
                 href="mailto:andrewfurusawa@gmail.com"
-                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
+                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 min-w-0"
               >
-                <SiGmail className="w-6 h-6" />
-                <span>andrewfurusawa@gmail.com</span>
+                <SiGmail className="w-6 h-6 shrink-0" aria-hidden="true" />
+                <span className="break-all">andrewfurusawa@gmail.com</span>
               </a>
               <a
                 href="https://github.com/afurusawa"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
+                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 min-w-0"
               >
-                <SiGithub className="w-6 h-6" />
-                <span>github.com/afurusawa</span>
+                <SiGithub className="w-6 h-6 shrink-0" aria-hidden="true" />
+                <span className="break-all">github.com/afurusawa</span>
               </a>
               <a
                 href="https://linkedin.com/in/afurusawa"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
+                className="flex items-center gap-4 p-4 border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 min-w-0"
               >
-                <SiLinkedin className="w-6 h-6" />
-                <span>linkedin.com/in/afurusawa</span>
+                <SiLinkedin className="w-6 h-6 shrink-0" aria-hidden="true" />
+                <span className="break-all">linkedin.com/in/afurusawa</span>
               </a>
             </div>
           </div>

@@ -27,13 +27,16 @@ const ThemeToggle: React.FC = () => {
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
       className="fixed right-0 top-0 z-10 p-8"
+      aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+      aria-pressed={isDark}
     >
       {isDark ? (
-        <FaSun className="w-6 h-6 text-yellow-500" />
+        <FaSun className="w-6 h-6 text-yellow-500" aria-hidden="true" />
       ) : (
-        <FaMoon className="w-6 h-6 text-gray-700" />
+        <FaMoon className="w-6 h-6 text-gray-700" aria-hidden="true" />
       )}
     </button>
   );

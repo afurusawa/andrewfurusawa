@@ -15,27 +15,27 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[var(--color-secondary)] transition-colors duration-200"
-              title="Next.js"
+              aria-label="Next.js"
             >
-              <SiNextdotjs className="w-6 h-6" />
+              <SiNextdotjs className="w-6 h-6" aria-hidden="true" />
             </a>
             <a
               href="https://tailwindcss.com"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[var(--color-secondary)] transition-colors duration-200"
-              title="Tailwind CSS"
+              aria-label="Tailwind CSS"
             >
-              <SiTailwindcss className="w-6 h-6" />
+              <SiTailwindcss className="w-6 h-6" aria-hidden="true" />
             </a>
             <a
               href="https://vercel.com"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[var(--color-secondary)] transition-colors duration-200"
-              title="Vercel"
+              aria-label="Vercel"
             >
-              <SiVercel className="w-6 h-6" />
+              <SiVercel className="w-6 h-6" aria-hidden="true" />
             </a>
           </div>
         </div>
