@@ -1,14 +1,41 @@
-import React from 'react';
+import React from "react";
 import type { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
-import { fonts } from './config/fonts';
-import BackgroundAnimation from './components/BackgroundAnimation';
-import ThemeToggle from './components/ThemeToggle';
+import { fonts } from "./config/fonts";
+import {
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "./config/site";
+import BackgroundAnimation from "./components/BackgroundAnimation";
+import ThemeToggle from "./components/ThemeToggle";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://andrewfurusawa.com'),
-  title: "Andrew Furusawa - personal website",
-  description: "Portfolio website for Andrew Furusawa, front-end developer",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -24,6 +51,7 @@ export default function RootLayout({
           <ThemeToggle />
           {children}
         </main>
+        <SpeedInsights />
       </body>
     </html>
   );
