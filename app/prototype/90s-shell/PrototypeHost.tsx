@@ -8,15 +8,17 @@ import PrototypeSwitcher, {
 import VariantA from "./variants/VariantA";
 import VariantB from "./variants/VariantB";
 import VariantC from "./variants/VariantC";
+import VariantD from "./variants/VariantD";
 import "./prototype.css";
 
 /**
- * PROTOTYPE — three radically different /90s frames-feel shells.
- * Switch with ?variant=A|B|C or the floating bar (← →).
+ * PROTOTYPE — /90s frames-feel shells.
+ * Switch with ?variant=A|B|C|D or the floating bar (← →).
  *
  * A: classic left frame nav + content pane
- * B: top banner chrome + stacked cards
- * C: multi-pane collage + optional pack density
+ * B: top banner chrome + stacked cards (period max-width)
+ * C: multi-pane collage + optional pack density (kitsch/color)
+ * D: hybrid — B width (~1024 stage) + C kitsch/color
  */
 function PrototypeInner() {
   const variant = usePrototypeVariant();
@@ -31,6 +33,7 @@ function PrototypeInner() {
         {variant === "A" && <VariantA />}
         {variant === "B" && <VariantB />}
         {variant === "C" && <VariantC />}
+        {variant === "D" && <VariantD />}
       </div>
       <PrototypeSwitcher current={variant} />
     </div>

@@ -480,6 +480,146 @@
   }
 }
 
+/* --- Variant D: B width discipline + C kitsch/color (hybrid from feedback) --- */
+.p90-d {
+  min-height: 100%;
+  /* Starfield lives on the full bleed; stage is period-width */
+  background-color: #000;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, #00ff66 0, transparent 100%),
+    radial-gradient(1px 1px at 68% 58%, #00ffff 0, transparent 100%),
+    radial-gradient(1px 1px at 42% 82%, #ff00ff 0, transparent 100%),
+    radial-gradient(1px 1px at 88% 18%, #00ff66 0, transparent 100%),
+    radial-gradient(1px 1px at 8% 72%, #00ffff 0, transparent 100%),
+    radial-gradient(1px 1px at 52% 12%, #ffffff 0, transparent 100%),
+    radial-gradient(1px 1px at 30% 45%, #ff00ff 0, transparent 100%),
+    radial-gradient(1px 1px at 75% 35%, #00ff66 0, transparent 100%);
+  padding: 0.75rem 0.75rem 2.5rem;
+}
+
+.p90-d__stage {
+  max-width: 64rem; /* ~1024px period-friendly column */
+  width: 100%;
+  margin: 0 auto;
+  border: 3px solid var(--p90-purple);
+  box-shadow:
+    0 0 0 1px var(--p90-magenta),
+    0 0 28px rgba(102, 0, 204, 0.45),
+    inset 0 0 40px rgba(0, 255, 255, 0.04);
+  background: rgba(5, 7, 14, 0.92);
+  display: flex;
+  flex-direction: column;
+}
+
+.p90-d__banner {
+  text-align: center;
+  padding: 1rem 1rem 0.75rem;
+  border-bottom: 3px double var(--p90-magenta);
+  background: linear-gradient(180deg, #1a0033 0%, #05080f 100%);
+}
+
+.p90-d__banner .p90-radical {
+  color: var(--p90-cyan);
+  text-shadow:
+    0 0 10px rgba(0, 255, 255, 0.65),
+    0 0 20px rgba(255, 0, 255, 0.35),
+    2px 2px 0 var(--p90-purple);
+}
+
+.p90-d__navrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  border-bottom: 2px solid var(--p90-cyan);
+  background: linear-gradient(90deg, #001a12, #0a0018, #001a12);
+}
+
+.p90-d__navrow a {
+  padding: 0.4rem 0.9rem;
+  text-decoration: none;
+  min-width: 6.5rem;
+  text-align: center;
+}
+
+.p90-d__navrow a:nth-child(1) {
+  border-color: #8cffb8 #003d1f #003d1f #8cffb8;
+}
+.p90-d__navrow a:nth-child(2) {
+  border-color: #9cf #036 #036 #9cf;
+  background: linear-gradient(180deg, #123040 0%, #0a1a22 100%);
+  color: var(--p90-cyan);
+}
+.p90-d__navrow a:nth-child(3) {
+  border-color: #f9f #603 #603 #f9f;
+  background: linear-gradient(180deg, #301230 0%, #1a0a1a 100%);
+  color: var(--p90-magenta);
+}
+
+.p90-d__pack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 0, 255, 0.35);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.p90-d__main {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.p90-d__pane {
+  border: 2px solid var(--p90-green);
+  box-shadow:
+    0 0 14px rgba(102, 0, 204, 0.4),
+    inset 0 0 0 1px rgba(0, 255, 255, 0.12);
+  background: rgba(11, 14, 26, 0.95);
+}
+
+.p90-d__pane--skills {
+  border-color: var(--p90-cyan);
+}
+
+.p90-d__pane--contact {
+  border-color: var(--p90-magenta);
+}
+
+.p90-d__pane-bar {
+  padding: 0.35rem 0.65rem;
+  background: linear-gradient(90deg, #1a0033, #001a12 55%, #003344);
+  border-bottom: 1px solid var(--p90-magenta);
+  color: var(--p90-cyan);
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.p90-d__pane-bar span:last-child {
+  color: var(--p90-magenta);
+  font-size: 0.85rem;
+}
+
+.p90-d__pane-body {
+  padding: 0.85rem 0.9rem;
+}
+
+.p90-d__counter-wrap {
+  font-size: 0.9rem;
+  color: var(--p90-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .p90-radical {
     text-shadow: 2px 2px 0 var(--p90-purple);

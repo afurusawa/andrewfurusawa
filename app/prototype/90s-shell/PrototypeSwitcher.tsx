@@ -3,18 +3,19 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 
-export type VariantKey = "A" | "B" | "C";
+export type VariantKey = "A" | "B" | "C" | "D";
 
 export const VARIANT_META: Record<VariantKey, string> = {
   A: "Left Frame Classic",
   B: "Top Banner Stack",
   C: "Multi-Pane Collage",
+  D: "Width + Kitsch Hybrid",
 };
 
-const ORDER: VariantKey[] = ["A", "B", "C"];
+const ORDER: VariantKey[] = ["A", "B", "C", "D"];
 
 function isVariant(v: string | null): v is VariantKey {
-  return v === "A" || v === "B" || v === "C";
+  return v === "A" || v === "B" || v === "C" || v === "D";
 }
 
 export function usePrototypeVariant(): VariantKey {
