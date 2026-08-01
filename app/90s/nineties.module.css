@@ -1,0 +1,429 @@
+.experiment {
+  --bg: #000;
+  --panel: #0b0e1a;
+  --panel-deep: #05080f;
+  --cyan: #00ffff;
+  --green: #00ff66;
+  --magenta: #ff00ff;
+  --purple: #6600cc;
+  --muted: #7dffb0;
+
+  min-height: 100vh;
+  padding: 0.75rem 0.75rem 2.5rem;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, var(--green) 0, transparent 100%),
+    radial-gradient(1px 1px at 68% 58%, var(--cyan) 0, transparent 100%),
+    radial-gradient(1px 1px at 42% 82%, var(--magenta) 0, transparent 100%),
+    radial-gradient(1px 1px at 88% 18%, var(--green) 0, transparent 100%),
+    radial-gradient(1px 1px at 8% 72%, var(--cyan) 0, transparent 100%),
+    radial-gradient(1px 1px at 52% 12%, #fff 0, transparent 100%),
+    radial-gradient(1px 1px at 30% 45%, var(--magenta) 0, transparent 100%),
+    radial-gradient(1px 1px at 75% 35%, var(--green) 0, transparent 100%),
+    radial-gradient(circle, rgb(0 255 102 / 72%) 0.55px, transparent 0.8px),
+    radial-gradient(circle, rgb(0 255 255 / 68%) 0.5px, transparent 0.75px),
+    radial-gradient(circle, rgb(255 0 255 / 55%) 0.45px, transparent 0.7px);
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0.5rem 1.1rem,
+    1.8rem 0.4rem,
+    0.9rem 2.3rem;
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    3.7rem 4.1rem,
+    5.3rem 5.9rem,
+    7.1rem 6.7rem;
+  color: var(--green);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.125rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.experiment *,
+.experiment *::before,
+.experiment *::after {
+  box-sizing: border-box;
+}
+
+.experiment p,
+.experiment a,
+.experiment li {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+.stage {
+  width: 100%;
+  max-width: 64rem;
+  margin: 0 auto;
+  border: 3px solid var(--purple);
+  background: color-mix(in srgb, var(--panel-deep) 92%, transparent);
+  box-shadow:
+    0 0 0 1px var(--magenta),
+    0 0 28px rgb(102 0 204 / 45%),
+    inset 0 0 40px rgb(0 255 255 / 4%);
+}
+
+.banner {
+  padding: 1rem 1rem 0.75rem;
+  border-bottom: 3px double var(--magenta);
+  background: linear-gradient(180deg, #1a0033, var(--panel-deep));
+  text-align: center;
+}
+
+.banner h1 {
+  margin: 0;
+  color: var(--cyan);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 10px rgb(0 255 255 / 65%),
+    0 0 20px rgb(255 0 255 / 35%),
+    2px 2px 0 var(--purple);
+}
+
+.eyebrow,
+.tagline,
+.microcopy {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.tagline {
+  margin-top: 0.35rem;
+  color: var(--magenta);
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 2px solid var(--cyan);
+  background: linear-gradient(90deg, #001a12, #0a0018, #001a12);
+}
+
+.navigationLink,
+.profileLink {
+  color: var(--green);
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.skillsTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--green);
+  font: inherit;
+}
+
+.skillsTable caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skillsTable th,
+.skillsTable td {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--green);
+  text-align: left;
+}
+
+.skillsTable th {
+  color: var(--cyan);
+  background: rgb(0 255 102 / 12%);
+}
+
+.skillsTable td:first-child,
+.skillsTable td:last-child {
+  white-space: nowrap;
+}
+
+.skillsTable td:last-child {
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.skillsTable svg {
+  vertical-align: -0.12em;
+}
+
+.navigationLink {
+  min-width: 6.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 3px solid;
+  border-color: #8cffb8 #003d1f #003d1f #8cffb8;
+  background: linear-gradient(180deg, #12301f, #0a1a12);
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 0 6px rgb(0 255 102 / 35%);
+}
+
+.navigationLink:nth-child(2) {
+  border-color: #9cf #036 #036 #9cf;
+  background: linear-gradient(180deg, #123040, #0a1a22);
+  color: var(--cyan);
+}
+
+.navigationLink:nth-child(3),
+.contactLinks .profileLink {
+  border-color: #f9f #603 #603 #f9f;
+  background: linear-gradient(180deg, #301230, #1a0a1a);
+  color: var(--magenta);
+}
+
+.navigationLink:hover,
+.profileLink:hover {
+  color: var(--magenta);
+}
+
+.navigationLink:focus-visible,
+.profileLink:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px var(--purple);
+}
+
+.hitCounter {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hitDigits {
+  display: inline-flex;
+  gap: 2px;
+  letter-spacing: 0.12em;
+}
+
+.hitDigits span {
+  min-width: 1.1em;
+  padding: 0.1em 0.15em;
+  border: 1px solid var(--green);
+  background: #001a0a;
+  color: var(--green);
+  text-align: center;
+}
+
+.optionalPack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgb(255 0 255 / 35%);
+  background: rgb(0 0 0 / 55%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.cautionStrip {
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #ffcc00;
+  background: #332200;
+  color: #ffcc00;
+  font-size: 0.85rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border: 2px outset #c0c0c0;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.htmlBadge {
+  background: #1a1a1a;
+  color: #ff6b6b;
+}
+
+.coolBadge {
+  background: #003366;
+  color: #ffd700;
+}
+
+.hackBadge {
+  background: #220000;
+  color: #ff6688;
+}
+
+.panes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem;
+}
+
+.pane {
+  scroll-margin-top: 0.75rem;
+  border: 2px solid var(--green);
+  background: rgb(11 14 26 / 95%);
+  box-shadow:
+    0 0 14px rgb(102 0 204 / 40%),
+    inset 0 0 0 1px rgb(0 255 255 / 12%);
+}
+
+.skillsPane {
+  border-color: var(--cyan);
+}
+
+.contactPane {
+  border-color: var(--magenta);
+}
+
+.paneBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.35rem 0.65rem;
+  border-bottom: 1px solid var(--magenta);
+  background: linear-gradient(90deg, #1a0033, #001a12 55%, #003344);
+  color: var(--cyan);
+  font-size: 0.95rem;
+}
+
+.paneBar h2 {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.paneBar span {
+  color: var(--magenta);
+  font-size: 0.85rem;
+}
+
+.paneBody {
+  padding: 0.85rem 0.9rem;
+}
+
+.paneBody p:not(.microcopy) {
+  margin-bottom: 0;
+}
+
+.identity {
+  margin-top: 0.75rem;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.identity span {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.socialLinks,
+.contactLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profileLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+.contactLinks .profileLink {
+  padding: 0.35rem 0.7rem;
+  border: 3px solid;
+  text-decoration: none;
+}
+
+.contactLinks .profileLink:hover {
+  color: var(--cyan);
+}
+
+.footer {
+  padding: 0.75rem 1rem;
+  border-top: 2px solid var(--purple);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@media (max-width: 34rem) {
+  .experiment {
+    padding-inline: 0.4rem;
+  }
+
+  .navigation {
+    padding-inline: 0.5rem;
+  }
+
+  .navigationLink {
+    flex: 1 1 6.5rem;
+  }
+
+  .hitCounter {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .paneBar {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage {
+    box-shadow: 0 0 0 1px var(--magenta);
+  }
+
+  .banner h1 {
+    text-shadow: 2px 2px 0 var(--purple);
+  }
+
+  .navigationLink {
+    text-shadow: none;
+  }
+
+  .pane {
+    box-shadow: inset 0 0 0 1px rgb(0 255 255 / 12%);
+  }
+}
