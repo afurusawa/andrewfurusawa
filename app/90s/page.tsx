@@ -17,6 +17,8 @@ const identity = {
   role: "Front-End Developer",
 } as const;
 
+const cosmeticHitCount = "001337";
+
 function ProfileLinkList({
   links,
   className,
@@ -66,7 +68,24 @@ export default function NinetiesExperiment() {
             {item.label}
           </a>
         ))}
+        <div className={styles.hitCounter} aria-hidden="true">
+          <span>hits</span>
+          <span className={styles.hitDigits}>
+            {cosmeticHitCount.split("").map((digit, index) => (
+              <span key={`${digit}-${index}`}>{digit}</span>
+            ))}
+          </span>
+        </div>
       </nav>
+
+      <aside className={styles.optionalPack} aria-hidden="true">
+        <span className={styles.cautionStrip}>
+          ⚠ Under construction — please be patient
+        </span>
+        <span className={`${styles.badge} ${styles.htmlBadge}`}>I ♥ HTML</span>
+        <span className={`${styles.badge} ${styles.coolBadge}`}>100% COOL</span>
+        <span className={`${styles.badge} ${styles.hackBadge}`}>HACK THE PLANET</span>
+      </aside>
 
       <div className={styles.panes}>
         <section className={styles.pane} id="about" aria-labelledby="about-heading">
@@ -139,6 +158,7 @@ export default function NinetiesExperiment() {
             <span>Open channels</span>
           </div>
           <div className={styles.paneBody}>
+            <p className={styles.microcopy}>Ping me on the period-legal channels:</p>
             <ProfileLinkList
               links={contactLinks}
               className={styles.contactLinks}
@@ -146,6 +166,11 @@ export default function NinetiesExperiment() {
           </div>
         </section>
       </div>
+
+      <footer className={styles.footer}>
+        Best viewed at 1024×768 · Built with notepad energy · No web ring
+        membership
+      </footer>
     </main>
   );
 }

@@ -198,7 +198,8 @@
   color: var(--cyan);
 }
 
-.navigationLink:nth-child(3) {
+.navigationLink:nth-child(3),
+.contactLinks .profileLink {
   border-color: #f9f #603 #603 #f9f;
   background: linear-gradient(180deg, #301230, #1a0a1a);
   color: var(--magenta);
@@ -214,6 +215,75 @@
   outline: 3px solid var(--cyan);
   outline-offset: 3px;
   box-shadow: 0 0 0 5px var(--purple);
+}
+
+.hitCounter {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hitDigits {
+  display: inline-flex;
+  gap: 2px;
+  letter-spacing: 0.12em;
+}
+
+.hitDigits span {
+  min-width: 1.1em;
+  padding: 0.1em 0.15em;
+  border: 1px solid var(--green);
+  background: #001a0a;
+  color: var(--green);
+  text-align: center;
+}
+
+.optionalPack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgb(255 0 255 / 35%);
+  background: rgb(0 0 0 / 55%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.cautionStrip {
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #ffcc00;
+  background: #332200;
+  color: #ffcc00;
+  font-size: 0.85rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border: 2px outset #c0c0c0;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.htmlBadge {
+  background: #1a1a1a;
+  color: #ff6b6b;
+}
+
+.coolBadge {
+  background: #003366;
+  color: #ffd700;
+}
+
+.hackBadge {
+  background: #220000;
+  color: #ff6688;
 }
 
 .panes {
@@ -298,6 +368,24 @@
   text-underline-offset: 0.15em;
 }
 
+.contactLinks .profileLink {
+  padding: 0.35rem 0.7rem;
+  border: 3px solid;
+  text-decoration: none;
+}
+
+.contactLinks .profileLink:hover {
+  color: var(--cyan);
+}
+
+.footer {
+  padding: 0.75rem 1rem;
+  border-top: 2px solid var(--purple);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
 @media (max-width: 34rem) {
   .experiment {
     padding-inline: 0.4rem;
@@ -309,6 +397,11 @@
 
   .navigationLink {
     flex: 1 1 6.5rem;
+  }
+
+  .hitCounter {
+    width: 100%;
+    justify-content: center;
   }
 
   .paneBar {
