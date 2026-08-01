@@ -294,6 +294,7 @@
 }
 
 .pane {
+  scroll-margin-top: 0.75rem;
   border: 2px solid var(--green);
   background: rgb(11 14 26 / 95%);
   box-shadow:
