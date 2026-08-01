@@ -1,8 +1,8 @@
 import React from "react";
-import SkillsSection from "./components/SkillsSection";
-import ContactSection from "./components/ContactSection";
-import Footer from "./components/Footer";
-import { socialProfileLinks } from "./config/profileLinks";
+import SkillsSection from "../components/SkillsSection";
+import ContactSection from "../components/ContactSection";
+import Footer from "../components/Footer";
+import { socialProfileLinks } from "../config/profileLinks";
 
 export default function Home() {
   return (
