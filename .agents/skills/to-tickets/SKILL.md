@@ -59,12 +59,19 @@ Iterate until the user approves the breakdown.
 
 Publish the approved tickets. **How** depends on the tracker `/setup-matt-pocock-skills` configured — the tickets are the same either way, only the shape of the blocking edges changes:
 
-- **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the numbers/titles it depends on. Use the per-ticket file template below — one ticket per file, never a single combined file.
-- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking / sub-issue relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. Apply the `ready-for-agent` triage label unless instructed otherwise — the tickets are agent-grabbable by construction.
+- **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the numbers/titles it depends on. Use the per-ticket file template below — one ticket per file, never a single combined file. If the source was a parent plan/spec file, keep tickets under that feature slug so the hierarchy is obvious on disk.
+- **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Apply the `ready-for-agent` triage label unless instructed otherwise — the tickets are agent-grabbable by construction.
+
+**Parent hierarchy (required when the source is a spec/PRD issue):**
+
+- Every implementation ticket **must** be a **native sub-issue** of the parent spec issue. Body “Parent” / `Part of #N` links alone are not enough.
+- On GitHub: create with `--parent <spec>` when available, or `POST .../issues/<spec>/sub_issues` with JSON `{"sub_issue_id": <child-database-id>}` (integer database id from the child issue’s `.id`, not the `#number`).
+- Also wire **blocking** edges between tickets with the tracker’s native blocked-by API (JSON integer blocker database ids). Sub-issue parent ≠ dependency blocker.
+- Consult the tracker doc’s “Specs and implementation tickets” section for exact commands.
 
 Work the **frontier**: any ticket whose blockers are all done. For a purely linear chain that means top to bottom.
 
-Do NOT close or modify any parent issue.
+Do NOT close or rewrite the parent spec body when publishing tickets — only attach sub-issues and wire blockers.
 
 <local-ticket-template>
 
@@ -85,7 +92,7 @@ Do NOT close or modify any parent issue.
 
 ## Parent
 
-A reference to the parent issue on the tracker (if the source was an existing issue, otherwise omit this section).
+Required when tickets are cut from a spec/PRD: link the parent issue (e.g. `Part of #<spec>`). On GitHub this is in addition to the native sub-issue link under that parent.
 
 ## What to build
 
