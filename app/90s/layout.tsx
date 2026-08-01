@@ -1,18 +1,9 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import styles from "./nineties.module.css";
+import { ninetiesMetadata } from "./metadata";
 
-export const metadata: Metadata = {
-  title: "Andrew Furusawa /90s",
-  description: "A private portfolio experiment by Andrew Furusawa.",
-  alternates: {
-    canonical: "/90s",
-  },
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+export const metadata = ninetiesMetadata;
 
 export default function NinetiesLayout({ children }: { children: ReactNode }) {
-  return children;
+  return <div className={styles.experiment}>{children}</div>;
 }
