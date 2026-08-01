@@ -3,6 +3,7 @@ import {
   socialProfileLinks,
   type ProfileLink,
 } from "../config/profileLinks";
+import { skills } from "../config/skills";
 import styles from "./nineties.module.css";
 
 const navigationItems = [
@@ -102,9 +103,33 @@ export default function NinetiesExperiment() {
             <span>Signal acquired</span>
           </div>
           <div className={styles.paneBody}>
-            <p className={styles.microcopy}>
-              The full skills transmission is being decoded.
-            </p>
+            <div className={styles.tableScroll}>
+              <table className={styles.skillsTable}>
+                <caption>Andrew Furusawa&apos;s skills catalogue</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Skill</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {skills.map((skill, index) => {
+                    const Icon = skill.icon;
+
+                    return (
+                      <tr key={skill.name}>
+                        <td>{String(index + 1).padStart(2, "0")}</td>
+                        <td>
+                          <Icon aria-hidden="true" /> {skill.name}
+                        </td>
+                        <td>online</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
 

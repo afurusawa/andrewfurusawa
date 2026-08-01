@@ -132,6 +132,55 @@
   color: var(--green);
 }
 
+.tableScroll {
+  overflow-x: auto;
+}
+
+.skillsTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--green);
+  font: inherit;
+}
+
+.skillsTable caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skillsTable th,
+.skillsTable td {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--green);
+  text-align: left;
+}
+
+.skillsTable th {
+  color: var(--cyan);
+  background: rgb(0 255 102 / 12%);
+}
+
+.skillsTable td:first-child,
+.skillsTable td:last-child {
+  white-space: nowrap;
+}
+
+.skillsTable td:last-child {
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.skillsTable svg {
+  vertical-align: -0.12em;
+}
+
 .navigationLink {
   min-width: 6.5rem;
   padding: 0.4rem 0.9rem;
