@@ -18,9 +18,12 @@
   --p90-display: var(--font-vt323), "Courier New", Courier, monospace;
   --p90-read: var(--p90-display);
   --p90-font: var(--p90-read);
-  --p90-read-size: 1.35rem;
+  --p90-read-size: 1.5rem;
   --p90-read-tracking: 0.02em;
   --p90-read-leading: 1.5;
+  /* Nothing in the design under test renders below this. Every derived size
+     is max(--p90-min, ...) so shrinking a label can never cross the floor. */
+  --p90-min: 0.875rem;
 
   position: fixed;
   inset: 0;
@@ -48,7 +51,7 @@
 .p90-root[data-font="mono"] {
   --p90-read: ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas,
     "Courier New", monospace;
-  --p90-read-size: 1rem;
+  --p90-read-size: 1.125rem;
   --p90-read-tracking: 0.01em;
   --p90-read-leading: 1.55;
 }
@@ -73,12 +76,20 @@
   letter-spacing: 0.06em;
 }
 
-/* The section title is the one place the pixel face still earns its keep — it
-   is read as a mark, not as text. It sits outside the legibility axis in every
-   mode, so this has to outrank the per-mode rules above. */
-.p90-root[data-font] .p90-radical {
+/* Where the pixel face still earns its keep: the section title and the category
+   headings. Both are read as marks rather than as text — short, uppercase, and
+   scanned rather than parsed — so they sit outside the legibility axis in every
+   mode. This has to outrank the per-mode rules above. */
+.p90-root[data-font] .p90-radical,
+.p90-root[data-font] .p90-b__group-head {
   font-family: var(--p90-display);
   letter-spacing: 0.06em;
+}
+
+/* ...but the count riding along in the heading is text, so it stays readable. */
+.p90-root[data-font] .p90-b__group-head span {
+  font-family: var(--p90-read);
+  letter-spacing: var(--p90-read-tracking);
 }
 
 /* The green glow is what smears the small type. Keep it for display sizes,
@@ -136,13 +147,13 @@
 
 .p90-tagline {
   color: var(--p90-magenta);
-  font-size: 1rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.85));
   margin: 0.25rem 0 0;
 }
 
 .p90-micro {
   color: var(--p90-muted);
-  font-size: 0.95rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.8));
 }
 
 .p90-bevel {
@@ -231,7 +242,7 @@
   background: linear-gradient(90deg, #1a0033, #001a12 55%, #003344);
   border-bottom: 1px solid var(--p90-magenta);
   color: var(--p90-cyan);
-  font-size: 0.95rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.8));
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
@@ -240,7 +251,7 @@
 
 .p90-pane__bar span:last-child {
   color: var(--p90-magenta);
-  font-size: 0.85rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.72));
 }
 
 .p90-pane__body {
@@ -255,7 +266,7 @@
   align-items: center;
   padding: 0.5rem 0.9rem;
   border-bottom: 1px dashed rgba(0, 255, 255, 0.3);
-  font-size: 0.9rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.78));
   color: var(--p90-muted);
 }
 
@@ -268,7 +279,7 @@
 .p90-a__table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.9));
 }
 
 .p90-a__table th,
@@ -295,7 +306,7 @@
 
 .p90-a__slug {
   color: var(--p90-muted);
-  font-size: 0.9rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.78));
 }
 
 .p90-a__status--note {
@@ -322,7 +333,7 @@
 
 .p90-a__summary {
   color: var(--p90-muted);
-  font-size: 0.9rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.78));
 }
 
 /* --- Variant B: tile wall grouped by category --- */
@@ -338,11 +349,14 @@
   border-bottom: 1px solid rgba(255, 0, 255, 0.4);
   padding-bottom: 0.2rem;
   margin-bottom: 0.6rem;
+  /* Pixel face renders small for its point size, so the heading is sized up to
+     sit clearly above the tile labels underneath it. */
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 1.2));
 }
 
 .p90-b__group-head span {
   color: var(--p90-muted);
-  font-size: calc(var(--p90-read-size) * 0.7);
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.7));
 }
 
 .p90-b__wall {
@@ -364,7 +378,7 @@
   border-color: #8cffb8 #003d1f #003d1f #8cffb8;
   background: linear-gradient(180deg, #12301f 0%, #0a1a12 100%);
   color: var(--p90-green);
-  font-size: calc(var(--p90-read-size) * 0.85);
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.85));
   line-height: 1.2;
 }
 
@@ -392,7 +406,7 @@
 }
 
 .p90-b__tile-flag {
-  font-size: calc(var(--p90-read-size) * 0.62);
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.62));
   color: var(--p90-magenta);
   letter-spacing: 0.08em;
 }
@@ -425,7 +439,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1.15rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 1));
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -438,19 +452,19 @@
 
 .p90-c__note-body {
   color: var(--p90-muted);
-  font-size: 0.95rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.82));
   text-decoration: none;
 }
 
 .p90-c__note-meta {
   margin-top: auto;
   color: var(--p90-magenta);
-  font-size: 0.8rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.72));
   letter-spacing: 0.08em;
 }
 
 .p90-c__run {
-  font-size: 1rem;
+  font-size: max(var(--p90-min), calc(var(--p90-read-size) * 0.9));
   line-height: 1.9;
   color: var(--p90-muted);
 }
