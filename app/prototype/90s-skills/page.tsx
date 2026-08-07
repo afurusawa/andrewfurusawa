@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import PrototypeSwitcher from "./PrototypeSwitcher";
-import { VARIANT_META, type VariantKey } from "./variants";
+import {
+  FONT_META,
+  isFontKey,
+  VARIANT_META,
+  type FontKey,
+  type VariantKey,
+} from "./variants";
 import VariantA from "./variants/VariantA";
 import VariantB from "./variants/VariantB";
 import VariantC from "./variants/VariantC";
@@ -34,24 +40,27 @@ export const metadata: Metadata = {
 export default async function Prototype90sSkillsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ variant?: string }>;
+  searchParams: Promise<{ variant?: string; font?: string }>;
 }) {
-  const raw = (await searchParams).variant;
+  const params = await searchParams;
+  const raw = params.variant;
   const variant: VariantKey = raw === "B" || raw === "C" ? raw : "A";
+  const font: FontKey = isFontKey(params.font) ? params.font : "pixel";
 
   return (
-    <div className="p90-root" data-variant={variant}>
+    <div className="p90-root" data-variant={variant} data-font={font}>
       <div className="p90-banner-note">
         PROTOTYPE — /90s Skills directory · variant {variant} (
-        {VARIANT_META[variant]}) · {CATALOGUE.length} skills, {PUBLISH_SET.length}{" "}
-        with notes · use bar or ← →
+        {VARIANT_META[variant]}) · type: {font} ({FONT_META[font]}) ·{" "}
+        {CATALOGUE.length} skills, {PUBLISH_SET.length} with notes · ← → variant,
+        ↑ ↓ type
       </div>
       <div style={{ paddingTop: "1.5rem", minHeight: "100%" }}>
         {variant === "A" && <VariantA />}
         {variant === "B" && <VariantB />}
         {variant === "C" && <VariantC />}
       </div>
-      <PrototypeSwitcher current={variant} />
+      <PrototypeSwitcher current={variant} font={font} />
     </div>
   );
 }
