@@ -64,7 +64,7 @@
   letter-spacing: 0.05em;
 }
 
-/* mono: only the big title stays pixel, everything else is plain mono */
+/* mono: everything is plain mono except the display heading */
 .p90-root[data-font="mono"] h2,
 .p90-root[data-font="mono"] h3,
 .p90-root[data-font="mono"] .p90-pane__bar,
@@ -73,8 +73,12 @@
   letter-spacing: 0.06em;
 }
 
-.p90-radical {
+/* The section title is the one place the pixel face still earns its keep — it
+   is read as a mark, not as text. It sits outside the legibility axis in every
+   mode, so this has to outrank the per-mode rules above. */
+.p90-root[data-font] .p90-radical {
   font-family: var(--p90-display);
+  letter-spacing: 0.06em;
 }
 
 /* The green glow is what smears the small type. Keep it for display sizes,
