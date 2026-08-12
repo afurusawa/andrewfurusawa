@@ -4,7 +4,8 @@ export type SecurityHeader = {
 };
 
 /**
- * Browser security headers for the public portfolio.
+ * Browser security headers applied to every path, plus experiment
+ * discoverability headers attached only to `/90s` and `/90s/:path*`.
  * CSP is intentionally compatible with Next.js App Router assets and
  * Vercel Speed Insights reporting endpoints.
  */
@@ -42,6 +43,29 @@ export const securityHeaders: SecurityHeader[] = [
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
+  },
+];
+
+export const experimentRobotsHeader: SecurityHeader = {
+  key: "X-Robots-Tag",
+  value: "noindex, nofollow",
+};
+
+export const pathHeaders: {
+  source: string;
+  headers: SecurityHeader[];
+}[] = [
+  {
+    source: "/:path*",
+    headers: securityHeaders,
+  },
+  {
+    source: "/90s",
+    headers: [experimentRobotsHeader],
+  },
+  {
+    source: "/90s/:path*",
+    headers: [experimentRobotsHeader],
   },
 ];
 

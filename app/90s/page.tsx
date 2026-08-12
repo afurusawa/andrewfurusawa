@@ -4,7 +4,10 @@ import {
   type ProfileLink,
 } from "../config/profileLinks";
 import { skills } from "../config/skills";
+import { ninetiesHubMetadata } from "./metadata";
 import styles from "./nineties.module.css";
+
+export const metadata = ninetiesHubMetadata;
 
 const navigationItems = [
   { href: "#about", label: "About" },
