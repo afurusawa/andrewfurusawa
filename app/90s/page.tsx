@@ -137,7 +137,7 @@ export default function NinetiesExperiment() {
                     const Icon = skill.icon;
 
                     return (
-                      <tr key={skill.name}>
+                      <tr key={skill.slug}>
                         <td>{String(index + 1).padStart(2, "0")}</td>
                         <td>
                           <Icon aria-hidden="true" /> {skill.name}
