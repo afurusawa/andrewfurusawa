@@ -21,7 +21,7 @@ export default function SkillsSection() {
           {skills.map((skill) => {
             const Icon = skill.icon;
             return (
-              <SkillTile key={skill.name} name={skill.name}>
+              <SkillTile key={skill.slug} name={skill.name} slug={skill.slug}>
                 <div className="flex items-center justify-center" aria-hidden="true">
                   <Icon className="w-16 h-16 sm:w-20 sm:h-20 text-[var(--color-primary)]" />
                 </div>
