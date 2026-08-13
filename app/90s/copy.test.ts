@@ -4,6 +4,7 @@ import {
   CONTACT_LEAD_IN,
   EYEBROW,
   HUB_HEADING,
+  SKILLS_HELPER,
   WORK_HELPER,
 } from "./copy";
 
@@ -24,6 +25,12 @@ describe("/90s voice-law copy", () => {
   it("explains link-free work with the locked helper", () => {
     expect(WORK_HELPER).toBe(
       "Client work, so there's nothing public to link. The stacks below are.",
+    );
+  });
+
+  it("states the publish-set split with the locked skills helper", () => {
+    expect(SKILLS_HELPER).toBe(
+      "Skills with a note are links. The rest are here for the record.",
     );
   });
 

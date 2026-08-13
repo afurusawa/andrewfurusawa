@@ -39,6 +39,7 @@ Pure functions, no React, no side effects — this is what the node-environment 
 | Path | Holds |
 |------|-------|
 | `app/lib/filterSkills.ts` | Skills filtering for the homepage filter UI. |
+| `app/lib/skillDirectory.ts` | The `/90s` skills directory shape — catalogue grouped by category with note presence resolved. The publish set is owned here; nothing else re-derives it. |
 
 ## Components (modern presentation only)
 

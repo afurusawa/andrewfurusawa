@@ -144,47 +144,70 @@ p.eyebrow {
   color: var(--green);
 }
 
-.tableScroll {
-  overflow-x: auto;
+/* Skills directory: a wall of icon tiles grouped by category. */
+.skillGroup {
+  margin-top: 1.25rem;
 }
 
-.skillsTable {
-  width: 100%;
-  border-collapse: collapse;
-  color: var(--green);
-  font: inherit;
-}
-
-.skillsTable caption {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.skillsTable th,
-.skillsTable td {
-  padding: 0.35rem 0.5rem;
-  border: 1px solid var(--green);
-  text-align: left;
-}
-
-.skillsTable th {
+.skillGroupHeading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgb(255 0 255 / 40%);
   color: var(--cyan);
-  background: rgb(0 255 102 / 12%);
+  /* Short, uppercase, scanned rather than read — the display face earns it
+     here, sized up because VT323 renders small for its point size. */
+  font-family: var(--font-display);
+  font-size: max(1.35rem, var(--text-floor));
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.skillsTable td:first-child {
-  white-space: nowrap;
+/* The count riding along in the heading is text, so it stays on the
+   reading face at the floor size and out of the glow. */
+.skillGroupCount {
+  color: var(--muted);
+  font-family: var(--font-reading);
+  font-size: max(0.875rem, var(--text-floor));
+  letter-spacing: normal;
+  text-transform: none;
+  text-shadow: none;
 }
 
-.skillsTable svg {
-  vertical-align: -0.12em;
+.skillWall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Listed-only tile: green bevel, non-interactive, dimmed but still readable. */
+.skillTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 0.35rem;
+  border: 3px solid;
+  border-color: #8cffb8 #003d1f #003d1f #8cffb8;
+  background: linear-gradient(180deg, #12301f, #0a1a12);
+  color: var(--green);
+  font-size: max(0.9375rem, var(--text-floor));
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: none;
+  opacity: 0.85;
+}
+
+.skillTile svg {
+  width: 2.25rem;
+  height: 2.25rem;
 }
 
 .navigationLink {
