@@ -1,11 +1,22 @@
 import { describe, expect, it } from "vitest";
 import { CATEGORY_ORDER, skills } from "../config/skills";
+import { joinCatalogue, type SkillNote } from "./skillCatalogue";
 import {
   buildSkillDirectory,
   getSkillDirectory,
   groupCountLabel,
   skillNoteHref,
 } from "./skillDirectory";
+
+function catalogueWithNotes(...slugs: string[]) {
+  const notes: SkillNote[] = slugs.map((slug) => ({
+    slug,
+    summary: `${slug} summary`,
+    body: "",
+  }));
+
+  return joinCatalogue(skills, notes);
+}
 
 describe("skill directory", () => {
   it("groups the catalogue in CATEGORY_ORDER", () => {
@@ -27,17 +38,8 @@ describe("skill directory", () => {
     );
   });
 
-  it("lists every skill without a note while the publish set is empty", () => {
-    const directory = getSkillDirectory();
-
-    expect(directory.every((group) => group.noted === 0)).toBe(true);
-    expect(
-      directory.every((group) => group.skills.every((s) => !s.hasNote)),
-    ).toBe(true);
-  });
-
-  it("marks note presence from the publish set it is given", () => {
-    const directory = buildSkillDirectory(skills, ["ionic"]);
+  it("reads note presence from the join rather than re-deriving it", () => {
+    const directory = buildSkillDirectory(catalogueWithNotes("ionic"));
     const mobile = directory.find((group) => group.category === "Mobile");
 
     expect(mobile?.noted).toBe(1);
@@ -45,17 +47,26 @@ describe("skill directory", () => {
     expect(mobile?.skills.find((s) => s.slug === "cordova")?.hasNote).toBe(false);
   });
 
+  it("shows Ionic as the only noted skill in the shipping directory", () => {
+    const noted = getSkillDirectory().flatMap((group) =>
+      group.skills.filter((skill) => skill.hasNote).map((skill) => skill.slug),
+    );
+
+    expect(noted).toEqual(["ionic"]);
+  });
+
   it("drops a category with no skills rather than heading an empty group", () => {
     const directory = buildSkillDirectory(
-      skills.filter((skill) => skill.category !== "Design"),
-      [],
+      catalogueWithNotes().filter((skill) => skill.category !== "Design"),
     );
 
     expect(directory.map((group) => group.category)).not.toContain("Design");
   });
 
   it("counts a group as '<n> · <m> with notes'", () => {
-    const [frontend] = buildSkillDirectory(skills, ["react", "redux"]);
+    const [frontend] = buildSkillDirectory(
+      catalogueWithNotes("react", "redux"),
+    );
 
     expect(groupCountLabel(frontend)).toBe("13 · 2 with notes");
   });

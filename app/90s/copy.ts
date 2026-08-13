@@ -16,6 +16,16 @@ export const SKILLS_HELPER =
 
 export const CONTACT_LEAD_IN = "Email is best:";
 
+/** Link back to the directory — the breadcrumb's counterpart after a note. */
+export const BACK_TO_DIRECTORY = "Back to the skills directory";
+
+/**
+ * Unknown note slug. Two sentences: the first is plain text, the second is the
+ * real link, so the recovery is the link text rather than a bare "here".
+ */
+export const NOTE_MISSING_LEAD = "That note doesn't exist.";
+export const NOTE_MISSING_LINK = `${BACK_TO_DIRECTORY}.`;
+
 export const PANE_GARNISH = {
   about: "Welcome, traveler",
   work: "Now shipping",
@@ -25,3 +35,6 @@ export const PANE_GARNISH = {
 
 export const FOOTER =
   "Best viewed at 1024×768 · Built with notepad energy · No web ring membership";
+
+/** The note routes' own footer garnish, aria-hidden and kept to a short mark. */
+export const NOTE_FOOTER = "END OF FILE";

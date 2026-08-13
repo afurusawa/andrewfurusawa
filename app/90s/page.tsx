@@ -4,8 +4,13 @@ import {
   type ProfileLink,
 } from "../config/profileLinks";
 import { featuredWork } from "../config/featuredWork";
-import { skills } from "../config/skills";
-import { getSkillDirectory, groupCountLabel } from "../lib/skillDirectory";
+import { getSkillCatalogue } from "../lib/skillCatalogue";
+import {
+  getSkillDirectory,
+  groupCountLabel,
+  skillNoteHref,
+} from "../lib/skillDirectory";
+import { ExperimentNav } from "./ExperimentNav";
 import {
   ABOUT_PARAGRAPHS,
   CONTACT_LEAD_IN,
@@ -22,15 +27,11 @@ import styles from "./nineties.module.css";
 
 export const metadata = ninetiesHubMetadata;
 
-const navigationItems = [
-  { href: "#about", label: "About" },
-  { href: "#work", label: "Work" },
-  { href: "#skills", label: "Skills" },
-  { href: "#contact", label: "Contact" },
-] as const;
-
-// Stack entries are catalogue slugs; the catalogue owns how a skill is named.
-const skillNamesBySlug = new Map(skills.map((skill) => [skill.slug, skill.name]));
+// Stack entries are catalogue slugs; the join owns how a skill is named and
+// whether it has a note to link to.
+const catalogueBySlug = new Map(
+  getSkillCatalogue().map((skill) => [skill.slug, skill]),
+);
 
 // Grouped once at module scope: the directory is static build-time data.
 const skillDirectory = getSkillDirectory();
@@ -90,21 +91,7 @@ export default function NinetiesExperiment() {
         <p className={styles.tagline}>{ROLE}</p>
       </header>
 
-      <nav className={styles.navigation} aria-label="Experiment sections">
-        {navigationItems.map((item) => (
-          <a className={styles.navigationLink} href={item.href} key={item.href}>
-            {item.label}
-          </a>
-        ))}
-        <div className={styles.hitCounter} aria-hidden="true">
-          <span>hits</span>
-          <span className={styles.hitDigits}>
-            {cosmeticHitCount.split("").map((digit, index) => (
-              <span key={`${digit}-${index}`}>{digit}</span>
-            ))}
-          </span>
-        </div>
-      </nav>
+      <ExperimentNav hitCount={cosmeticHitCount} />
 
       <div className={styles.pack} aria-hidden="true">
         <img
@@ -173,11 +160,27 @@ export default function NinetiesExperiment() {
                     className={styles.stackTags}
                     aria-label={`${project.title} stack`}
                   >
-                    {project.stack.map((slug) => (
-                      <li className={styles.stackTag} key={slug}>
-                        {skillNamesBySlug.get(slug) ?? slug}
-                      </li>
-                    ))}
+                    {project.stack.map((slug) => {
+                      const skill = catalogueBySlug.get(slug);
+                      const label = skill?.name ?? slug;
+
+                      // A stack tag is a link only for the publish set, so the
+                      // strip can never point at a note that does not exist.
+                      return (
+                        <li className={styles.stackTag} key={slug}>
+                          {skill?.hasNote ? (
+                            <a
+                              className={styles.stackTagLink}
+                              href={skillNoteHref(slug)}
+                            >
+                              {label}
+                            </a>
+                          ) : (
+                            label
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </li>
               ))}
@@ -211,12 +214,30 @@ export default function NinetiesExperiment() {
                     {group.skills.map((skill) => {
                       const Icon = skill.icon;
 
-                      // Every tile is listed-only until the first note ships;
-                      // `hasNote` already carries the split in the data.
+                      // A noted tile is itself the link; a listed-only tile
+                      // stays plain text so it can never read as a dead link.
                       return (
-                        <li className={styles.skillTile} key={skill.slug}>
-                          <Icon aria-hidden="true" />
-                          <span>{skill.name}</span>
+                        <li key={skill.slug}>
+                          {skill.hasNote ? (
+                            <a
+                              className={`${styles.skillTile} ${styles.skillTileNoted}`}
+                              href={skillNoteHref(skill.slug)}
+                            >
+                              <Icon aria-hidden="true" />
+                              <span>{skill.name}</span>
+                              <span
+                                className={styles.skillTileFlag}
+                                aria-hidden="true"
+                              >
+                                NOTE ►
+                              </span>
+                            </a>
+                          ) : (
+                            <span className={styles.skillTile}>
+                              <Icon aria-hidden="true" />
+                              <span>{skill.name}</span>
+                            </span>
+                          )}
                         </li>
                       );
                     })}

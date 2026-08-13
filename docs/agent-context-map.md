@@ -2,7 +2,7 @@
 
 Path inventory. **Read the one section you need, not the whole file.** For why the system is shaped this way, read [`MAP.md`](MAP.md) instead.
 
-_Last updated: 2026-08-06._
+_Last updated: 2026-08-13._
 
 ## Routes and layouts
 
@@ -13,7 +13,12 @@ _Last updated: 2026-08-06._
 | `app/(portfolio)/page.tsx` | The public homepage `/`. |
 | `app/90s/layout.tsx` | Experiment shell — wraps children in the `.experiment` class, exports its metadata. |
 | `app/90s/page.tsx` | The `/90s` page. |
-| `app/90s/metadata.ts` | Experiment layout unfurl + `noindex`; hub canonical lives on the page. |
+| `app/90s/metadata.ts` | Experiment layout unfurl + `noindex`; hub and note canonicals live on their pages. |
+| `app/90s/skills/[slug]/page.tsx` | A skill note. `generateStaticParams` from the publish set, `dynamicParams = false`. |
+| `app/90s/ExperimentNav.tsx` | The About · Work · Skills · Contact nav, shared by the hub, the notes, and the 404. |
+| `app/90s/NoteShell.tsx` | The outer shell a note and the 404 share — banner, nav, one Document Window, footer. |
+| `app/90s/not-found.tsx` | The experiment's own 404 — same shell, recovery in the last sentence. |
+| `app/90s/[...missing]/page.tsx` | Catches every unknown path under `/90s` and calls `notFound()`, so the router's own rejection of an unmatched slug can't escape to the global 404. |
 | `app/90s/nineties.module.css` | All experiment chrome. Nothing else styles `/90s`. |
 | `app/prototype/90s-shell/` | Throwaway shell variants A–D behind `?variant=`. Reference only. |
 | `public/90s/` | The hub kitsch pack — under-construction tape plus three 88×31 badges. Hub-only theater, ≤40KB, never rendered on a note route. |
@@ -31,15 +36,17 @@ Everything here is data, not markup. New content belongs in this directory, neve
 | `app/config/site.ts` | `SITE_URL`, `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `absoluteUrl()`. |
 | `app/config/fonts.ts` | All four Google fonts, loaded once at the root as CSS variables. |
 | `app/config/securityHeaders.ts` | Response headers, consumed by `next.config.ts`. |
+| `content/skills/` | The skill notes, one Markdown file per catalogue slug. A file here is what publishes a note; a filename with no catalogue slug fails the build. |
 
 ## Logic
 
-Pure functions, no React, no side effects — this is what the node-environment test runner can reach.
+No React — this is what the node-environment test runner can reach. Pure functions, with one exception: `skillCatalogue.ts` reads `content/skills/` from disk. That read happens at build time inside server components, and the tests run against the real files.
 
 | Path | Holds |
 |------|-------|
 | `app/lib/filterSkills.ts` | Skills filtering for the homepage filter UI. |
-| `app/lib/skillDirectory.ts` | The `/90s` skills directory shape — catalogue grouped by category with note presence resolved. The publish set is owned here; nothing else re-derives it. |
+| `app/lib/skillCatalogue.ts` | The one join: catalogue skills plus the notes on disk, and the Markdown pipeline that renders one. The publish set is owned here; nothing else re-derives it. Touches the filesystem, so it is build-time only. |
+| `app/lib/skillDirectory.ts` | The `/90s` skills directory shape — the catalogue grouped by category. Reads the join, never the filesystem. |
 
 ## Components (modern presentation only)
 

@@ -187,8 +187,13 @@ p.eyebrow {
   list-style: none;
 }
 
+.skillWall > li {
+  display: flex;
+}
+
 /* Listed-only tile: green bevel, non-interactive, dimmed but still readable. */
 .skillTile {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -208,6 +213,34 @@ p.eyebrow {
 .skillTile svg {
   width: 2.25rem;
   height: 2.25rem;
+}
+
+/* Noted tile: magenta bevel, cyan label, and the tile itself is the link. */
+a.skillTileNoted {
+  border-color: #f9f #603 #603 #f9f;
+  background: linear-gradient(180deg, #301230, #1a0a1a);
+  color: var(--cyan);
+  text-decoration: none;
+  opacity: 1;
+}
+
+a.skillTileNoted:hover {
+  color: var(--magenta);
+}
+
+.skillTileFlag {
+  color: var(--magenta);
+  font-size: max(0.8125rem, var(--text-floor));
+  letter-spacing: 0.08em;
+}
+
+.stackTagLink {
+  color: var(--green);
+  text-underline-offset: 0.15em;
+}
+
+.stackTagLink:hover {
+  color: var(--cyan);
 }
 
 .navigationLink {
@@ -235,13 +268,23 @@ p.eyebrow {
   color: var(--magenta);
 }
 
+.navigationLink[aria-current="page"] {
+  border-color: #603 #f9f #f9f #603;
+  background: #250a28;
+  color: var(--cyan);
+}
+
 .navigationLink:hover,
 .profileLink:hover {
   color: var(--magenta);
 }
 
 .navigationLink:focus-visible,
-.profileLink:focus-visible {
+.profileLink:focus-visible,
+a.skillTileNoted:focus-visible,
+.stackTagLink:focus-visible,
+.noteBreadcrumb a:focus-visible,
+.noteBody a:focus-visible {
   outline: 3px solid var(--cyan);
   outline-offset: 3px;
   box-shadow: 0 0 0 5px var(--purple);
@@ -445,6 +488,144 @@ p.eyebrow {
   color: var(--cyan);
 }
 
+/* Skill note: one bordered document window on the same stage. */
+.noteSiteName {
+  margin: 0;
+  color: var(--cyan);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 10px rgb(0 255 255 / 65%),
+    2px 2px 0 var(--purple);
+}
+
+.noteWindow {
+  margin: 1rem;
+  border: 2px solid var(--cyan);
+  /* Opaque: the starfield never sits behind copy that is read. */
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px rgb(0 255 255 / 14%);
+}
+
+.noteWindowBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.3rem 0.6rem;
+  border-bottom: 1px solid var(--magenta);
+  background: linear-gradient(90deg, #1a0033, #003344);
+  color: var(--cyan);
+  font-size: max(0.9375rem, var(--text-floor));
+  letter-spacing: 0.06em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.noteBreadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.75rem clamp(1rem, 5vw, 3rem) 0;
+  color: var(--muted);
+  font-size: max(0.875rem, var(--text-floor));
+}
+
+.noteBreadcrumb a {
+  color: var(--cyan);
+  text-underline-offset: 0.15em;
+}
+
+.noteBreadcrumb a:hover {
+  color: var(--magenta);
+}
+
+.noteHead {
+  padding: 1rem clamp(1rem, 5vw, 3rem) 1.4rem;
+  border-bottom: 1px solid rgb(0 255 102 / 35%);
+}
+
+/* The skill's own name, in mixed case — reading face, since VT323 is reserved
+   for short uppercase marks. */
+.noteHeading {
+  margin: 0;
+  color: var(--cyan);
+  font-family: var(--font-reading);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+}
+
+.noteSummary {
+  max-width: 46rem;
+  margin: 0.9rem 0 0;
+  color: #e9fff0;
+  font-size: max(1.0625rem, var(--text-floor));
+  line-height: 1.55;
+  text-shadow: none;
+}
+
+.noteUpdated {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: max(0.875rem, var(--text-floor));
+}
+
+/* The reading column: reading face, no glow, generous measure. */
+.noteBody {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.6rem clamp(1rem, 5vw, 3rem) 2rem;
+  color: #e9fff0;
+  font-size: max(1rem, var(--text-floor));
+  line-height: 1.65;
+  text-shadow: none;
+}
+
+.noteBody h2 {
+  margin: 2.2rem 0 0.7rem;
+  color: var(--cyan);
+  font-family: var(--font-reading);
+  font-size: max(1.25rem, var(--text-floor));
+  letter-spacing: 0.04em;
+}
+
+.noteBody h2:first-child {
+  margin-top: 0;
+}
+
+.noteBody p {
+  margin: 0 0 1rem;
+}
+
+.noteBack {
+  display: inline-flex;
+  margin-top: 1.2rem;
+  color: var(--cyan);
+  font-weight: 700;
+  text-underline-offset: 0.15em;
+}
+
+.noteBack:hover,
+.noteBody a:hover {
+  color: var(--magenta);
+}
+
+.noteBody > p a {
+  color: var(--cyan);
+}
+
+.noteFooter {
+  padding: 0.65rem;
+  border-top: 1px solid var(--purple);
+  color: var(--muted);
+  font-size: max(0.875rem, var(--text-floor));
+  text-align: center;
+}
+
 .footer {
   padding: 0.75rem 1rem;
   border-top: 2px solid var(--purple);
@@ -471,8 +652,13 @@ p.eyebrow {
     justify-content: center;
   }
 
-  .paneBar {
+  .paneBar,
+  .noteWindowBar {
     flex-direction: column;
+  }
+
+  .noteWindow {
+    margin: 0.5rem;
   }
 }
 

@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   ABOUT_PARAGRAPHS,
+  BACK_TO_DIRECTORY,
   CONTACT_LEAD_IN,
   EYEBROW,
   HUB_HEADING,
+  NOTE_MISSING_LEAD,
+  NOTE_MISSING_LINK,
   SKILLS_HELPER,
   WORK_HELPER,
 } from "./copy";
@@ -36,5 +39,15 @@ describe("/90s voice-law copy", () => {
 
   it("keeps the contact lead-in as plain words", () => {
     expect(CONTACT_LEAD_IN).toBe("Email is best:");
+  });
+
+  it("states the unknown note with the locked copy, the link last", () => {
+    expect(`${NOTE_MISSING_LEAD} ${NOTE_MISSING_LINK}`).toBe(
+      "That note doesn't exist. Back to the skills directory.",
+    );
+  });
+
+  it("names the escape after a note in plain words", () => {
+    expect(BACK_TO_DIRECTORY).toBe("Back to the skills directory");
   });
 });
