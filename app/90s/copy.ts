@@ -8,10 +8,14 @@ export const ABOUT_PARAGRAPHS = [
   "The skills below aren't a checklist. Where I have something worth saying about a tool, it's a link: where I used it, why it fit, and what it taught me.",
 ] as const;
 
+export const WORK_HELPER =
+  "Client work, so there's nothing public to link. The stacks below are.";
+
 export const CONTACT_LEAD_IN = "Email is best:";
 
 export const PANE_GARNISH = {
   about: "Welcome, traveler",
+  work: "Now shipping",
   skills: "Signal acquired",
   contact: "Open channels",
 } as const;

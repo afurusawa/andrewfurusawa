@@ -4,6 +4,7 @@ import {
   CONTACT_LEAD_IN,
   EYEBROW,
   HUB_HEADING,
+  WORK_HELPER,
 } from "./copy";
 
 describe("/90s voice-law copy", () => {
@@ -18,6 +19,12 @@ describe("/90s voice-law copy", () => {
       "I'm a front-end developer, twelve years in, most of it taking web applications from discovery through release and then living with them afterwards. The part I like is the middle — turning a vague requirement into something people can actually click.",
       "The skills below aren't a checklist. Where I have something worth saying about a tool, it's a link: where I used it, why it fit, and what it taught me.",
     ]);
+  });
+
+  it("explains link-free work with the locked helper", () => {
+    expect(WORK_HELPER).toBe(
+      "Client work, so there's nothing public to link. The stacks below are.",
+    );
   });
 
   it("keeps the contact lead-in as plain words", () => {

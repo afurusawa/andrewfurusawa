@@ -198,13 +198,14 @@ p.eyebrow {
   text-shadow: none;
 }
 
-.navigationLink:nth-child(2) {
+.navigationLink:nth-child(3) {
   border-color: #9cf #036 #036 #9cf;
   background: linear-gradient(180deg, #123040, #0a1a22);
   color: var(--cyan);
 }
 
-.navigationLink:nth-child(3),
+.navigationLink:nth-child(2),
+.navigationLink:nth-child(4),
 .contactLinks .profileLink {
   border-color: #f9f #603 #603 #f9f;
   background: linear-gradient(180deg, #301230, #1a0a1a);
@@ -292,6 +293,10 @@ p.eyebrow {
     inset 0 0 0 1px rgb(0 255 255 / 12%);
 }
 
+.workPane {
+  border-color: var(--magenta);
+}
+
 .skillsPane {
   border-color: var(--cyan);
 }
@@ -337,6 +342,56 @@ p.eyebrow {
 
 .paneBody p:not(.microcopy):last-of-type {
   margin-bottom: 0;
+}
+
+/* Featured work: a light strip of cards, no images and no project links. */
+.workList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workItem {
+  padding: 0.6rem 0.7rem;
+  border: 2px solid;
+  border-color: #f9f #603 #603 #f9f;
+  background: rgb(26 0 26 / 45%);
+}
+
+.workTitle {
+  margin: 0 0 0.25rem;
+  color: var(--cyan);
+  font-family: var(--font-display);
+  font-size: max(1.125rem, var(--text-floor));
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.paneBody p.workMeta {
+  margin-bottom: 0.4rem;
+  color: var(--muted);
+  font-size: max(0.875rem, var(--text-floor));
+}
+
+.stackTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stackTag {
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--green);
+  background: #001a0a;
+  color: var(--green);
+  font-size: max(0.875rem, var(--text-floor));
 }
 
 .socialLinks,
