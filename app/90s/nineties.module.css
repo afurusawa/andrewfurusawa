@@ -7,6 +7,10 @@
   --magenta: #ff00ff;
   --purple: #6600cc;
   --muted: #7dffb0;
+  --text-floor: 14px;
+  --font-reading: ui-monospace, "Cascadia Code", Cascadia, Consolas,
+    "Liberation Mono", monospace;
+  --font-display: var(--font-vt323), var(--font-reading);
 
   min-height: 100vh;
   padding: 0.75rem 0.75rem 2.5rem;
@@ -48,8 +52,8 @@
     5.3rem 5.9rem,
     7.1rem 6.7rem;
   color: var(--green);
-  font-family: "Courier New", Courier, monospace;
-  font-size: 1.125rem;
+  font-family: var(--font-reading);
+  font-size: max(1.125rem, var(--text-floor));
   letter-spacing: 0.04em;
   line-height: 1.4;
 }
@@ -109,7 +113,15 @@
 .microcopy {
   margin: 0;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: max(0.875rem, var(--text-floor));
+  text-shadow: none;
+}
+
+p.eyebrow {
+  font-family: var(--font-display);
+  font-size: max(1.125rem, var(--text-floor));
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .tagline {
@@ -167,14 +179,8 @@
   background: rgb(0 255 102 / 12%);
 }
 
-.skillsTable td:first-child,
-.skillsTable td:last-child {
+.skillsTable td:first-child {
   white-space: nowrap;
-}
-
-.skillsTable td:last-child {
-  color: var(--muted);
-  text-transform: uppercase;
 }
 
 .skillsTable svg {
@@ -189,7 +195,7 @@
   background: linear-gradient(180deg, #12301f, #0a1a12);
   text-align: center;
   text-decoration: none;
-  text-shadow: 0 0 6px rgb(0 255 102 / 35%);
+  text-shadow: none;
 }
 
 .navigationLink:nth-child(2) {
@@ -222,7 +228,7 @@
   align-items: center;
   gap: 0.4rem;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: max(0.875rem, var(--text-floor));
   pointer-events: none;
   user-select: none;
 }
@@ -260,7 +266,7 @@
   border: 2px solid #ffcc00;
   background: #332200;
   color: #ffcc00;
-  font-size: 0.85rem;
+  font-size: max(0.875rem, var(--text-floor));
 }
 
 .badge {
@@ -268,7 +274,7 @@
   padding: 0.15rem 0.45rem;
   border: 2px outset #c0c0c0;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: max(0.8rem, var(--text-floor));
 }
 
 .htmlBadge {
@@ -318,18 +324,22 @@
   border-bottom: 1px solid var(--magenta);
   background: linear-gradient(90deg, #1a0033, #001a12 55%, #003344);
   color: var(--cyan);
-  font-size: 0.95rem;
+  font-size: max(0.95rem, var(--text-floor));
 }
 
 .paneBar h2 {
   margin: 0;
   color: inherit;
-  font: inherit;
+  font-family: var(--font-display);
+  font-size: max(1.125rem, var(--text-floor));
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.paneBar span {
+.paneBar > span {
   color: var(--magenta);
-  font-size: 0.85rem;
+  font-size: max(0.875rem, var(--text-floor));
 }
 
 .paneBody {
@@ -337,18 +347,12 @@
 }
 
 .paneBody p:not(.microcopy) {
+  margin: 0 0 0.75rem;
+  text-shadow: none;
+}
+
+.paneBody p:not(.microcopy):last-of-type {
   margin-bottom: 0;
-}
-
-.identity {
-  margin-top: 0.75rem;
-  color: var(--cyan);
-  font-weight: 700;
-}
-
-.identity span {
-  color: var(--muted);
-  font-weight: 400;
 }
 
 .socialLinks,
@@ -383,7 +387,7 @@
   padding: 0.75rem 1rem;
   border-top: 2px solid var(--purple);
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: max(0.875rem, var(--text-floor));
   text-align: center;
 }
 
@@ -417,10 +421,6 @@
 
   .banner h1 {
     text-shadow: 2px 2px 0 var(--purple);
-  }
-
-  .navigationLink {
-    text-shadow: none;
   }
 
   .pane {
