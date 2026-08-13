@@ -4,6 +4,15 @@ import {
   type ProfileLink,
 } from "../config/profileLinks";
 import { skills } from "../config/skills";
+import {
+  ABOUT_PARAGRAPHS,
+  CONTACT_LEAD_IN,
+  EYEBROW,
+  FOOTER,
+  HUB_HEADING,
+  PANE_GARNISH,
+  ROLE,
+} from "./copy";
 import { ninetiesHubMetadata } from "./metadata";
 import styles from "./nineties.module.css";
 
@@ -14,11 +23,6 @@ const navigationItems = [
   { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ] as const;
-
-const identity = {
-  name: "Andrew Furusawa",
-  role: "Front-End Developer",
-} as const;
 
 const cosmeticHitCount = "001337";
 
@@ -58,11 +62,11 @@ export default function NinetiesExperiment() {
   return (
     <main className={styles.stage}>
       <header className={styles.banner}>
-        <p className={styles.eyebrow}>Welcome to the information superhighway</p>
-        <h1>Neon Cyber Basement</h1>
-        <p className={styles.tagline}>
-          {identity.name} · {identity.role}
+        <p className={styles.eyebrow} aria-hidden="true">
+          {EYEBROW}
         </p>
+        <h1>{HUB_HEADING}</h1>
+        <p className={styles.tagline}>{ROLE}</p>
       </header>
 
       <nav className={styles.navigation} aria-label="Experiment sections">
@@ -93,24 +97,17 @@ export default function NinetiesExperiment() {
       <div className={styles.panes}>
         <section className={styles.pane} id="about" aria-labelledby="about-heading">
           <div className={styles.paneBar}>
-            <h2 id="about-heading">:: About ::</h2>
-            <span>Welcome, traveler</span>
+            <h2 id="about-heading">
+              <span aria-hidden="true">:: </span>
+              About
+              <span aria-hidden="true"> ::</span>
+            </h2>
+            <span aria-hidden="true">{PANE_GARNISH.about}</span>
           </div>
           <div className={styles.paneBody}>
-            <p className={styles.microcopy}>
-              Building useful things from the early web to the modern one.
-            </p>
-            <p className={styles.identity}>
-              {identity.name} <span>· {identity.role}</span>
-            </p>
-            <p>
-              With over 12 years of front-end development experience, I enjoy
-              building web applications from discovery to production. I&apos;ve
-              been a key player in all phases of the development process,
-              including discovery and requirements gathering, usability
-              testing, prototyping, development, deployment, release
-              management, and maintenance.
-            </p>
+            {ABOUT_PARAGRAPHS.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
             <ProfileLinkList
               links={socialProfileLinks}
               className={styles.socialLinks}
@@ -121,18 +118,21 @@ export default function NinetiesExperiment() {
 
         <section className={`${styles.pane} ${styles.skillsPane}`} id="skills" aria-labelledby="skills-heading">
           <div className={styles.paneBar}>
-            <h2 id="skills-heading">:: Skills ::</h2>
-            <span>Signal acquired</span>
+            <h2 id="skills-heading">
+              <span aria-hidden="true">:: </span>
+              Skills
+              <span aria-hidden="true"> ::</span>
+            </h2>
+            <span aria-hidden="true">{PANE_GARNISH.skills}</span>
           </div>
           <div className={styles.paneBody}>
             <div className={styles.tableScroll}>
               <table className={styles.skillsTable}>
-                <caption>Andrew Furusawa&apos;s skills catalogue</caption>
+                <caption>{HUB_HEADING}&apos;s skills catalogue</caption>
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Skill</th>
-                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -145,7 +145,6 @@ export default function NinetiesExperiment() {
                         <td>
                           <Icon aria-hidden="true" /> {skill.name}
                         </td>
-                        <td>online</td>
                       </tr>
                     );
                   })}
@@ -157,11 +156,15 @@ export default function NinetiesExperiment() {
 
         <section className={`${styles.pane} ${styles.contactPane}`} id="contact" aria-labelledby="contact-heading">
           <div className={styles.paneBar}>
-            <h2 id="contact-heading">:: Contact ::</h2>
-            <span>Open channels</span>
+            <h2 id="contact-heading">
+              <span aria-hidden="true">:: </span>
+              Contact
+              <span aria-hidden="true"> ::</span>
+            </h2>
+            <span aria-hidden="true">{PANE_GARNISH.contact}</span>
           </div>
           <div className={styles.paneBody}>
-            <p className={styles.microcopy}>Ping me on the period-legal channels:</p>
+            <p className={styles.microcopy}>{CONTACT_LEAD_IN}</p>
             <ProfileLinkList
               links={contactLinks}
               className={styles.contactLinks}
@@ -170,9 +173,8 @@ export default function NinetiesExperiment() {
         </section>
       </div>
 
-      <footer className={styles.footer}>
-        Best viewed at 1024×768 · Built with notepad energy · No web ring
-        membership
+      <footer className={styles.footer} aria-hidden="true">
+        {FOOTER}
       </footer>
     </main>
   );
