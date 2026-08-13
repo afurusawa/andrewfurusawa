@@ -11,6 +11,9 @@ export const ABOUT_PARAGRAPHS = [
 export const WORK_HELPER =
   "Client work, so there's nothing public to link. The stacks below are.";
 
+export const SKILLS_HELPER =
+  "Skills with a note are links. The rest are here for the record.";
+
 export const CONTACT_LEAD_IN = "Email is best:";
 
 export const PANE_GARNISH = {

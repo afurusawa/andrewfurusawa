@@ -5,6 +5,7 @@ import {
 } from "../config/profileLinks";
 import { featuredWork } from "../config/featuredWork";
 import { skills } from "../config/skills";
+import { getSkillDirectory, groupCountLabel } from "../lib/skillDirectory";
 import {
   ABOUT_PARAGRAPHS,
   CONTACT_LEAD_IN,
@@ -13,6 +14,7 @@ import {
   HUB_HEADING,
   PANE_GARNISH,
   ROLE,
+  SKILLS_HELPER,
   WORK_HELPER,
 } from "./copy";
 import { ninetiesHubMetadata } from "./metadata";
@@ -29,6 +31,9 @@ const navigationItems = [
 
 // Stack entries are catalogue slugs; the catalogue owns how a skill is named.
 const skillNamesBySlug = new Map(skills.map((skill) => [skill.slug, skill.name]));
+
+// Grouped once at module scope: the directory is static build-time data.
+const skillDirectory = getSkillDirectory();
 
 const cosmeticHitCount = "001337";
 
@@ -190,31 +195,35 @@ export default function NinetiesExperiment() {
             <span aria-hidden="true">{PANE_GARNISH.skills}</span>
           </div>
           <div className={styles.paneBody}>
-            <div className={styles.tableScroll}>
-              <table className={styles.skillsTable}>
-                <caption>{HUB_HEADING}&apos;s skills catalogue</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Skill</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {skills.map((skill, index) => {
-                    const Icon = skill.icon;
+            <p className={styles.microcopy}>{SKILLS_HELPER}</p>
+            {skillDirectory.map((group) => {
+              const headingId = `skills-${group.category.toLowerCase()}`;
 
-                    return (
-                      <tr key={skill.slug}>
-                        <td>{String(index + 1).padStart(2, "0")}</td>
-                        <td>
-                          <Icon aria-hidden="true" /> {skill.name}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+              return (
+                <div className={styles.skillGroup} key={group.category}>
+                  <h3 className={styles.skillGroupHeading} id={headingId}>
+                    {group.category}
+                    <span className={styles.skillGroupCount}>
+                      {groupCountLabel(group)}
+                    </span>
+                  </h3>
+                  <ul className={styles.skillWall} aria-labelledby={headingId}>
+                    {group.skills.map((skill) => {
+                      const Icon = skill.icon;
+
+                      // Every tile is listed-only until the first note ships;
+                      // `hasNote` already carries the split in the data.
+                      return (
+                        <li className={styles.skillTile} key={skill.slug}>
+                          <Icon aria-hidden="true" />
+                          <span>{skill.name}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </section>
 
