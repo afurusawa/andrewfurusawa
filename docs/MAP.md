@@ -1,0 +1,58 @@
+# Project Map
+
+**What this is:** Andrew Furusawa's personal portfolio at `andrewfurusawa.dev`, deployed on Vercel. One codebase, two **presentations** of the same substance: the public modern portfolio at `/`, and a soft-secret 90s experiment at `/90s`. There is no CMS, no database, and no API — content is TypeScript modules under `app/config/`.
+
+**Stack:** Next.js 15 App Router, React 19, TypeScript 5, Tailwind v4 (PostCSS), react-icons, Vitest, Vercel Speed Insights.
+
+_Last updated: 2026-08-06. Update this map when architecture or ownership changes in a way that matters._
+
+This file is orientation: how the system is shaped and why. For *where a file lives*, use [`agent-context-map.md`](agent-context-map.md). For *what is being worked on now*, use [`../PLAN.md`](../PLAN.md). For *what a word means*, use [`../CONTEXT.md`](../CONTEXT.md).
+
+## Routes and ownership
+
+| Route | Owned by | Public? |
+|-------|----------|---------|
+| `/` | `app/(portfolio)/` + `app/components/` | Yes — indexed, in the sitemap |
+| `/90s` | `app/90s/` alone | Soft secret — crawl-allowed, `X-Robots-Tag` `noindex, nofollow`, not in the sitemap |
+| `/prototype/90s-shell` | `app/prototype/` | Throwaway; kept for reference, not a product surface |
+
+The **route-group seam is the whole architecture**. `app/layout.tsx` is deliberately slim — `<html>`, fonts, global CSS, Speed Insights, and metadata, nothing visual. Portfolio chrome (background animation, theme toggle, page padding) lives in the `(portfolio)` group so it cannot leak onto `/90s`; the experiment's chrome lives entirely in `app/90s/nineties.module.css` behind a single `.experiment` class.
+
+**Anything added to the root layout appears on both presentations.** That is almost never what you want.
+
+## Data contracts
+
+Both presentations read the same data and share none of their chrome.
+
+| Contract | Shape | Consumed by |
+|----------|-------|-------------|
+| `Skill` (`app/config/skills.ts`) | `{ slug, name, icon, category }` | `/` skills section, `/90s` directory |
+| `ProfileLink` (`app/config/profileLinks.ts`) | `{ href, ariaLabel, label, Icon, openInNewTab, heroClassName? }` | `/` hero + contact, `/90s` contact |
+| Site identity (`app/config/site.ts`) | `SITE_URL`, `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `absoluteUrl()` | root metadata, `robots.ts`, `sitemap.ts` |
+| `pathHeaders` (`app/config/securityHeaders.ts`) | security tuples on `/:path*`; `X-Robots-Tag` on `/90s` and `/90s/:path*` | `next.config.ts` |
+
+`app/90s/` imports *data* from `app/config/` and *nothing* from `app/components/`. Share substance, never chrome — if a change makes the experiment import a portfolio component, the change is wrong.
+
+`slug` is authored, never derived — `/90s/skills/<slug>` must survive a display-name change. `category` is a closed union (Frontend · Mobile · Backend · Tooling · Design) in `CATEGORY_ORDER`; `/` ignores it. Homepage anchors are `skill-${slug}`. See [Prefactor the shared skills catalogue with authored slugs and categories](https://github.com/afurusawa/andrewfurusawa/issues/52).
+
+**Decided, not yet built:** v2 hub chrome pack is one tape under-construction graphic plus three 88×31 badges; the starfield stays CSS; CSS stand-ins must not ship. See [Define hi-fi chrome inventory and assets for /90s v2](https://github.com/afurusawa/andrewfurusawa/issues/41).
+
+## Conventions
+
+- **Tests are colocated `*.test.ts` next to the module.** Vitest runs in a `node` environment and only collects `app/**/*.test.ts` (`vitest.config.mts`). There is no DOM or component testing — which is *why* logic belongs in `app/lib/` and content in `app/config/`, where it is reachable.
+- **`npm test` runs the suite; `npm run dev` uses Turbopack.** A plugin Turbopack can't take is a real constraint, not a detail.
+- **Server components by default.** Only four client components exist (`ThemeToggle`, `SkillTile`, `SkillsFilter`, `SkillsFilterContext`) — interactive islands, deliberately budgeted. A fifth `"use client"` needs a reason.
+- **Theming is a `.dark` class on `<html>`** driving CSS variables in `app/globals.css`, toggled client-side from `localStorage`. `/90s` opts out of all of it.
+- **Performance is budgeted:** mobile p75 LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1; ≤ 500 KB initial transfer, ≤ 150 KB initial JS. A new dependency or font is a budget decision.
+- **WCAG 2.2 AA on every route**, kitsch included. Motion respects `prefers-reduced-motion`.
+
+## Design authority
+
+v1's [`design/90s-experiment-spec.md`](design/90s-experiment-spec.md) is **historical**. It remains binding for the *shipped* `/90s` until v2 is implemented. v2 taste and scope live in a GitHub **spec** issue produced from [Wayfinder: /90s hi-fi kitsch and skill-note content spec](https://github.com/afurusawa/andrewfurusawa/issues/35) — not in a new `docs/design/` file. Before that issue exists, the map and its closed tickets are the record. After v2 ships, the code wins.
+
+`adr/` holds architecture decision records. It does not exist yet — nothing has cleared the hard-to-reverse, surprising, real-trade-off bar.
+
+## Known sharp edges
+
+- **`/90s` is a soft secret by header, not by `robots.txt`.** `robots.txt` does not name `/90s`. `X-Robots-Tag: noindex, nofollow` is sent on `/90s` and `/90s/:path*`. The experiment layout still exports `robots: { index: false, follow: false }`. See [Switch /90s to crawl-allowed de-indexing](https://github.com/afurusawa/andrewfurusawa/issues/53).
+- **`README.md` is untouched `create-next-app` boilerplate** describing fonts this project doesn't use. Trust this map over it.
