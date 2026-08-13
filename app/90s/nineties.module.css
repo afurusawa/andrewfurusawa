@@ -248,12 +248,13 @@ p.eyebrow {
   text-align: center;
 }
 
-.optionalPack {
+/* Hub-only pack: one wrapping row of static graphics, never overlaying panes. */
+.pack {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
+  gap: 0.5rem 0.45rem;
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid rgb(255 0 255 / 35%);
   background: rgb(0 0 0 / 55%);
@@ -261,35 +262,18 @@ p.eyebrow {
   user-select: none;
 }
 
-.cautionStrip {
-  padding: 0.25rem 0.5rem;
-  border: 2px solid #ffcc00;
-  background: #332200;
-  color: #ffcc00;
-  font-size: max(0.875rem, var(--text-floor));
+.packTape {
+  flex: 0 1 30rem;
+  width: 30rem;
+  min-width: 0;
+  height: auto;
 }
 
-.badge {
-  display: inline-block;
-  padding: 0.15rem 0.45rem;
-  border: 2px outset #c0c0c0;
-  color: #fff;
-  font-size: max(0.8rem, var(--text-floor));
-}
-
-.htmlBadge {
-  background: #1a1a1a;
-  color: #ff6b6b;
-}
-
-.coolBadge {
-  background: #003366;
-  color: #ffd700;
-}
-
-.hackBadge {
-  background: #220000;
-  color: #ff6688;
+.packBadge {
+  flex: none;
+  width: 88px;
+  height: 31px;
+  image-rendering: pixelated;
 }
 
 .panes {

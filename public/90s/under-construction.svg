@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 44" width="480" height="44">
+  <defs>
+    <pattern id="hazard" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="28" height="28" fill="#ffcc00"/>
+      <rect width="14" height="28" fill="#141414"/>
+    </pattern>
+  </defs>
+  <rect width="480" height="44" fill="url(#hazard)"/>
+  <rect y="11" width="480" height="22" fill="#0a0a0a"/>
+  <rect y="10" width="480" height="1" fill="#ffcc00"/>
+  <rect y="33" width="480" height="1" fill="#ffcc00"/>
+  <text x="238" y="28" fill="#ffcc00" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', 'Arial Black', sans-serif" font-size="16" letter-spacing="4" text-anchor="middle">UNDER CONSTRUCTION</text>
+</svg>

@@ -26,6 +26,16 @@ const navigationItems = [
 
 const cosmeticHitCount = "001337";
 
+// Hub-only theater. These files live in public/90s/ and are drawn by
+// scripts/generate-90s-pack.mjs; a skill note never renders them.
+const PACK_TAPE = { src: "/90s/under-construction.svg", width: 480, height: 44 };
+
+const PACK_BADGES = [
+  { src: "/90s/badge-html.png" },
+  { src: "/90s/badge-cool.png" },
+  { src: "/90s/badge-hack.png" },
+] as const;
+
 function ProfileLinkList({
   links,
   className,
@@ -85,14 +95,25 @@ export default function NinetiesExperiment() {
         </div>
       </nav>
 
-      <aside className={styles.optionalPack} aria-hidden="true">
-        <span className={styles.cautionStrip}>
-          ⚠ Under construction — please be patient
-        </span>
-        <span className={`${styles.badge} ${styles.htmlBadge}`}>I ♥ HTML</span>
-        <span className={`${styles.badge} ${styles.coolBadge}`}>100% COOL</span>
-        <span className={`${styles.badge} ${styles.hackBadge}`}>HACK THE PLANET</span>
-      </aside>
+      <div className={styles.pack} aria-hidden="true">
+        <img
+          className={styles.packTape}
+          src={PACK_TAPE.src}
+          alt=""
+          width={PACK_TAPE.width}
+          height={PACK_TAPE.height}
+        />
+        {PACK_BADGES.map((badge) => (
+          <img
+            key={badge.src}
+            className={styles.packBadge}
+            src={badge.src}
+            alt=""
+            width={88}
+            height={31}
+          />
+        ))}
+      </div>
 
       <div className={styles.panes}>
         <section className={styles.pane} id="about" aria-labelledby="about-heading">
