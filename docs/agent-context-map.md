@@ -26,6 +26,7 @@ Everything here is data, not markup. New content belongs in this directory, neve
 | Path | Holds |
 |------|-------|
 | `app/config/skills.ts` | The skills catalogue — `Skill = { slug, name, icon, category }`, shared by both presentations. |
+| `app/config/featuredWork.ts` | Featured work — `FeaturedProject`, hand-curated and capped at three. Membership is featuring; `stack` entries are catalogue slugs. |
 | `app/config/profileLinks.ts` | Social and contact links — `ProfileLink`, plus hero-specific styling. |
 | `app/config/site.ts` | `SITE_URL`, `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `absoluteUrl()`. |
 | `app/config/fonts.ts` | All four Google fonts, loaded once at the root as CSS variables. |

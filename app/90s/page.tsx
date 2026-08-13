@@ -3,6 +3,7 @@ import {
   socialProfileLinks,
   type ProfileLink,
 } from "../config/profileLinks";
+import { featuredWork } from "../config/featuredWork";
 import { skills } from "../config/skills";
 import {
   ABOUT_PARAGRAPHS,
@@ -12,6 +13,7 @@ import {
   HUB_HEADING,
   PANE_GARNISH,
   ROLE,
+  WORK_HELPER,
 } from "./copy";
 import { ninetiesHubMetadata } from "./metadata";
 import styles from "./nineties.module.css";
@@ -20,9 +22,13 @@ export const metadata = ninetiesHubMetadata;
 
 const navigationItems = [
   { href: "#about", label: "About" },
+  { href: "#work", label: "Work" },
   { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ] as const;
+
+// Stack entries are catalogue slugs; the catalogue owns how a skill is named.
+const skillNamesBySlug = new Map(skills.map((skill) => [skill.slug, skill.name]));
 
 const cosmeticHitCount = "001337";
 
@@ -134,6 +140,43 @@ export default function NinetiesExperiment() {
               className={styles.socialLinks}
               ariaLabel="Andrew's social profiles"
             />
+          </div>
+        </section>
+
+        <section className={`${styles.pane} ${styles.workPane}`} id="work" aria-labelledby="work-heading">
+          <div className={styles.paneBar}>
+            <h2 id="work-heading">
+              <span aria-hidden="true">:: </span>
+              Work
+              <span aria-hidden="true"> ::</span>
+            </h2>
+            <span aria-hidden="true">{PANE_GARNISH.work}</span>
+          </div>
+          <div className={styles.paneBody}>
+            <p className={styles.microcopy}>{WORK_HELPER}</p>
+            <ul className={styles.workList}>
+              {featuredWork.map((project) => (
+                <li className={styles.workItem} key={project.slug}>
+                  <h3 className={styles.workTitle}>{project.title}</h3>
+                  <p className={styles.workMeta}>
+                    <span>{project.role}</span>
+                    <span aria-hidden="true"> · </span>
+                    <span>{project.period}</span>
+                  </p>
+                  <p>{project.blurb}</p>
+                  <ul
+                    className={styles.stackTags}
+                    aria-label={`${project.title} stack`}
+                  >
+                    {project.stack.map((slug) => (
+                      <li className={styles.stackTag} key={slug}>
+                        {skillNamesBySlug.get(slug) ?? slug}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
