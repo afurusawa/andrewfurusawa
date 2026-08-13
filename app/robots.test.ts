@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest";
 import robots from "./robots";
 
 describe("robots", () => {
-  it("discourages crawlers from indexing the /90s experiment", () => {
-    const rules = robots().rules;
+  it("does not name the /90s experiment", () => {
+    const manifest = robots();
 
-    expect(rules).toEqual({
+    expect(JSON.stringify(manifest)).not.toContain("/90s");
+    expect(manifest.rules).toEqual({
       userAgent: "*",
       allow: "/",
-      disallow: "/90s",
     });
   });
 });

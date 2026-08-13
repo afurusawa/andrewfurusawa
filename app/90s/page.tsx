@@ -13,7 +13,10 @@ import {
   PANE_GARNISH,
   ROLE,
 } from "./copy";
+import { ninetiesHubMetadata } from "./metadata";
 import styles from "./nineties.module.css";
+
+export const metadata = ninetiesHubMetadata;
 
 const navigationItems = [
   { href: "#about", label: "About" },
@@ -137,7 +140,7 @@ export default function NinetiesExperiment() {
                     const Icon = skill.icon;
 
                     return (
-                      <tr key={skill.name}>
+                      <tr key={skill.slug}>
                         <td>{String(index + 1).padStart(2, "0")}</td>
                         <td>
                           <Icon aria-hidden="true" /> {skill.name}

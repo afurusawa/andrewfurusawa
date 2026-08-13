@@ -2,9 +2,9 @@
 
 import React, { type ReactNode } from "react";
 import { useSkillsFilter } from "./SkillsFilterContext";
-import { skillDomId } from "../lib/skillDomId";
 
 type SkillTileProps = {
+  slug: string;
   name: string;
   children: ReactNode;
 };
@@ -13,7 +13,7 @@ type SkillTileProps = {
  * Client visibility wrapper. Server-rendered icon/label content is passed as
  * children so static markup stays outside the filter island's data work.
  */
-export default function SkillTile({ name, children }: SkillTileProps) {
+export default function SkillTile({ slug, name, children }: SkillTileProps) {
   const { matchedNames } = useSkillsFilter();
 
   if (!matchedNames.has(name)) {
@@ -22,7 +22,7 @@ export default function SkillTile({ name, children }: SkillTileProps) {
 
   return (
     <div
-      id={skillDomId(name)}
+      id={`skill-${slug}`}
       className="flex flex-col items-center justify-center w-28 h-28 sm:w-32 sm:h-32"
     >
       {children}

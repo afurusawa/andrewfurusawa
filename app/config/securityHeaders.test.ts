@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  pathHeaders,
   requiredSecurityHeaderNames,
   securityHeaders,
 } from "./securityHeaders";
@@ -26,6 +27,21 @@ describe("securityHeaders", () => {
     expect(byKey["X-Content-Type-Options"]).toBe("nosniff");
     expect(byKey["X-Frame-Options"]).toBe("DENY");
     expect(byKey["Content-Security-Policy"]).toContain("frame-ancestors 'none'");
+  });
+
+  it("sends X-Robots-Tag on the experiment paths only", () => {
+    const bySource = Object.fromEntries(
+      pathHeaders.map((entry) => [
+        entry.source,
+        Object.fromEntries(
+          entry.headers.map((header) => [header.key, header.value]),
+        ),
+      ]),
+    );
+
+    expect(bySource["/90s"]["X-Robots-Tag"]).toBe("noindex, nofollow");
+    expect(bySource["/90s/:path*"]["X-Robots-Tag"]).toBe("noindex, nofollow");
+    expect(bySource["/:path*"]["X-Robots-Tag"]).toBeUndefined();
   });
 
   it("allows Vercel Speed Insights endpoints in CSP", () => {
