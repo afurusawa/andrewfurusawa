@@ -16,6 +16,8 @@ _Last updated: 2026-08-06._
 | `app/90s/metadata.ts` | Experiment layout unfurl + `noindex`; hub canonical lives on the page. |
 | `app/90s/nineties.module.css` | All experiment chrome. Nothing else styles `/90s`. |
 | `app/prototype/90s-shell/` | Throwaway shell variants A–D behind `?variant=`. Reference only. |
+| `public/90s/` | The hub kitsch pack — under-construction tape plus three 88×31 badges. Hub-only theater, ≤40KB, never rendered on a note route. |
+| `scripts/generate-90s-pack.mjs` | Draws `public/90s/`. Provenance for the pack; run it rather than hand-editing an asset. |
 
 ## Content and configuration
 
