@@ -1,34 +1,35 @@
 "use client";
 
-import { Suspense } from "react";
 import PrototypeSwitcher, {
   usePrototypeVariant,
   VARIANT_META,
 } from "./PrototypeSwitcher";
-import VariantC from "./variants/VariantC";
-import VariantD from "./variants/VariantD";
 import VariantE from "./variants/VariantE";
-import VariantF from "./variants/VariantF";
 import VariantG from "./variants/VariantG";
+import VariantH from "./variants/VariantH";
+import VariantI from "./variants/VariantI";
+import VariantJ from "./variants/VariantJ";
 import "./prototype.css";
 
 /**
  * PROTOTYPE — homepage visual registers for the rebuilt public `/`.
- * Switch with ?variant=C|D|E|F|G or the floating bar (← →).
+ * Switch with ?variant=H|I|J|G|E or the floating bar (← →).
  *
- * Round 1 survivors:
- * C: Dossier Rail — fixed left rail, label/value rows, dense record
- * D: Poster Panels — no nav, full-height panels, accent field, inverse work
+ * Round 3 (E's typography + G's IA and colour + F's timeline, richer
+ * content, portrait and CSPO credential added):
+ * H: Loaded Stage    — G's side stage, loaded record, full colour cards on mobile
+ * I: Portrait Ledger — no sticky chrome, portrait masthead, inverted timeline band
+ * J: Sticky Marquee  — colour moves to a top marquee so content gets full width
  *
- * Round 2 (C-density + D-chroma, no dead space):
- * E: Rail + Bands — C rail, right column split into full-bleed colour bands
- * F: Data Portrait — timeline, outcome numerals, tinted offer matrix
- * G: Split Stage — sticky colour stage repaints per section beside a dense record
+ * Kept from round 2 for comparison:
+ * G: Split Stage — the IA these three are built on
+ * E: Rail + Bands — the typographic range they borrow
  *
- * A (Editorial Broadsheet) and B (Studio Grid) were retired after round 1;
- * they live in history at commit b820b8e.
+ * Retired: A, B (round 1) live at b820b8e; C (Dossier Rail, superseded),
+ * D (Poster Panels) and F (Data Portrait, timeline kept in `timeline.ts`)
+ * live at 2613dd1.
  */
-function PrototypeInner() {
+export default function PrototypeHost() {
   const variant = usePrototypeVariant();
 
   return (
@@ -38,20 +39,12 @@ function PrototypeInner() {
         transcription · variant {variant} ({VARIANT_META[variant]}) · use the bar
         or ← →
       </div>
-      {variant === "C" && <VariantC />}
-      {variant === "D" && <VariantD />}
-      {variant === "E" && <VariantE />}
-      {variant === "F" && <VariantF />}
+      {variant === "H" && <VariantH />}
+      {variant === "I" && <VariantI />}
+      {variant === "J" && <VariantJ />}
       {variant === "G" && <VariantG />}
+      {variant === "E" && <VariantE />}
       <PrototypeSwitcher current={variant} />
     </div>
-  );
-}
-
-export default function PrototypeHost() {
-  return (
-    <Suspense fallback={<div style={{ padding: "2rem" }}>Loading prototype…</div>}>
-      <PrototypeInner />
-    </Suspense>
   );
 }

@@ -1,5 +1,6 @@
 import type { IconType } from "react-icons";
-import { SiGithub, SiGmail, SiLinkedin } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
+import { SiGithub, SiGmail } from "react-icons/si";
 
 export type ProfileLink = {
   href: string;
@@ -26,7 +27,7 @@ export const socialProfileLinks: readonly ProfileLink[] = [
     href: "https://linkedin.com/in/afurusawa",
     ariaLabel: "Andrew Furusawa on LinkedIn",
     label: "linkedin.com/in/afurusawa",
-    Icon: SiLinkedin,
+    Icon: FaLinkedin,
     openInNewTab: true,
     heroClassName:
       "transition-all duration-300 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300",

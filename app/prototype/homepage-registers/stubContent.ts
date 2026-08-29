@@ -82,3 +82,30 @@ export const contact = {
   primary: contactLinks[0],
   links: contactLinks,
 };
+
+/** Portrait, added round 3 so the page has a face on it. */
+export const portrait = {
+  src: "/prototype/profile.jpg",
+  width: 400,
+  height: 400,
+  alt: "Andrew Furusawa",
+};
+
+/**
+ * Credentials. PLACEHOLDER framing around one real, current credential —
+ * CSPO, awarded August 2026 by Scrum Alliance.
+ */
+export const credentials = {
+  label: "Credentials",
+  items: [
+    {
+      id: "cspo",
+      name: "Certified Scrum Product Owner",
+      short: "CSPO",
+      issuer: "Scrum Alliance",
+      year: "2026",
+      badge: "/prototype/cspo-badge.png",
+      alt: "Certified Scrum Product Owner badge, Scrum Alliance",
+    },
+  ],
+};

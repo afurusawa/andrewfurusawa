@@ -4,7 +4,7 @@ import PrototypeHost from "./PrototypeHost";
 
 /**
  * PROTOTYPE route — five homepage visual registers, switchable via
- * `?variant=C|D|E|F|G`. Fonts are loaded here (server component) and exposed to
+ * `?variant=H|I|J|G|E`. Fonts are loaded here (server component) and exposed to
  * the variants as CSS variables; none of these families are committed to
  * anything yet. Throwaway: see README.md.
  */

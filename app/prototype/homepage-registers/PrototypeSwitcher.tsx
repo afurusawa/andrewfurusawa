@@ -1,42 +1,52 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export type VariantKey = "C" | "D" | "E" | "F" | "G";
+export type VariantKey = "H" | "I" | "J" | "G" | "E";
 
 export const VARIANT_META: Record<VariantKey, string> = {
-  C: "Dossier Rail",
-  D: "Poster Panels",
-  E: "Rail + Bands",
-  F: "Data Portrait",
+  H: "Loaded Stage",
+  I: "Portrait Ledger",
+  J: "Sticky Marquee",
   G: "Split Stage",
+  E: "Rail + Bands",
 };
 
-const ORDER: VariantKey[] = ["C", "D", "E", "F", "G"];
+const ORDER: VariantKey[] = ["H", "I", "J", "G", "E"];
 
 function isVariant(v: string | null): v is VariantKey {
   return ORDER.includes(v as VariantKey);
 }
 
+/**
+ * Reads `?variant=` straight off `location` rather than via `useSearchParams`,
+ * which suspends and needs a `<Suspense>` boundary around the whole prototype.
+ * A throwaway switcher does not need the router; this renders on the server as
+ * the default and corrects itself on mount.
+ */
 export function usePrototypeVariant(): VariantKey {
-  const searchParams = useSearchParams();
-  const raw = searchParams.get("variant");
-  return isVariant(raw) ? raw : "C";
+  const [variant, setVariant] = useState<VariantKey>("H");
+
+  useEffect(() => {
+    function read() {
+      const raw = new URLSearchParams(window.location.search).get("variant");
+      setVariant(isVariant(raw) ? raw : "H");
+    }
+    read();
+    window.addEventListener("popstate", read);
+    return () => window.removeEventListener("popstate", read);
+  }, []);
+
+  return variant;
 }
 
 export default function PrototypeSwitcher({ current }: { current: VariantKey }) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const go = useCallback(
-    (next: VariantKey) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("variant", next);
-      router.replace(`?${params.toString()}`, { scroll: false });
-    },
-    [router, searchParams],
-  );
+  const go = useCallback((next: VariantKey) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("variant", next);
+    window.history.replaceState(null, "", "?" + params.toString());
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  }, []);
 
   const cycle = useCallback(
     (delta: number) => {
