@@ -46,3 +46,47 @@
   font-size: 0.75rem;
   text-align: center;
 }
+
+/*
+ * PROTOTYPE type isolation.
+ *
+ * app/globals.css styles h1/h2/h3/p as bare element selectors (colour, family,
+ * weight, letter-spacing, text-transform) for the current homepage's type
+ * system. Tailwind v4 emits utilities inside `@layer utilities`, and any
+ * unlayered rule outranks every layer regardless of specificity — so those
+ * global rules beat the variants' own classes, uppercasing headings and
+ * repainting them. These registers are explicitly not built on the current
+ * homepage, so neutralise the global rules here and re-assert, unlayered, the
+ * small set of utilities the variants actually rely on.
+ */
+[data-variant] :where(h1, h2, h3, p) {
+  font-family: inherit;
+  font-style: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  font-weight: inherit;
+}
+
+/* globals only forces colour on h1/h2 — leave h3/p to their own utilities. */
+[data-variant] :where(h1, h2) {
+  color: inherit;
+}
+
+[data-variant] .font-\[family-name\:var\(--phr-display\)\] {
+  font-family: var(--phr-display);
+}
+[data-variant] .font-\[family-name\:var\(--phr-serif\)\] {
+  font-family: var(--phr-serif);
+}
+[data-variant] .font-\[family-name\:var\(--phr-mono\)\] {
+  font-family: var(--phr-mono);
+}
+[data-variant] .font-\[family-name\:var\(--phr-sans\)\] {
+  font-family: var(--phr-sans);
+}
+[data-variant] .font-medium {
+  font-weight: 500;
+}
+[data-variant] .font-semibold {
+  font-weight: 600;
+}

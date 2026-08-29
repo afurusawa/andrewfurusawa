@@ -5,20 +5,28 @@ import PrototypeSwitcher, {
   usePrototypeVariant,
   VARIANT_META,
 } from "./PrototypeSwitcher";
-import VariantA from "./variants/VariantA";
-import VariantB from "./variants/VariantB";
 import VariantC from "./variants/VariantC";
 import VariantD from "./variants/VariantD";
+import VariantE from "./variants/VariantE";
+import VariantF from "./variants/VariantF";
+import VariantG from "./variants/VariantG";
 import "./prototype.css";
 
 /**
  * PROTOTYPE — homepage visual registers for the rebuilt public `/`.
- * Switch with ?variant=A|B|C|D or the floating bar (← →).
+ * Switch with ?variant=C|D|E|F|G or the floating bar (← →).
  *
- * A: Editorial Broadsheet — paper field, serif, numbered work index
- * B: Studio Grid — sticky nav, bento tiles, work cards, dark CTA block
+ * Round 1 survivors:
  * C: Dossier Rail — fixed left rail, label/value rows, dense record
  * D: Poster Panels — no nav, full-height panels, accent field, inverse work
+ *
+ * Round 2 (C-density + D-chroma, no dead space):
+ * E: Rail + Bands — C rail, right column split into full-bleed colour bands
+ * F: Data Portrait — timeline, outcome numerals, tinted offer matrix
+ * G: Split Stage — sticky colour stage repaints per section beside a dense record
+ *
+ * A (Editorial Broadsheet) and B (Studio Grid) were retired after round 1;
+ * they live in history at commit b820b8e.
  */
 function PrototypeInner() {
   const variant = usePrototypeVariant();
@@ -30,10 +38,11 @@ function PrototypeInner() {
         transcription · variant {variant} ({VARIANT_META[variant]}) · use the bar
         or ← →
       </div>
-      {variant === "A" && <VariantA />}
-      {variant === "B" && <VariantB />}
       {variant === "C" && <VariantC />}
       {variant === "D" && <VariantD />}
+      {variant === "E" && <VariantE />}
+      {variant === "F" && <VariantF />}
+      {variant === "G" && <VariantG />}
       <PrototypeSwitcher current={variant} />
     </div>
   );

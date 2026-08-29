@@ -3,8 +3,8 @@ import { Fraunces, IBM_Plex_Mono, Inter, Newsreader } from "next/font/google";
 import PrototypeHost from "./PrototypeHost";
 
 /**
- * PROTOTYPE route — four homepage visual registers, switchable via
- * `?variant=A|B|C|D`. Fonts are loaded here (server component) and exposed to
+ * PROTOTYPE route — five homepage visual registers, switchable via
+ * `?variant=C|D|E|F|G`. Fonts are loaded here (server component) and exposed to
  * the variants as CSS variables; none of these families are committed to
  * anything yet. Throwaway: see README.md.
  */

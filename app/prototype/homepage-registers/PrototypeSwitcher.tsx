@@ -3,25 +3,26 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 
-export type VariantKey = "A" | "B" | "C" | "D";
+export type VariantKey = "C" | "D" | "E" | "F" | "G";
 
 export const VARIANT_META: Record<VariantKey, string> = {
-  A: "Editorial Broadsheet",
-  B: "Studio Grid",
   C: "Dossier Rail",
   D: "Poster Panels",
+  E: "Rail + Bands",
+  F: "Data Portrait",
+  G: "Split Stage",
 };
 
-const ORDER: VariantKey[] = ["A", "B", "C", "D"];
+const ORDER: VariantKey[] = ["C", "D", "E", "F", "G"];
 
 function isVariant(v: string | null): v is VariantKey {
-  return v === "A" || v === "B" || v === "C" || v === "D";
+  return ORDER.includes(v as VariantKey);
 }
 
 export function usePrototypeVariant(): VariantKey {
   const searchParams = useSearchParams();
   const raw = searchParams.get("variant");
-  return isVariant(raw) ? raw : "A";
+  return isVariant(raw) ? raw : "C";
 }
 
 export default function PrototypeSwitcher({ current }: { current: VariantKey }) {
