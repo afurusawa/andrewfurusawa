@@ -10,6 +10,24 @@ Run `npm run dev`, then open
 <http://localhost:3000/prototype/homepage-registers> and cycle with the bottom
 bar or the ← → keys.
 
+## Verdict: `H` — Loaded Stage
+
+`H` won. Round 4 applied the three notes that came with the pick:
+
+1. **The timeline reads as one chart.** Three lanes on a single shared axis
+   (`J`'s move) instead of three bars spread down the page. Each record below
+   carries its lane colour so the row ties back to its bar.
+2. **The stage carries more, and the credential is placed.** A ghost stage
+   numeral, a pair of figures that change with the section, and a section
+   index. CSPO moved up into the identity cluster — where a credential belongs
+   — instead of floating above the CTA. The stage needs ~720px of height, so it
+   scrolls internally rather than losing the CTA on a short laptop.
+3. **`01`–`04` line up.** The "Where I help" numerals sit in a fixed-width,
+   right-aligned, vertically centred box on rows of equal minimum height.
+
+The stage figures are PLACEHOLDER (`stageFigures` in `stubContent.ts`) except
+the "Recent work" pair, which comes from the engagement blurbs.
+
 ## Round 3 — the parts that survived, recombined
 
 Built from the round-2 verdict: E's typographic range and ghost numerals, G's

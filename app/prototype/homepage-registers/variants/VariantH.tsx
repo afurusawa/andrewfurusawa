@@ -3,13 +3,19 @@
 /**
  * PROTOTYPE Variant H — "Loaded Stage".
  *
- * Round 3, straight from the feedback: keep G's IA and colour transitions,
- * fix G's two complaints. The record side stops being plain — E's ghost
- * numerals sit behind "Where I help", F's timeline carries "Recent work",
- * and the type mixes display / serif / mono the way E does. The stage
- * carries the portrait and the CSPO badge. Below `lg` the stage becomes a
- * full coloured section card plus a sticky five-segment progress bar, so
- * mobile keeps the colour story instead of flattening into a list.
+ * Round 4, from the round-3 verdict on H:
+ * - "Recent work" now reads as one chart. Three lanes on a single shared
+ *   axis (J's move) instead of three bars spread down the page, with the
+ *   lane colour tying each record back to its bar.
+ * - The stage carries more: a ghost stage numeral, a pair of figures that
+ *   change with the section, and a section index. The CSPO credential moves
+ *   up into the identity cluster, where a credential belongs, instead of
+ *   floating above the CTA.
+ * - "Where I help" numerals sit in a fixed-width, vertically centred box on
+ *   rows of equal minimum height, so 01 through 04 line up on both axes.
+ *
+ * Below `lg` the stage becomes a full coloured section card plus a sticky
+ * five-segment progress bar, so mobile keeps the colour story.
  */
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -20,6 +26,7 @@ import {
   identity,
   portrait,
   recentWork,
+  stageFigures,
   whatIDo,
   whereIHelp,
 } from "../stubContent";
@@ -73,6 +80,9 @@ const STAGES = [
   },
 ];
 
+/** One colour per engagement lane, reused by the record below the chart. */
+const LANE = ["bg-teal-600", "bg-indigo-500", "bg-amber-500"];
+
 export default function VariantH() {
   const [active, setActive] = useState(0);
 
@@ -117,62 +127,106 @@ export default function VariantH() {
       {/* Stage */}
       <aside
         className={
-          "hidden lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-between lg:px-12 lg:py-11 text-white transition-colors duration-500 " +
+          // overflow-x-hidden clips the ghost numeral's bleed; overflow-y-auto
+          // means a short laptop viewport scrolls the stage rather than losing
+          // the CTA off the bottom (the stage needs ~720px to sit still).
+          "relative hidden lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-between lg:overflow-y-auto lg:overflow-x-hidden lg:px-12 lg:py-10 text-white transition-colors duration-500 " +
           stage.field
         }
       >
-        <div className="flex items-center gap-4">
-          <Image
-            src={portrait.src}
-            alt={portrait.alt}
-            width={portrait.width}
-            height={portrait.height}
-            className="h-14 w-14 rounded-full object-cover ring-2 ring-white/40"
-          />
-          <div>
-            <p className="font-[family-name:var(--phr-display)] text-xl tracking-tight">
-              {identity.name}
-            </p>
-            <p className="mt-0.5 font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.2em] text-white/70">
-              {identity.line}
-            </p>
+        {/* ghost stage numeral — weight in the field without more words */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -right-6 bottom-24 select-none font-[family-name:var(--phr-display)] text-[13rem] leading-none tracking-tight text-white/[0.07]"
+        >
+          {String(active + 1).padStart(2, "0")}
+        </span>
+
+        <div className="relative">
+          <div className="flex items-center gap-4">
+            <Image
+              src={portrait.src}
+              alt={portrait.alt}
+              width={portrait.width}
+              height={portrait.height}
+              className="h-14 w-14 rounded-full object-cover ring-2 ring-white/40"
+            />
+            <div>
+              <p className="font-[family-name:var(--phr-display)] text-xl tracking-tight">
+                {identity.name}
+              </p>
+              <p className="mt-0.5 font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.2em] text-white/70">
+                {identity.line}
+              </p>
+            </div>
           </div>
-        </div>
-
-        <div>
-          <p className="font-[family-name:var(--phr-mono)] text-sm tracking-[0.2em] text-white/60">
-            {String(active + 1).padStart(2, "0")} / {String(STAGES.length).padStart(2, "0")}
-          </p>
-          <h2 className="mt-4 font-[family-name:var(--phr-display)] text-6xl leading-[0.95] tracking-tight">
-            {stage.label}
-          </h2>
-          <p className="mt-6 max-w-[26ch] font-[family-name:var(--phr-serif)] text-xl leading-snug text-white/85">
-            {stage.caption}
-          </p>
-        </div>
-
-        <div>
-          <div className="flex items-center gap-3 border-t border-white/20 pt-5">
+          {/* credential sits with the identity, not floating above the CTA */}
+          <div className="mt-4 flex items-center gap-2.5 border-t border-white/15 pt-4">
             <Image
               src={cred.badge}
               alt={cred.alt}
               width={600}
               height={600}
-              className="h-11 w-11 shrink-0"
+              className="h-8 w-8 shrink-0"
             />
-            <p className="font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase leading-relaxed tracking-[0.14em] text-white/70">
-              {cred.name}
-              <br />
-              {cred.issuer} · {cred.year}
+            <p className="font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.14em] text-white/70">
+              {cred.short} · {cred.issuer} · {cred.year}
             </p>
           </div>
+        </div>
+
+        <div className="relative">
+          <p className="font-[family-name:var(--phr-mono)] text-sm tracking-[0.2em] text-white/60">
+            {String(active + 1).padStart(2, "0")} / {String(STAGES.length).padStart(2, "0")}
+          </p>
+          <h2 className="mt-3 font-[family-name:var(--phr-display)] text-[3.25rem] leading-[0.95] tracking-tight">
+            {stage.label}
+          </h2>
+          <p className="mt-5 max-w-[26ch] font-[family-name:var(--phr-serif)] text-xl leading-snug text-white/85">
+            {stage.caption}
+          </p>
+          <dl className="mt-7 flex gap-10 border-t border-white/20 pt-5">
+            {stageFigures[stage.id].map(figure => (
+              <div key={figure.label}>
+                <dt className="font-[family-name:var(--phr-display)] text-3xl leading-none tracking-tight">
+                  {figure.value}
+                </dt>
+                <dd className="mt-1.5 max-w-[16ch] font-[family-name:var(--phr-mono)] text-[0.5625rem] uppercase leading-relaxed tracking-[0.12em] text-white/60">
+                  {figure.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <div className="relative">
+          <ol className="mb-7 space-y-1">
+            {STAGES.map((s, i) => (
+              <li key={s.id}>
+                <a
+                  href={"#h-" + s.id}
+                  className={
+                    "flex items-center gap-3 font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.14em] transition-opacity hover:opacity-100 " +
+                    (i === active ? "opacity-100" : "opacity-45")
+                  }
+                >
+                  <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <span
+                    aria-hidden
+                    className={"h-px bg-white transition-all " + (i === active ? "w-8" : "w-3")}
+                  />
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ol>
           <a
             href={contact.primary.href}
-            className="mt-6 inline-block border-2 border-white px-5 py-3 text-sm font-semibold uppercase tracking-[0.12em] hover:bg-white hover:text-neutral-900"
+            className="inline-block border-2 border-white px-5 py-3 text-sm font-semibold uppercase tracking-[0.12em] hover:bg-white hover:text-neutral-900"
           >
             Start a conversation
           </a>
-          <ul className="mt-5 flex flex-wrap gap-5">
+          <ul className="mt-4 flex flex-wrap gap-5">
             {contact.links.slice(1).map(link => (
               <li key={link.href}>
                 <a
@@ -249,15 +303,16 @@ export default function VariantH() {
             {whereIHelp.items.map((item, i) => (
               <li
                 key={item.title}
-                className="relative overflow-hidden border-t border-neutral-200 py-7 first:border-t-0 first:pt-0"
+                className="relative flex min-h-[8.5rem] items-center overflow-hidden border-t border-neutral-200 first:border-t-0"
               >
+                {/* fixed-width, right-aligned, vertically centred: 01–04 line up */}
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute -top-4 right-0 select-none font-[family-name:var(--phr-display)] text-8xl leading-none text-blue-100"
+                  className="pointer-events-none absolute right-0 top-1/2 w-[2.1em] -translate-y-1/2 select-none text-right font-[family-name:var(--phr-display)] text-8xl leading-none tabular-nums text-blue-100"
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <div className="relative max-w-prose">
+                <div className="relative max-w-prose py-6 pr-24">
                   <h3 className="font-[family-name:var(--phr-display)] text-2xl tracking-tight">
                     {item.title}
                   </h3>
@@ -276,49 +331,68 @@ export default function VariantH() {
             <p className="font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.24em] text-neutral-500">
               {recentWork.helper}
             </p>
-            <div className="mt-7">
-              {recentWork.projects.map(project => {
+
+            {/* One chart: three lanes, one axis, read in a glance */}
+            <div className="mt-7 space-y-2">
+              {recentWork.projects.map((project, i) => {
                 const [start, end] = span(project.period);
                 return (
-                  <article
-                    key={project.slug}
-                    className="border-t border-neutral-300 py-6 first:border-t-0 first:pt-0"
-                  >
-                    <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <h3 className="font-[family-name:var(--phr-display)] text-xl tracking-tight">
-                        {project.title}
-                      </h3>
-                      <p className="font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.14em] text-neutral-500">
-                        {project.period}
-                      </p>
-                    </div>
-                    <div className="relative mt-3 h-2.5 bg-neutral-200">
+                  <div key={project.slug} className="flex items-center gap-4">
+                    <span className="w-28 shrink-0 truncate font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.1em] text-neutral-600 md:w-40">
+                      {project.title}
+                    </span>
+                    <div className="relative h-4 flex-1 bg-neutral-200">
                       <div
-                        className="absolute top-0 h-2.5 bg-neutral-900"
+                        className={"absolute top-0 h-4 " + LANE[i % LANE.length]}
                         style={{ left: pct(start) + "%", width: pct(end) - pct(start) + "%" }}
                       />
                     </div>
-                    <p className="mt-4 max-w-prose text-[0.9375rem] leading-relaxed text-neutral-700">
-                      {project.blurb}
-                    </p>
-                    <p className="mt-2 text-xs text-neutral-500">{project.role}</p>
-                    <ul className="mt-3 flex flex-wrap gap-1.5">
-                      {project.stack.map(tech => (
-                        <li
-                          key={tech}
-                          className="border border-neutral-300 px-2 py-0.5 font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.1em] text-neutral-600"
-                        >
-                          {tech}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
+                  </div>
                 );
               })}
+              <div className="flex gap-4">
+                <span className="w-28 shrink-0 md:w-40" aria-hidden />
+                <div className="flex flex-1 justify-between border-t border-neutral-900 pt-2 font-[family-name:var(--phr-mono)] text-[0.625rem] tracking-[0.1em] text-neutral-500">
+                  {AXIS_YEARS.map(year => (
+                    <span key={year}>{year === AXIS_END ? "now" : year}</span>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="mt-2 flex justify-between border-t border-neutral-900 pt-2 font-[family-name:var(--phr-mono)] text-[0.625rem] tracking-[0.1em] text-neutral-500">
-              {AXIS_YEARS.map(year => (
-                <span key={year}>{year === AXIS_END ? "now" : year}</span>
+
+            {/* The record — each row keyed back to its lane by colour */}
+            <div className="mt-12">
+              {recentWork.projects.map((project, i) => (
+                <article
+                  key={project.slug}
+                  className="border-t border-neutral-300 py-6 first:border-t-0 first:pt-0"
+                >
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span
+                      aria-hidden
+                      className={"h-3 w-3 shrink-0 self-center " + LANE[i % LANE.length]}
+                    />
+                    <h3 className="font-[family-name:var(--phr-display)] text-xl tracking-tight">
+                      {project.title}
+                    </h3>
+                    <p className="font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.14em] text-neutral-500">
+                      {project.period} · {project.role}
+                    </p>
+                  </div>
+                  <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-neutral-700">
+                    {project.blurb}
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-1.5">
+                    {project.stack.map(tech => (
+                      <li
+                        key={tech}
+                        className="border border-neutral-300 px-2 py-0.5 font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.1em] text-neutral-600"
+                      >
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
               ))}
             </div>
           </div>
@@ -362,14 +436,6 @@ export default function VariantH() {
                 </li>
               ))}
             </ul>
-            <div className="mt-10 flex items-center gap-4 border-t border-neutral-200 pt-6">
-              <Image src={cred.badge} alt={cred.alt} width={600} height={600} className="h-14 w-14" />
-              <p className="font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase leading-relaxed tracking-[0.12em] text-neutral-500">
-                {cred.name}
-                <br />
-                {cred.issuer} · {cred.year}
-              </p>
-            </div>
           </div>
         </section>
       </main>
@@ -390,6 +456,18 @@ function StageCard({ stage, index }: { stage: (typeof STAGES)[number]; index: nu
       <p className="mt-4 max-w-[28ch] font-[family-name:var(--phr-serif)] text-lg leading-snug text-white/85">
         {stage.caption}
       </p>
+      <dl className="mt-6 flex gap-8 border-t border-white/25 pt-4">
+        {stageFigures[stage.id].map(figure => (
+          <div key={figure.label}>
+            <dt className="font-[family-name:var(--phr-display)] text-2xl leading-none tracking-tight">
+              {figure.value}
+            </dt>
+            <dd className="mt-1.5 max-w-[16ch] font-[family-name:var(--phr-mono)] text-[0.5625rem] uppercase leading-relaxed tracking-[0.12em] text-white/60">
+              {figure.label}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </div>
   );
 }

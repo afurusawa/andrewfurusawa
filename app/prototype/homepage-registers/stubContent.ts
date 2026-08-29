@@ -109,3 +109,31 @@ export const credentials = {
     },
   ],
 };
+
+/**
+ * Per-stage figures for the H stage. PLACEHOLDER except the "work" pair, which
+ * comes from the real engagement blurbs. Round 4: the stage needed substance
+ * that changes as you scroll, not just a label.
+ */
+export const stageFigures: Record<string, { value: string; label: string }[]> = {
+  what: [
+    { value: "9", label: "years shipping product" },
+    { value: "3", label: "named engagements" },
+  ],
+  where: [
+    { value: "4", label: "ways teams bring me in" },
+    { value: "1", label: "narrative, product to code" },
+  ],
+  work: [
+    { value: "10", label: "hospitals on one codebase" },
+    { value: "70%", label: "faster for 20k+ users" },
+  ],
+  how: [
+    { value: "1–2 wk", label: "to a credible date" },
+    { value: "0", label: "handover cliffs" },
+  ],
+  contact: [
+    { value: "48 h", label: "typical reply" },
+    { value: "CSPO", label: "Scrum Alliance, 2026" },
+  ],
+};

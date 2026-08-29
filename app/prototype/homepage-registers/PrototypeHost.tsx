@@ -15,6 +15,10 @@ import "./prototype.css";
  * PROTOTYPE — homepage visual registers for the rebuilt public `/`.
  * Switch with ?variant=H|I|J|G|E or the floating bar (← →).
  *
+ * WINNER: H. Chosen in round 3 and revised in round 4 — one lane chart for
+ * "Recent work", more substance on the stage, credential moved into the
+ * identity cluster, aligned "Where I help" numerals.
+ *
  * Round 3 (E's typography + G's IA and colour + F's timeline, richer
  * content, portrait and CSPO credential added):
  * H: Loaded Stage    — G's side stage, loaded record, full colour cards on mobile
