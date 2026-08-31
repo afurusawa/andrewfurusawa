@@ -1,55 +1,40 @@
 # Plan
 
-**Objective:** produce a v2 **spec** (GitHub issue via `/to-spec`) for the `/90s` experiment — hi-fi kitsch chrome, skill notes at `/90s/skills/[slug]`, a light featured-work strip, mailto-only contact — charted as [Wayfinder: /90s hi-fi kitsch and skill-note content spec](https://github.com/afurusawa/andrewfurusawa/issues/35). This effort produces **decisions**, then one tracker spec. It does not build the upgrade, cut over the public homepage, or write a new `docs/design/` file.
+**Objective:** produce a **spec** (GitHub issue via `/to-spec`) for rebuilding the public homepage (`/`) from scratch — new chrome, new UI, and a new **offer** taken from the **capabilities page** — charted as [Wayfinder: homepage rebuild from the capabilities page](https://github.com/afurusawa/andrewfurusawa/issues/66). This effort produces **decisions**, then one tracker spec. It does not implement the redesign, restyle `/90s`, fork the site by audience, or ship a PDF.
 
 **Architecture, route ownership, and data contracts:** see `docs/MAP.md`, `docs/agent-context-map.md` (path inventory), and `docs/adr/`. Do not duplicate those essays here.
 
 **The issue tracker is canonical.** This file is the readable snapshot; where the two disagree, GitHub wins. `docs/agents/issue-tracker.md` records how maps, tickets, blocking, and the frontier are expressed here.
 
-_Last updated: 2026-08-12._
+_Last updated: 2026-08-31._
 
 ## Active Slice
 
-**In flight:** nothing. Decision tickets are closed.
+**In flight:** nothing. Decision tickets are unclaimed.
 
-**Terminology:** the writing unit is a **skill note**. "Dispatch" is retired everywhere except the two closed research tickets, whose titles are left as historical record. The implementable package is a **spec** issue, not a `docs/design/` file.
-
-**Takeable now:** destination handoff — run `/to-spec` to write the v2 spec issue from the closed map. Not a new wayfinder child.
+**Takeable now (frontier):** [Lock featured-work homepage copy](https://github.com/afurusawa/andrewfurusawa/issues/73); [Lock colour-scheme persistence and first-paint](https://github.com/afurusawa/andrewfurusawa/issues/74); [Define homepage chrome inventory from the chosen visual register](https://github.com/afurusawa/andrewfurusawa/issues/75); [Decide how the capabilities-page snapshot is maintained](https://github.com/afurusawa/andrewfurusawa/issues/77). Visual taste is the heavy path — use `/prototype`.
 
 ## Backlog
 
-None. The map waits on that spec issue before it can close.
+Blocked until its parents close: spec packaging.
 
-**Not yet sharp enough to ticket:** performance budget for hub and note pages against the live portfolio; a brand name for the space beyond the path `/90s`; the first multi-skill publish batch after the single example.
+**Not yet sharp enough to ticket:** second-pass polish prototypes after the winning register; dark treatment of the winner; type, motion, in-page nav; font/motion budget vs live `/`; whether leftover homepage modules are named for deletion in the spec.
 
-**Ruled out of this effort:** homepage cutover or linking `/90s` from the live nav; changing the modern homepage skills UI (shared `category` does not force it); guestbook or public message walls; server-backed contact form or hit counter; a first-class light theme; autoplay audio; drafting the full first batch of skill notes; any CMS as the authoring source of truth.
+**Ruled out of this effort:** implementing the redesign; restyling `/90s` or rewriting its identity line; homepage cutover of `/90s`; audience fork; PDF product or download; blog/case-study routes; CMS; contact form; public phone number; keeping the homepage skills wall; reopening the stack.
 
 ## Completed Ledger
 
 One line per finished decision. Detail lives in the linked ticket — zoom there rather than restating it here.
 
-### Current effort — [/90s v2 spec](https://github.com/afurusawa/andrewfurusawa/issues/35)
+### Current effort — [Wayfinder: homepage rebuild from the capabilities page](https://github.com/afurusawa/andrewfurusawa/issues/66)
 
-- [Research Next.js MDX/content patterns for /90s skill posts](https://github.com/afurusawa/andrewfurusawa/issues/36) — `@next/mdx` + top-level `content/skills/*.mdx` + `gray-matter` frontmatter + `generateStaticParams` with `dynamicParams = false`; `next-mdx-remote` archived, `output: export` ruled out, MDX config is app-global. Findings on `research/nextjs-mdx-90s-skill-posts`.
-- [Research soft-secret SEO for nested /90s skill post routes](https://github.com/afurusawa/andrewfurusawa/issues/37) — today's `Disallow: /90s` and `noindex` cancel each other; use `X-Robots-Tag` on `/90s` and `/90s/:path*` with self-referential canonicals per segment. Findings on `research/soft-secret-seo-90s`.
-- [Define the skill-note content model for /90s](https://github.com/afurusawa/andrewfurusawa/issues/38) — the unit is a **skill note**, one per skill and only where there's something to say; "dispatch" retired. `Skill` gains an explicit `slug`; `content/skills/<slug>.md`, filename is the association. Frontmatter `summary` + optional `updated`, no `draft`. Three fixed H2s: Where I used it / Why it fit / What it taught me.
-- [Define Featured work strip model for /90s hub](https://github.com/afurusawa/andrewfurusawa/issues/39) — shared `featuredWork.ts`; cap of 3, no floor; stack entries are skill slugs; all three items link-free. Nav becomes About · Work · Skills · Contact.
-- [Decide skills catalogue vs note set data relationship](https://github.com/afurusawa/andrewfurusawa/issues/42) — `allSkills` moves to `app/config/skills.ts` as `{ slug, name, icon }`; one build-time join; orphan notes throw. 35 slugs locked. `category` later added by the directory prototype.
-- [Prototype /90s skills directory UI treatments](https://github.com/afurusawa/andrewfurusawa/issues/43) — category-grouped icon-tile wall; publish-set carried by tile treatment; `category` ships; VT323 is display-only. See [Fix the category taxonomy for the skills catalogue](https://github.com/afurusawa/andrewfurusawa/issues/50).
-- [Define About and hub voice/microcopy for /90s v2](https://github.com/afurusawa/andrewfurusawa/issues/40) — garnish only in information-free chrome; hub `<h1>` is `Andrew Furusawa`; four locked strings (About, Skills helper, Work helper, 404).
-- [Prototype /90s skill note page shell](https://github.com/afurusawa/andrewfurusawa/issues/44) — Document Window: one bordered article on the existing stage; no sticky TOC. On `prototype/90s-skill-note-shell`.
-- [Choose the example skill for the v2 sample note](https://github.com/afurusawa/andrewfurusawa/issues/45) — **Ionic** (`ionic`).
-- [Produce the example skill note for the v2 spec](https://github.com/afurusawa/andrewfurusawa/issues/46) — Ionic example note drafted from MilkTracker and Blossom/GroConnect. [Final draft](https://github.com/afurusawa/andrewfurusawa/issues/46#issuecomment-5266039742).
-- [Decide the Markdown/MDX rendering toolchain for /90s skill notes](https://github.com/afurusawa/andrewfurusawa/issues/48) — local server-side plain-Markdown pipeline (`gray-matter` + `unified`/`remark`/`rehype`); no JSX/GFM/raw HTML.
-- [Lock the /90s soft-secret discoverability policy](https://github.com/afurusawa/andrewfurusawa/issues/49) — crawl-allowed + header `noindex, nofollow`; `/90s` unnamed in `robots.txt`; per-route experiment unfurls, no share image; inbound-link test.
-- [Fix the category taxonomy for the skills catalogue](https://github.com/afurusawa/andrewfurusawa/issues/50) — closed union Frontend · Mobile · Backend · Tooling · Design; no singletons (Testing merged into Tooling, Shadcn moved to Frontend); `/` ignores the field.
-- [Define hi-fi chrome inventory and assets for /90s v2](https://github.com/afurusawa/andrewfurusawa/issues/41) — fidelity-only v1 pack: required 88×31 badges + tape UC, CSS starfield, hub-only, static, ≤40KB; no new motifs.
-- [Lock /90s v2 design-spec packaging and map-done criteria](https://github.com/afurusawa/andrewfurusawa/issues/47) — no v2 `docs/design/` file; implementable package is a `/to-spec` GitHub issue; map closes when that issue exists.
+- [Research light-default optional-dark theming in Next.js App Router](https://github.com/afurusawa/andrewfurusawa/issues/69) — light is the absence of `.dark`; optional dark is a class + `localStorage` opt-in, not `prefers-color-scheme`; apply before first paint with a parser-blocking script that no-ops on `/90s`. Findings on `research/nextjs-light-default-optional-dark`.
+- [Prototype homepage visual registers for the public homepage](https://github.com/afurusawa/andrewfurusawa/issues/67) — register **H "Loaded Stage"** wins: sticky colour stage beside a loaded record, mixed display/serif/mono type, ghost numerals, engagement timeline as one lane chart, portrait and CSPO credential in the identity cluster. Prototype on `prototype/homepage-visual-registers`.
+- [Transcribe the capabilities page into the repo](https://github.com/afurusawa/andrewfurusawa/issues/68) — verbatim snapshot at `content/capabilities-page.md`, phone withheld because the repo is public. Recent work is anonymised domain + years, not named projects — reconciliation owned by [Lock featured-work homepage copy](https://github.com/afurusawa/andrewfurusawa/issues/73). Branch `content/capabilities-page`.
+- [Decide featured-work field split across presentations](https://github.com/afurusawa/andrewfurusawa/issues/70) — one shared substance, no per-presentation copy layer. `period` → structured `start`/`end` with derived label; `role` → `role` + `client`; new shared `outcomes: [{ result, figure? }]`. One `blurb`. Standing rule surfaced: the homepage takes priority over the experiment, always.
+- [Decide site metadata for the new offer](https://github.com/afurusawa/andrewfurusawa/issues/71) — title copies the identity line, `Andrew Furusawa · Product & Software Delivery Consulting`; description authored fresh, first person, offer-led, no technology names and no location. One string pair for search result and share card; no `title.template`. Adds a built `app/opengraph-image.tsx` and `summary_large_image`. Constrains [Lock homepage voice and section copy](https://github.com/afurusawa/andrewfurusawa/issues/72) to first person.
+- [Lock homepage voice and section copy](https://github.com/afurusawa/andrewfurusawa/issues/72) — capabilities-page prose rewritten **for the web**: every claim kept, blocks halved to ~40–70 words, first person, spine headings verbatim. Offer leads with speed; agentic tooling is named as why the pace is possible, not as the offer itself. The edge is the product-owner/engineer crossover — "either seat, or both when the work needs one person to" — stated **once** in a new lede and then demonstrated by the `Where I help` row order. `Where I help` splits two dense bullets into four rows; `How I work` stays three. Location `Inland Empire, CA · Remote`; 12+ years, degree and CSPO all sit in the identity cluster. Contact lead-in names the paid discovery sprint. Handed [#75](https://github.com/afurusawa/andrewfurusawa/issues/75) a conditional pull-quote string and the finding that per-section stage figures are unsupported by the substance; handed [#73](https://github.com/afurusawa/andrewfurusawa/issues/73) a surfaced résumé that **names clients** the capabilities page anonymises.
 
-### [/90s v1 design spec](https://github.com/afurusawa/andrewfurusawa/issues/15) — closed
+### [/90s v2 spec](https://github.com/afurusawa/andrewfurusawa/issues/35) — closed
 
-Delivered `docs/design/90s-experiment-spec.md` and shipped as `app/90s/` in [#34](https://github.com/afurusawa/andrewfurusawa/pull/34). Locked and still binding until v2 supersedes them: single-page `/90s`; About · Skills · Contact; shared profile links and skills data; dark theme only; cosmetic theater only; soft-secret discoverability; WCAG 2.2 AA; hybrid variant D shell at a ~64rem stage; mood-board colour lock with VT323 body type.
-
-### [Portfolio audit and framework decision](https://github.com/afurusawa/andrewfurusawa/issues/1) — closed
-
-Stay on **Next.js** — no material Astro advantage evidenced; reconsider only if a like-for-like proof clears the initial-JS gate. Set the performance budgets and the canonical `https://andrewfurusawa.dev` domain now recorded in `docs/MAP.md`.
+Map closed into [Spec: /90s v2 hi-fi kitsch and skill notes](https://github.com/afurusawa/andrewfurusawa/issues/51) and shipped. Not this effort.
