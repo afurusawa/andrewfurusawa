@@ -18,7 +18,7 @@ export type PrototypeState = { variant: VariantKey; scheme: SchemeKey };
  * the dark values; light is the locked control.
  */
 export function usePrototypeState(): PrototypeState {
-  const [state, setState] = useState<PrototypeState>({ variant: "A", scheme: "dark" });
+  const [state, setState] = useState<PrototypeState>({ variant: "D", scheme: "dark" });
 
   useEffect(() => {
     function read() {
@@ -26,7 +26,7 @@ export function usePrototypeState(): PrototypeState {
       const rawVariant = params.get("variant");
       const rawScheme = params.get("scheme");
       setState({
-        variant: isVariant(rawVariant) ? rawVariant : "A",
+        variant: isVariant(rawVariant) ? rawVariant : "D",
         scheme: isScheme(rawScheme) ? rawScheme : "dark",
       });
     }

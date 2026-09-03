@@ -7,9 +7,10 @@ import "./prototype.css";
 
 /**
  * PROTOTYPE — exact dark-scheme values for the colour panel, on register H.
- * Switch palettes with ?variant=A|B|C or ← →. Toggle the locked light
+ * Switch palettes with ?variant=D|A|B|C or ← →. Toggle the locked light
  * control with ?scheme=light|dark, the scheme button, or L / D.
  *
+ * D: Panel holds    (light fields + white ink; record inverts)
  * A: Starting point (fields -300, lanes lifted)
  * B: Calmer tints   (fields -400, lanes lifted)
  * C: Unlifted lanes (fields -300, light lane values)
@@ -39,7 +40,7 @@ export default function PrototypeHost() {
           ))}
         </div>
       </div>
-      <VariantH key={scheme} palette={palette} />
+      <VariantH key={scheme + palette.panelInk} palette={palette} />
       <PrototypeSwitcher current={{ variant, scheme }} />
     </div>
   );

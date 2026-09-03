@@ -13,11 +13,15 @@
  *   A Starting point — fields -300, lanes lifted (teal-500 / indigo-400 / amber-500)
  *   B Calmer tints  — fields -400, lanes lifted
  *   C Unlifted lanes — fields -300, light lane values on the dark track
+ *   D Panel holds   — colour panel keeps the light fields and white ink;
+ *                     only the record/paper invert. Hue-on-paper splits
+ *                     (field stays -800/-700; record ink is -300) because
+ *                     the light field tokens fail on 950.
  *
  * Every class string is a complete Tailwind utility so the scanner sees it.
  */
 
-export type VariantKey = "A" | "B" | "C";
+export type VariantKey = "A" | "B" | "C" | "D";
 export type SchemeKey = "light" | "dark";
 
 export type StageTokens = {
@@ -60,9 +64,10 @@ export const VARIANT_META: Record<VariantKey, string> = {
   A: "Starting point",
   B: "Calmer tints",
   C: "Unlifted lanes",
+  D: "Panel holds",
 };
 
-export const ORDER: VariantKey[] = ["A", "B", "C"];
+export const ORDER: VariantKey[] = ["D", "A", "B", "C"];
 
 const LIGHT_STAGES: Palette["stages"] = [
   {
@@ -248,6 +253,50 @@ const LANES_UNLIFTED: [string, string, string] = [
   "bg-amber-600",
 ];
 
+/** Panel = light fields + white ink; record ink lifts so it survives 950. */
+const PANEL_HOLDS_STAGES: Palette["stages"] = [
+  {
+    field: "bg-emerald-800",
+    ink: "text-emerald-300",
+    recordGhost: "text-emerald-950",
+    ctaHover: "hover:bg-white hover:text-emerald-800",
+    accent: "border-emerald-300",
+    linkHover: "hover:text-emerald-300",
+  },
+  {
+    field: "bg-blue-800",
+    ink: "text-blue-300",
+    recordGhost: "text-blue-950",
+    ctaHover: "hover:bg-white hover:text-blue-800",
+    accent: "border-blue-300",
+    linkHover: "hover:text-blue-300",
+  },
+  {
+    field: "bg-neutral-900",
+    ink: "text-neutral-100",
+    recordGhost: "text-neutral-800",
+    ctaHover: "hover:bg-white hover:text-neutral-900",
+    accent: "border-neutral-100",
+    linkHover: "hover:text-neutral-100",
+  },
+  {
+    field: "bg-amber-700",
+    ink: "text-amber-300",
+    recordGhost: "text-amber-950",
+    ctaHover: "hover:bg-white hover:text-amber-700",
+    accent: "border-amber-300",
+    linkHover: "hover:text-amber-300",
+  },
+  {
+    field: "bg-rose-800",
+    ink: "text-rose-300",
+    recordGhost: "text-rose-950",
+    ctaHover: "hover:bg-white hover:text-rose-800",
+    accent: "border-rose-300",
+    linkHover: "hover:text-rose-300",
+  },
+];
+
 export const LIGHT: Palette = {
   key: "A",
   scheme: "light",
@@ -284,6 +333,21 @@ export const DARK: Record<VariantKey, Palette> = {
     ...DARK_CHROME,
     lanes: LANES_UNLIFTED,
     stages: DARK_300,
+  },
+  D: {
+    key: "D",
+    scheme: "dark",
+    name: "Panel holds",
+    summary: "panel stays 800/700 + white ink · record inverts · lanes lifted",
+    ...DARK_CHROME,
+    panelInk: LIGHT_CHROME.panelInk,
+    panelGhost: LIGHT_CHROME.panelGhost,
+    panelBorder: LIGHT_CHROME.panelBorder,
+    panelRule: LIGHT_CHROME.panelRule,
+    panelRing: LIGHT_CHROME.panelRing,
+    cta: LIGHT_CHROME.cta,
+    lanes: LANES_LIFTED,
+    stages: PANEL_HOLDS_STAGES,
   },
 };
 
