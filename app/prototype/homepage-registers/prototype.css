@@ -47,6 +47,34 @@
   text-align: center;
 }
 
+.phr-swatches {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.phr-swatches span {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+}
+
+.phr-swatches i {
+  width: 1px;
+  height: 0.75rem;
+  background: rgb(255 255 255 / 35%);
+}
+
+.phr-switcher__scheme {
+  width: auto !important;
+  padding: 0 0.65rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 /*
  * PROTOTYPE type isolation.
  *

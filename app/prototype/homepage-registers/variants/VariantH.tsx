@@ -1,24 +1,14 @@
 "use client";
 
 /**
- * PROTOTYPE Variant H — "Loaded Stage".
- *
- * Round 4, from the round-3 verdict on H:
- * - "Recent work" now reads as one chart. Three lanes on a single shared
- *   axis (J's move) instead of three bars spread down the page, with the
- *   lane colour tying each record back to its bar.
- * - The stage carries more: a ghost stage numeral, a pair of figures that
- *   change with the section, and a section index. The CSPO credential moves
- *   up into the identity cluster, where a credential belongs, instead of
- *   floating above the CTA.
- * - "Where I help" numerals sit in a fixed-width, vertically centred box on
- *   rows of equal minimum height, so 01 through 04 line up on both axes.
- *
- * Below `lg` the stage becomes a full coloured section card plus a sticky
- * five-segment progress bar, so mobile keeps the colour story.
+ * PROTOTYPE Variant H — "Loaded Stage", retokened for the dark-scheme
+ * palette round. Structure is the register as of 4e8a1ed. Colour comes from
+ * the palette prop. The opacity ladder is gone; type carries hierarchy.
+ * Mono strings sit on the 11px floor from #75.
  */
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import type { Palette, StageTokens } from "../palettes";
 import {
   contact,
   credentials,
@@ -32,62 +22,19 @@ import {
 } from "../stubContent";
 import { AXIS_END, AXIS_YEARS, METRICS, pct, span } from "../timeline";
 
-const STAGES = [
-  {
-    id: "what",
-    label: whatIDo.label,
-    caption: whatIDo.statement,
-    field: "bg-emerald-800",
-    seg: "bg-emerald-800",
-    ink: "text-emerald-800",
-    ghost: "text-emerald-100",
-  },
-  {
-    id: "where",
-    label: whereIHelp.label,
-    caption: "Four situations I get called into.",
-    field: "bg-blue-800",
-    seg: "bg-blue-800",
-    ink: "text-blue-800",
-    ghost: "text-blue-100",
-  },
-  {
-    id: "work",
-    label: recentWork.label,
-    caption: recentWork.helper,
-    field: "bg-neutral-900",
-    seg: "bg-neutral-900",
-    ink: "text-neutral-900",
-    ghost: "text-neutral-200",
-  },
-  {
-    id: "how",
-    label: howIWork.label,
-    caption: "The habits that make the dates hold.",
-    field: "bg-amber-600",
-    seg: "bg-amber-600",
-    ink: "text-amber-700",
-    ghost: "text-amber-100",
-  },
-  {
-    id: "contact",
-    label: contact.label,
-    caption: contact.invitation,
-    field: "bg-rose-800",
-    seg: "bg-rose-800",
-    ink: "text-rose-800",
-    ghost: "text-rose-100",
-  },
+const STAGE_COPY = [
+  { id: "what", label: whatIDo.label, caption: whatIDo.statement },
+  { id: "where", label: whereIHelp.label, caption: "Four situations I get called into." },
+  { id: "work", label: recentWork.label, caption: recentWork.helper },
+  { id: "how", label: howIWork.label, caption: "The habits that make the dates hold." },
+  { id: "contact", label: contact.label, caption: contact.invitation },
 ];
 
-/** One colour per engagement lane, reused by the record below the chart. */
-const LANE = ["bg-teal-600", "bg-indigo-500", "bg-amber-500"];
-
-export default function VariantH() {
+export default function VariantH({ palette }: { palette: Palette }) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const sections = STAGES.map(stage => document.getElementById("h-" + stage.id)).filter(
+    const sections = STAGE_COPY.map(stage => document.getElementById("h-" + stage.id)).filter(
       (el): el is HTMLElement => Boolean(el),
     );
     const observer = new IntersectionObserver(
@@ -96,7 +43,7 @@ export default function VariantH() {
           .filter(entry => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (!visible) return;
-        const idx = STAGES.findIndex(stage => "h-" + stage.id === visible.target.id);
+        const idx = STAGE_COPY.findIndex(stage => "h-" + stage.id === visible.target.id);
         if (idx >= 0) setActive(idx);
       },
       { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] },
@@ -105,39 +52,46 @@ export default function VariantH() {
     return () => observer.disconnect();
   }, []);
 
-  const stage = STAGES[active];
+  const stage = palette.stages[active];
+  const copy = STAGE_COPY[active];
   const cred = credentials.items[0];
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900 font-[family-name:var(--phr-sans)] antialiased lg:grid lg:grid-cols-[42%_58%]">
-      {/* Sticky progress — mobile only; carries the colour transition */}
+    <div
+      className={
+        "min-h-screen font-[family-name:var(--phr-sans)] antialiased lg:grid lg:grid-cols-[42%_58%] " +
+        palette.paper +
+        " " +
+        palette.heading
+      }
+    >
       <div className="sticky top-0 z-40 flex h-1.5 lg:hidden" aria-hidden>
-        {STAGES.map((s, i) => (
+        {palette.stages.map((s, i) => (
           <div
-            key={s.id}
+            key={STAGE_COPY[i].id}
             className={
               "h-full flex-1 transition-opacity duration-500 " +
-              s.seg +
+              s.field +
               (i <= active ? " opacity-100" : " opacity-20")
             }
           />
         ))}
       </div>
 
-      {/* Stage */}
       <aside
         className={
-          // overflow-x-hidden clips the ghost numeral's bleed; overflow-y-auto
-          // means a short laptop viewport scrolls the stage rather than losing
-          // the CTA off the bottom (the stage needs ~720px to sit still).
-          "relative hidden lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-between lg:overflow-y-auto lg:overflow-x-hidden lg:px-12 lg:py-10 text-white transition-colors duration-500 " +
+          "relative hidden lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:justify-between lg:overflow-y-auto lg:overflow-x-hidden lg:px-12 lg:py-10 transition-colors duration-500 " +
+          palette.panelInk +
+          " " +
           stage.field
         }
       >
-        {/* ghost stage numeral — weight in the field without more words */}
         <span
           aria-hidden
-          className="pointer-events-none absolute -right-6 bottom-24 select-none font-[family-name:var(--phr-display)] text-[13rem] leading-none tracking-tight text-white/[0.07]"
+          className={
+            "pointer-events-none absolute -right-6 bottom-24 select-none font-[family-name:var(--phr-display)] text-[13rem] leading-none tracking-tight " +
+            palette.panelGhost
+          }
         >
           {String(active + 1).padStart(2, "0")}
         </span>
@@ -149,19 +103,18 @@ export default function VariantH() {
               alt={portrait.alt}
               width={portrait.width}
               height={portrait.height}
-              className="h-14 w-14 rounded-full object-cover ring-2 ring-white/40"
+              className={"h-14 w-14 rounded-full object-cover ring-2 " + palette.panelRing}
             />
             <div>
               <p className="font-[family-name:var(--phr-display)] text-xl tracking-tight">
                 {identity.name}
               </p>
-              <p className="mt-0.5 font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.2em] text-white/70">
+              <p className="mt-0.5 font-[family-name:var(--phr-mono)] text-[0.6875rem] font-medium uppercase tracking-[0.2em]">
                 {identity.line}
               </p>
             </div>
           </div>
-          {/* credential sits with the identity, not floating above the CTA */}
-          <div className="mt-4 flex items-center gap-2.5 border-t border-white/15 pt-4">
+          <div className={"mt-4 flex items-center gap-2.5 border-t pt-4 " + palette.panelBorder}>
             <Image
               src={cred.badge}
               alt={cred.alt}
@@ -169,29 +122,29 @@ export default function VariantH() {
               height={600}
               className="h-8 w-8 shrink-0"
             />
-            <p className="font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.14em] text-white/70">
+            <p className="font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.14em]">
               {cred.short} · {cred.issuer} · {cred.year}
             </p>
           </div>
         </div>
 
         <div className="relative">
-          <p className="font-[family-name:var(--phr-mono)] text-sm tracking-[0.2em] text-white/60">
-            {String(active + 1).padStart(2, "0")} / {String(STAGES.length).padStart(2, "0")}
+          <p className="font-[family-name:var(--phr-mono)] text-[0.6875rem] tracking-[0.2em]">
+            {String(active + 1).padStart(2, "0")} / {String(STAGE_COPY.length).padStart(2, "0")}
           </p>
           <h2 className="mt-3 font-[family-name:var(--phr-display)] text-[3.25rem] leading-[0.95] tracking-tight">
-            {stage.label}
+            {copy.label}
           </h2>
-          <p className="mt-5 max-w-[26ch] font-[family-name:var(--phr-serif)] text-xl leading-snug text-white/85">
-            {stage.caption}
+          <p className="mt-5 max-w-[26ch] font-[family-name:var(--phr-serif)] text-xl leading-snug">
+            {copy.caption}
           </p>
-          <dl className="mt-7 flex gap-10 border-t border-white/20 pt-5">
-            {stageFigures[stage.id].map(figure => (
+          <dl className={"mt-7 flex gap-10 border-t pt-5 " + palette.panelBorder}>
+            {stageFigures[copy.id].map(figure => (
               <div key={figure.label}>
                 <dt className="font-[family-name:var(--phr-display)] text-3xl leading-none tracking-tight">
                   {figure.value}
                 </dt>
-                <dd className="mt-1.5 max-w-[16ch] font-[family-name:var(--phr-mono)] text-[0.5625rem] uppercase leading-relaxed tracking-[0.12em] text-white/60">
+                <dd className="mt-1.5 max-w-[16ch] font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase leading-relaxed tracking-[0.12em]">
                   {figure.label}
                 </dd>
               </div>
@@ -201,19 +154,23 @@ export default function VariantH() {
 
         <div className="relative">
           <ol className="mb-7 space-y-1">
-            {STAGES.map((s, i) => (
+            {STAGE_COPY.map((s, i) => (
               <li key={s.id}>
                 <a
                   href={"#h-" + s.id}
                   className={
-                    "flex items-center gap-3 font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.14em] transition-opacity hover:opacity-100 " +
-                    (i === active ? "opacity-100" : "opacity-45")
+                    "flex items-center gap-3 font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.14em] " +
+                    (i === active ? "font-medium" : "font-normal")
                   }
                 >
                   <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                   <span
                     aria-hidden
-                    className={"h-px bg-white transition-all " + (i === active ? "w-8" : "w-3")}
+                    className={
+                      "h-px transition-all " +
+                      palette.panelRule +
+                      (i === active ? " w-8" : " w-3")
+                    }
                   />
                   {s.label}
                 </a>
@@ -222,7 +179,12 @@ export default function VariantH() {
           </ol>
           <a
             href={contact.primary.href}
-            className="inline-block border-2 border-white px-5 py-3 text-sm font-semibold uppercase tracking-[0.12em] hover:bg-white hover:text-neutral-900"
+            className={
+              "inline-block border-2 px-5 py-3 text-sm font-semibold uppercase tracking-[0.12em] " +
+              palette.cta +
+              " " +
+              stage.ctaHover
+            }
           >
             Start a conversation
           </a>
@@ -234,7 +196,7 @@ export default function VariantH() {
                   aria-label={link.ariaLabel}
                   target={link.openInNewTab ? "_blank" : undefined}
                   rel={link.openInNewTab ? "noreferrer" : undefined}
-                  className="flex items-center gap-2 text-xs text-white/70 hover:text-white"
+                  className="flex items-center gap-2 text-xs underline-offset-2 hover:underline"
                 >
                   <link.Icon aria-hidden className="h-4 w-4" />
                   {link.label}
@@ -246,8 +208,7 @@ export default function VariantH() {
       </aside>
 
       <main>
-        {/* Mobile masthead — the stage's job, done once at the top */}
-        <div className="flex items-center gap-4 border-b border-neutral-200 px-6 py-6 lg:hidden">
+        <div className={"flex items-center gap-4 border-b px-6 py-6 lg:hidden " + palette.hairline}>
           <Image
             src={portrait.src}
             alt={portrait.alt}
@@ -259,36 +220,58 @@ export default function VariantH() {
             <p className="font-[family-name:var(--phr-display)] text-2xl tracking-tight">
               {identity.name}
             </p>
-            <p className="mt-0.5 font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.18em] text-neutral-500">
+            <p
+              className={
+                "mt-0.5 font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.18em] " +
+                palette.muted
+              }
+            >
               {identity.line}
             </p>
           </div>
         </div>
 
         <section id="h-what">
-          <StageCard stage={STAGES[0]} index={0} />
+          <StageCard palette={palette} tokens={palette.stages[0]} copy={STAGE_COPY[0]} index={0} />
           <div className="px-6 py-12 md:px-12 lg:py-20">
             <h1 className="max-w-[18ch] font-[family-name:var(--phr-display)] text-[2rem] leading-[1.05] tracking-tight md:text-5xl">
               {whatIDo.statement}
             </h1>
-            <p className="mt-7 max-w-prose font-[family-name:var(--phr-serif)] text-xl leading-relaxed text-neutral-700">
+            <p
+              className={
+                "mt-7 max-w-prose font-[family-name:var(--phr-serif)] text-xl leading-relaxed " +
+                palette.body
+              }
+            >
               {identity.lede}
             </p>
-            <div className="mt-10 grid gap-6 border-t border-neutral-900 pt-7 md:grid-cols-2">
+            <div className={"mt-10 grid gap-6 border-t pt-7 md:grid-cols-2 " + palette.strongHairline}>
               {whatIDo.body.map(p => (
-                <p key={p.slice(0, 24)} className="text-[0.9375rem] leading-relaxed text-neutral-600">
+                <p
+                  key={p.slice(0, 24)}
+                  className={"text-[0.9375rem] leading-relaxed " + palette.body}
+                >
                   {p}
                 </p>
               ))}
             </div>
-            {/* outcome numerals — F's other good idea, kept small */}
-            <dl className="mt-10 grid grid-cols-3 gap-px bg-neutral-200">
+            <dl className={"mt-10 grid grid-cols-3 gap-px " + palette.metricGrid}>
               {recentWork.projects.map(project => (
-                <div key={project.slug} className="bg-white pr-4 pt-4">
-                  <dt className="font-[family-name:var(--phr-display)] text-4xl leading-none tracking-tight text-emerald-800">
+                <div key={project.slug} className={"pr-4 pt-4 " + palette.metricCell}>
+                  <dt
+                    className={
+                      "font-[family-name:var(--phr-display)] text-4xl leading-none tracking-tight " +
+                      palette.stages[0].ink
+                    }
+                  >
                     {METRICS[project.slug].value}
                   </dt>
-                  <dd className="mt-2 font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase leading-relaxed tracking-[0.1em] text-neutral-500">
+                  <dd
+                    className={
+                      "mt-2 font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase leading-relaxed tracking-[0.1em] " +
+                      palette.muted
+                    }
+                  >
                     {METRICS[project.slug].caption}
                   </dd>
                 </div>
@@ -298,17 +281,22 @@ export default function VariantH() {
         </section>
 
         <section id="h-where">
-          <StageCard stage={STAGES[1]} index={1} />
+          <StageCard palette={palette} tokens={palette.stages[1]} copy={STAGE_COPY[1]} index={1} />
           <ul className="px-6 py-12 md:px-12 lg:py-20">
             {whereIHelp.items.map((item, i) => (
               <li
                 key={item.title}
-                className="relative flex min-h-[8.5rem] items-center overflow-hidden border-t border-neutral-200 first:border-t-0"
+                className={
+                  "relative flex min-h-[8.5rem] items-center overflow-hidden border-t first:border-t-0 " +
+                  palette.hairline
+                }
               >
-                {/* fixed-width, right-aligned, vertically centred: 01–04 line up */}
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute right-0 top-1/2 w-[2.1em] -translate-y-1/2 select-none text-right font-[family-name:var(--phr-display)] text-8xl leading-none tabular-nums text-blue-100"
+                  className={
+                    "pointer-events-none absolute right-0 top-1/2 w-[2.1em] -translate-y-1/2 select-none text-right font-[family-name:var(--phr-display)] text-8xl leading-none tabular-nums " +
+                    palette.stages[1].recordGhost
+                  }
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -316,7 +304,7 @@ export default function VariantH() {
                   <h3 className="font-[family-name:var(--phr-display)] text-2xl tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-[0.9375rem] leading-relaxed text-neutral-600">
+                  <p className={"mt-2 text-[0.9375rem] leading-relaxed " + palette.body}>
                     {item.body}
                   </p>
                 </div>
@@ -326,24 +314,33 @@ export default function VariantH() {
         </section>
 
         <section id="h-work">
-          <StageCard stage={STAGES[2]} index={2} />
-          <div className="bg-neutral-50 px-6 py-12 md:px-12 lg:py-20">
-            <p className="font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.24em] text-neutral-500">
+          <StageCard palette={palette} tokens={palette.stages[2]} copy={STAGE_COPY[2]} index={2} />
+          <div className={"px-6 py-12 md:px-12 lg:py-20 " + palette.band}>
+            <p
+              className={
+                "font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.24em] " +
+                palette.muted
+              }
+            >
               {recentWork.helper}
             </p>
 
-            {/* One chart: three lanes, one axis, read in a glance */}
             <div className="mt-7 space-y-2">
               {recentWork.projects.map((project, i) => {
                 const [start, end] = span(project.period);
                 return (
                   <div key={project.slug} className="flex items-center gap-4">
-                    <span className="w-28 shrink-0 truncate font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.1em] text-neutral-600 md:w-40">
+                    <span
+                      className={
+                        "w-28 shrink-0 truncate font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.1em] md:w-40 " +
+                        palette.body
+                      }
+                    >
                       {project.title}
                     </span>
-                    <div className="relative h-4 flex-1 bg-neutral-200">
+                    <div className={"relative h-4 flex-1 " + palette.track}>
                       <div
-                        className={"absolute top-0 h-4 " + LANE[i % LANE.length]}
+                        className={"absolute top-0 h-4 " + palette.lanes[i % palette.lanes.length]}
                         style={{ left: pct(start) + "%", width: pct(end) - pct(start) + "%" }}
                       />
                     </div>
@@ -352,7 +349,14 @@ export default function VariantH() {
               })}
               <div className="flex gap-4">
                 <span className="w-28 shrink-0 md:w-40" aria-hidden />
-                <div className="flex flex-1 justify-between border-t border-neutral-900 pt-2 font-[family-name:var(--phr-mono)] text-[0.625rem] tracking-[0.1em] text-neutral-500">
+                <div
+                  className={
+                    "flex flex-1 justify-between border-t pt-2 font-[family-name:var(--phr-mono)] text-[0.6875rem] tracking-[0.1em] " +
+                    palette.axis +
+                    " " +
+                    palette.muted
+                  }
+                >
                   {AXIS_YEARS.map(year => (
                     <span key={year}>{year === AXIS_END ? "now" : year}</span>
                   ))}
@@ -360,33 +364,42 @@ export default function VariantH() {
               </div>
             </div>
 
-            {/* The record — each row keyed back to its lane by colour */}
             <div className="mt-12">
               {recentWork.projects.map((project, i) => (
                 <article
                   key={project.slug}
-                  className="border-t border-neutral-300 py-6 first:border-t-0 first:pt-0"
+                  className={"border-t py-6 first:border-t-0 first:pt-0 " + palette.hairline}
                 >
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <span
                       aria-hidden
-                      className={"h-3 w-3 shrink-0 self-center " + LANE[i % LANE.length]}
+                      className={
+                        "h-3 w-3 shrink-0 self-center " + palette.lanes[i % palette.lanes.length]
+                      }
                     />
                     <h3 className="font-[family-name:var(--phr-display)] text-xl tracking-tight">
                       {project.title}
                     </h3>
-                    <p className="font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.14em] text-neutral-500">
+                    <p
+                      className={
+                        "font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.14em] " +
+                        palette.muted
+                      }
+                    >
                       {project.period} · {project.role}
                     </p>
                   </div>
-                  <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-neutral-700">
+                  <p className={"mt-3 max-w-prose text-[0.9375rem] leading-relaxed " + palette.body}>
                     {project.blurb}
                   </p>
                   <ul className="mt-3 flex flex-wrap gap-1.5">
                     {project.stack.map(tech => (
                       <li
                         key={tech}
-                        className="border border-neutral-300 px-2 py-0.5 font-[family-name:var(--phr-mono)] text-[0.625rem] uppercase tracking-[0.1em] text-neutral-600"
+                        className={
+                          "border px-2 py-0.5 font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase tracking-[0.1em] " +
+                          palette.chip
+                        }
                       >
                         {tech}
                       </li>
@@ -399,14 +412,14 @@ export default function VariantH() {
         </section>
 
         <section id="h-how">
-          <StageCard stage={STAGES[3]} index={3} />
+          <StageCard palette={palette} tokens={palette.stages[3]} copy={STAGE_COPY[3]} index={3} />
           <div className="grid px-6 py-12 md:grid-cols-2 md:gap-x-10 md:px-12 lg:py-20">
             {howIWork.items.map(item => (
-              <div key={item.title} className="border-t-2 border-amber-500 py-6">
+              <div key={item.title} className={"border-t-2 py-6 " + palette.stages[3].accent}>
                 <h3 className="font-[family-name:var(--phr-display)] text-lg tracking-tight">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-[0.9375rem] leading-relaxed text-neutral-600">
+                <p className={"mt-2 text-[0.9375rem] leading-relaxed " + palette.body}>
                   {item.body}
                 </p>
               </div>
@@ -415,7 +428,7 @@ export default function VariantH() {
         </section>
 
         <section id="h-contact">
-          <StageCard stage={STAGES[4]} index={4} />
+          <StageCard palette={palette} tokens={palette.stages[4]} copy={STAGE_COPY[4]} index={4} />
           <div className="px-6 py-12 md:px-12 lg:py-20">
             <p className="max-w-[18ch] font-[family-name:var(--phr-display)] text-3xl leading-tight tracking-tight md:text-4xl">
               {contact.invitation}
@@ -428,7 +441,12 @@ export default function VariantH() {
                     aria-label={link.ariaLabel}
                     target={link.openInNewTab ? "_blank" : undefined}
                     rel={link.openInNewTab ? "noreferrer" : undefined}
-                    className="flex items-center gap-3 text-base text-neutral-700 hover:text-rose-800"
+                    className={
+                      "flex items-center gap-3 text-base " +
+                      palette.body +
+                      " " +
+                      palette.stages[4].linkHover
+                    }
                   >
                     <link.Icon aria-hidden className="h-4 w-4" />
                     {link.label}
@@ -443,26 +461,35 @@ export default function VariantH() {
   );
 }
 
-/** The stage as a full coloured card — narrow viewports only. */
-function StageCard({ stage, index }: { stage: (typeof STAGES)[number]; index: number }) {
+function StageCard({
+  palette,
+  tokens,
+  copy,
+  index,
+}: {
+  palette: Palette;
+  tokens: StageTokens;
+  copy: (typeof STAGE_COPY)[number];
+  index: number;
+}) {
   return (
-    <div className={"px-6 py-8 text-white lg:hidden " + stage.field}>
-      <p className="font-[family-name:var(--phr-mono)] text-[0.6875rem] tracking-[0.2em] text-white/60">
-        {String(index + 1).padStart(2, "0")} / {String(STAGES.length).padStart(2, "0")}
+    <div className={"px-6 py-8 lg:hidden " + palette.panelInk + " " + tokens.field}>
+      <p className="font-[family-name:var(--phr-mono)] text-[0.6875rem] tracking-[0.2em]">
+        {String(index + 1).padStart(2, "0")} / {String(STAGE_COPY.length).padStart(2, "0")}
       </p>
       <h2 className="mt-3 font-[family-name:var(--phr-display)] text-4xl leading-[0.95] tracking-tight">
-        {stage.label}
+        {copy.label}
       </h2>
-      <p className="mt-4 max-w-[28ch] font-[family-name:var(--phr-serif)] text-lg leading-snug text-white/85">
-        {stage.caption}
+      <p className="mt-4 max-w-[28ch] font-[family-name:var(--phr-serif)] text-lg leading-snug">
+        {copy.caption}
       </p>
-      <dl className="mt-6 flex gap-8 border-t border-white/25 pt-4">
-        {stageFigures[stage.id].map(figure => (
+      <dl className={"mt-6 flex gap-8 border-t pt-4 " + palette.panelBorder}>
+        {stageFigures[copy.id].map(figure => (
           <div key={figure.label}>
             <dt className="font-[family-name:var(--phr-display)] text-2xl leading-none tracking-tight">
               {figure.value}
             </dt>
-            <dd className="mt-1.5 max-w-[16ch] font-[family-name:var(--phr-mono)] text-[0.5625rem] uppercase leading-relaxed tracking-[0.12em] text-white/60">
+            <dd className="mt-1.5 max-w-[16ch] font-[family-name:var(--phr-mono)] text-[0.6875rem] uppercase leading-relaxed tracking-[0.12em]">
               {figure.label}
             </dd>
           </div>

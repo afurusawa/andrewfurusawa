@@ -3,10 +3,9 @@ import { Fraunces, IBM_Plex_Mono, Inter, Newsreader } from "next/font/google";
 import PrototypeHost from "./PrototypeHost";
 
 /**
- * PROTOTYPE route — five homepage visual registers, switchable via
- * `?variant=H|I|J|G|E`. Fonts are loaded here (server component) and exposed to
- * the variants as CSS variables; none of these families are committed to
- * anything yet. Throwaway: see README.md.
+ * PROTOTYPE route — dark-scheme palettes on register H, switchable via
+ * `?variant=A|B|C` and `?scheme=dark|light`. Fonts are loaded here (server
+ * component) and exposed as CSS variables. Throwaway: see README.md.
  */
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
@@ -19,9 +18,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PROTOTYPE: homepage visual registers",
+  title: "PROTOTYPE: colour-panel dark values",
   description:
-    "Throwaway UI prototype exploring visual registers for the rebuilt public homepage.",
+    "Throwaway UI prototype of dark-scheme palettes on the Loaded Stage register.",
   robots: { index: false, follow: false },
 };
 
