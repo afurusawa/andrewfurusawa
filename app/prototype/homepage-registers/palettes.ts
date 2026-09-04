@@ -307,10 +307,10 @@ type WorkHue = "violet" | "cyan" | "fuchsia";
 
 const WORK_DARK: Record<WorkHue, StageTokens> = {
   violet: {
-    field: "bg-violet-800",
+    field: "bg-violet-900",
     ink: "text-violet-300",
     recordGhost: "text-violet-950",
-    ctaHover: "hover:bg-white hover:text-violet-800",
+    ctaHover: "hover:bg-white hover:text-violet-900",
     accent: "border-violet-300",
     linkHover: "hover:text-violet-300",
   },
@@ -334,12 +334,12 @@ const WORK_DARK: Record<WorkHue, StageTokens> = {
 
 const WORK_LIGHT: Record<WorkHue, StageTokens> = {
   violet: {
-    field: "bg-violet-800",
-    ink: "text-violet-800",
+    field: "bg-violet-900",
+    ink: "text-violet-900",
     recordGhost: "text-violet-100",
-    ctaHover: "hover:bg-white hover:text-violet-800",
-    accent: "border-violet-800",
-    linkHover: "hover:text-violet-800",
+    ctaHover: "hover:bg-white hover:text-violet-900",
+    accent: "border-violet-900",
+    linkHover: "hover:text-violet-900",
   },
   cyan: {
     field: "bg-cyan-800",
@@ -424,7 +424,7 @@ export const DARK: Record<VariantKey, Palette> = {
     WORK_DARK.violet,
     "D",
     "Violet work",
-    "panel holds · Recent work violet-800 · lanes lifted",
+    "panel holds · Recent work violet-900 · lanes lifted",
   ),
   E: panelHolds(
     WORK_DARK.cyan,
@@ -448,7 +448,7 @@ export function resolvePalette(variant: VariantKey, scheme: SchemeKey): Palette 
       ...LIGHT,
       key: variant,
       name: VARIANT_META[variant],
-      summary: "light · Recent work " + hue + "-800 · rest locked",
+      summary: "light · Recent work " + WORK_LIGHT[hue].field.replace("bg-", "") + " · rest locked",
       stages: withWork(LIGHT_STAGES, WORK_LIGHT[hue]),
     };
   }

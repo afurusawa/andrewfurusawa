@@ -24,7 +24,7 @@ longer `neutral-900` — that field vanished on dark paper — and is a hue:
 
 | Key | Recent work field | Why it is in the set |
 | --- | ----------------- | -------------------- |
-| `D` | `violet-800`      | the missing note; complements emerald |
+| `D` | `violet-900`      | the missing note; complements emerald; one step dimmer than `-800` |
 | `E` | `cyan-800`        | cool, sits near emerald/blue without matching either |
 | `F` | `fuchsia-800`     | warm-magenta, distinct from rose |
 
