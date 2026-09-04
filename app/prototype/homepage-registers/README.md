@@ -29,7 +29,8 @@ longer `neutral-900` — that field vanished on dark paper — and is a hue:
 | `F` | `fuchsia-800`     | warm-magenta, distinct from rose |
 
 All three pass white-on-field AA. The hue is applied in both schemes so the
-five-colour sequence does not fork.
+five-colour sequence does not fork. Timeline lanes keep the light values
+(`teal-600` / `indigo-500` / `amber-600`) on the dark track.
 
 ## Ground rules
 

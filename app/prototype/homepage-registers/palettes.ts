@@ -378,7 +378,7 @@ function panelHolds(work: StageTokens, key: VariantKey, name: string, summary: s
     panelRule: LIGHT_CHROME.panelRule,
     panelRing: LIGHT_CHROME.panelRing,
     cta: LIGHT_CHROME.cta,
-    lanes: LANES_LIFTED,
+    lanes: LANES_UNLIFTED,
     stages: withWork(PANEL_HOLDS_STAGES, work),
   };
 }
@@ -424,19 +424,19 @@ export const DARK: Record<VariantKey, Palette> = {
     WORK_DARK.violet,
     "D",
     "Violet work",
-    "panel holds · Recent work violet-900 · lanes lifted",
+    "panel holds · Recent work violet-900 · lanes unlifted",
   ),
   E: panelHolds(
     WORK_DARK.cyan,
     "E",
     "Cyan work",
-    "panel holds · Recent work cyan-800 · lanes lifted",
+    "panel holds · Recent work cyan-800 · lanes unlifted",
   ),
   F: panelHolds(
     WORK_DARK.fuchsia,
     "F",
     "Fuchsia work",
-    "panel holds · Recent work fuchsia-800 · lanes lifted",
+    "panel holds · Recent work fuchsia-800 · lanes unlifted",
   ),
 };
 
