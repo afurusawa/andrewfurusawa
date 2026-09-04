@@ -7,13 +7,8 @@ import "./prototype.css";
 
 /**
  * PROTOTYPE — exact dark-scheme values for the colour panel, on register H.
- * Switch palettes with ?variant=D|A|B|C or ← →. Toggle the locked light
- * control with ?scheme=light|dark, the scheme button, or L / D.
- *
- * D: Panel holds    (light fields + white ink; record inverts)
- * A: Starting point (fields -300, lanes lifted)
- * B: Calmer tints   (fields -400, lanes lifted)
- * C: Unlifted lanes (fields -300, light lane values)
+ * Switch palettes with ?variant=D|E|F or ← →. Toggle scheme with the
+ * button or L / D. D/E/F are panel-holds with a hued Recent work field.
  */
 
 export default function PrototypeHost() {
@@ -25,10 +20,7 @@ export default function PrototypeHost() {
       <div className="phr-banner">
         <div>
           PROTOTYPE — palette round on H ·{" "}
-          {scheme === "light"
-            ? "locked light (control) · " + variant + " waiting in dark"
-            : palette.name}{" "}
-          · {palette.summary}
+          {palette.name} · {scheme} · {palette.summary}
         </div>
         <div className="phr-swatches" aria-hidden>
           {palette.stages.map(s => (

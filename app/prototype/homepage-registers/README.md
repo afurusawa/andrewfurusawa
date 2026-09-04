@@ -14,27 +14,22 @@ chosen visual register](https://github.com/afurusawa/andrewfurusawa/issues/75).
 Run `npm run dev`, then open
 <http://localhost:3000/prototype/homepage-registers?variant=D&scheme=dark>
 
-- ← → cycles palettes D / A / B / C
-- the scheme button, or `L` / `D`, flips the locked light control
+- ← → cycles the Recent work hue: D violet / E cyan / F fuchsia
+- the scheme button, or `L` / `D`, flips light and dark (the hue follows)
 
 ## What to look at
 
-| Key | Name            | Dark fields                                      | Dark lanes                          |
-| --- | --------------- | ------------------------------------------------ | ----------------------------------- |
-| `D` | Panel holds     | same as light (`800`/`700` + white ink)          | lifted                              |
-| `A` | Starting point  | `emerald/blue/amber/rose-300` + `neutral-100`    | `teal-500` / `indigo-400` / `amber-500` |
-| `B` | Calmer tints    | same hues at `-400`; `neutral-100` unchanged     | lifted, same as A                   |
-| `C` | Unlifted lanes  | same as A                                        | `teal-600` / `indigo-500` / `amber-600` |
+Panel holds (light fields + white ink; record inverts). Recent work is no
+longer `neutral-900` — that field vanished on dark paper — and is a hue:
 
-Light is not a variant. It is the locked scheme from #75 (with #78's
-`amber-700` field, `amber-600` lane, and no opacity ladder), so the type
-hierarchy can be judged on the default rendering too.
+| Key | Recent work field | Why it is in the set |
+| --- | ----------------- | -------------------- |
+| `D` | `violet-800`      | the missing note; complements emerald |
+| `E` | `cyan-800`        | cool, sits near emerald/blue without matching either |
+| `F` | `fuchsia-800`     | warm-magenta, distinct from rose |
 
-`D` overturns the inversion of the colour panel itself — the panel is a
-coloured field with its own ink, so it does not have to follow the paper.
-Hue-on-paper then splits from the field token, because the light field
-values fail on `neutral-950`. The `Recent work` field (`neutral-900` on
-`neutral-950`) nearly vanishes; that is the cost of holding the panel.
+All three pass white-on-field AA. The hue is applied in both schemes so the
+five-colour sequence does not fork.
 
 ## Ground rules
 

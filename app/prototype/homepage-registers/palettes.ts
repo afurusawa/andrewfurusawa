@@ -13,15 +13,14 @@
  *   A Starting point — fields -300, lanes lifted (teal-500 / indigo-400 / amber-500)
  *   B Calmer tints  — fields -400, lanes lifted
  *   C Unlifted lanes — fields -300, light lane values on the dark track
- *   D Panel holds   — colour panel keeps the light fields and white ink;
- *                     only the record/paper invert. Hue-on-paper splits
- *                     (field stays -800/-700; record ink is -300) because
- *                     the light field tokens fail on 950.
+ *   D/E/F Panel holds with a hued Recent work field (violet / cyan / fuchsia).
+ *         Colour panel keeps the light fields and white ink; only the
+ *         record/paper invert. Recent work is no longer neutral-900.
  *
  * Every class string is a complete Tailwind utility so the scanner sees it.
  */
 
-export type VariantKey = "A" | "B" | "C" | "D";
+export type VariantKey = "A" | "B" | "C" | "D" | "E" | "F";
 export type SchemeKey = "light" | "dark";
 
 export type StageTokens = {
@@ -64,10 +63,13 @@ export const VARIANT_META: Record<VariantKey, string> = {
   A: "Starting point",
   B: "Calmer tints",
   C: "Unlifted lanes",
-  D: "Panel holds",
+  D: "Violet work",
+  E: "Cyan work",
+  F: "Fuchsia work",
 };
 
-export const ORDER: VariantKey[] = ["D", "A", "B", "C"];
+/** Live cycle is the Recent work hue on the panel-holds chassis. */
+export const ORDER: VariantKey[] = ["D", "E", "F"];
 
 const LIGHT_STAGES: Palette["stages"] = [
   {
@@ -297,6 +299,90 @@ const PANEL_HOLDS_STAGES: Palette["stages"] = [
   },
 ];
 
+function withWork(base: Palette["stages"], work: StageTokens): Palette["stages"] {
+  return [base[0], base[1], work, base[3], base[4]];
+}
+
+type WorkHue = "violet" | "cyan" | "fuchsia";
+
+const WORK_DARK: Record<WorkHue, StageTokens> = {
+  violet: {
+    field: "bg-violet-800",
+    ink: "text-violet-300",
+    recordGhost: "text-violet-950",
+    ctaHover: "hover:bg-white hover:text-violet-800",
+    accent: "border-violet-300",
+    linkHover: "hover:text-violet-300",
+  },
+  cyan: {
+    field: "bg-cyan-800",
+    ink: "text-cyan-300",
+    recordGhost: "text-cyan-950",
+    ctaHover: "hover:bg-white hover:text-cyan-800",
+    accent: "border-cyan-300",
+    linkHover: "hover:text-cyan-300",
+  },
+  fuchsia: {
+    field: "bg-fuchsia-800",
+    ink: "text-fuchsia-300",
+    recordGhost: "text-fuchsia-950",
+    ctaHover: "hover:bg-white hover:text-fuchsia-800",
+    accent: "border-fuchsia-300",
+    linkHover: "hover:text-fuchsia-300",
+  },
+};
+
+const WORK_LIGHT: Record<WorkHue, StageTokens> = {
+  violet: {
+    field: "bg-violet-800",
+    ink: "text-violet-800",
+    recordGhost: "text-violet-100",
+    ctaHover: "hover:bg-white hover:text-violet-800",
+    accent: "border-violet-800",
+    linkHover: "hover:text-violet-800",
+  },
+  cyan: {
+    field: "bg-cyan-800",
+    ink: "text-cyan-800",
+    recordGhost: "text-cyan-100",
+    ctaHover: "hover:bg-white hover:text-cyan-800",
+    accent: "border-cyan-800",
+    linkHover: "hover:text-cyan-800",
+  },
+  fuchsia: {
+    field: "bg-fuchsia-800",
+    ink: "text-fuchsia-800",
+    recordGhost: "text-fuchsia-100",
+    ctaHover: "hover:bg-white hover:text-fuchsia-800",
+    accent: "border-fuchsia-800",
+    linkHover: "hover:text-fuchsia-800",
+  },
+};
+
+const WORK_VARIANT: Partial<Record<VariantKey, WorkHue>> = {
+  D: "violet",
+  E: "cyan",
+  F: "fuchsia",
+};
+
+function panelHolds(work: StageTokens, key: VariantKey, name: string, summary: string): Palette {
+  return {
+    key,
+    scheme: "dark",
+    name,
+    summary,
+    ...DARK_CHROME,
+    panelInk: LIGHT_CHROME.panelInk,
+    panelGhost: LIGHT_CHROME.panelGhost,
+    panelBorder: LIGHT_CHROME.panelBorder,
+    panelRule: LIGHT_CHROME.panelRule,
+    panelRing: LIGHT_CHROME.panelRing,
+    cta: LIGHT_CHROME.cta,
+    lanes: LANES_LIFTED,
+    stages: withWork(PANEL_HOLDS_STAGES, work),
+  };
+}
+
 export const LIGHT: Palette = {
   key: "A",
   scheme: "light",
@@ -334,32 +420,43 @@ export const DARK: Record<VariantKey, Palette> = {
     lanes: LANES_UNLIFTED,
     stages: DARK_300,
   },
-  D: {
-    key: "D",
-    scheme: "dark",
-    name: "Panel holds",
-    summary: "panel stays 800/700 + white ink · record inverts · lanes lifted",
-    ...DARK_CHROME,
-    panelInk: LIGHT_CHROME.panelInk,
-    panelGhost: LIGHT_CHROME.panelGhost,
-    panelBorder: LIGHT_CHROME.panelBorder,
-    panelRule: LIGHT_CHROME.panelRule,
-    panelRing: LIGHT_CHROME.panelRing,
-    cta: LIGHT_CHROME.cta,
-    lanes: LANES_LIFTED,
-    stages: PANEL_HOLDS_STAGES,
-  },
+  D: panelHolds(
+    WORK_DARK.violet,
+    "D",
+    "Violet work",
+    "panel holds · Recent work violet-800 · lanes lifted",
+  ),
+  E: panelHolds(
+    WORK_DARK.cyan,
+    "E",
+    "Cyan work",
+    "panel holds · Recent work cyan-800 · lanes lifted",
+  ),
+  F: panelHolds(
+    WORK_DARK.fuchsia,
+    "F",
+    "Fuchsia work",
+    "panel holds · Recent work fuchsia-800 · lanes lifted",
+  ),
 };
 
 export function resolvePalette(variant: VariantKey, scheme: SchemeKey): Palette {
+  const hue = WORK_VARIANT[variant];
   if (scheme === "light") {
-    return { ...LIGHT, key: variant };
+    if (!hue) return { ...LIGHT, key: variant };
+    return {
+      ...LIGHT,
+      key: variant,
+      name: VARIANT_META[variant],
+      summary: "light · Recent work " + hue + "-800 · rest locked",
+      stages: withWork(LIGHT_STAGES, WORK_LIGHT[hue]),
+    };
   }
   return DARK[variant];
 }
 
 export function isVariant(v: string | null): v is VariantKey {
-  return ORDER.includes(v as VariantKey);
+  return v != null && v in VARIANT_META;
 }
 
 export function isScheme(v: string | null): v is SchemeKey {
