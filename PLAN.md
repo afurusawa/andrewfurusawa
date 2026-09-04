@@ -50,12 +50,4 @@ One line per finished decision. Detail lives in the linked ticket — zoom there
 
 ### [/90s v2 spec](https://github.com/afurusawa/andrewfurusawa/issues/51) — closed
 
-Produced from [Wayfinder: /90s hi-fi kitsch and skill-note content spec](https://github.com/afurusawa/andrewfurusawa/issues/35). Implementable package for the experiment upgrade; orthogonal to the homepage rebuild.
-
-### [/90s v1 design spec](https://github.com/afurusawa/andrewfurusawa/issues/15) — closed
-
-Delivered `docs/design/90s-experiment-spec.md` and shipped as `app/90s/` in [#34](https://github.com/afurusawa/andrewfurusawa/pull/34). Locked and still binding until v2 supersedes them: single-page `/90s`; About · Skills · Contact; shared profile links and skills data; dark theme only; cosmetic theater only; soft-secret discoverability; WCAG 2.2 AA; hybrid variant D shell at a ~64rem stage; mood-board colour lock with VT323 body type.
-
-### [Portfolio audit and framework decision](https://github.com/afurusawa/andrewfurusawa/issues/1) — closed
-
-Stay on **Next.js** — no material Astro advantage evidenced; reconsider only if a like-for-like proof clears the initial-JS gate. Set the performance budgets and the canonical `https://andrewfurusawa.dev` domain now recorded in `docs/MAP.md`.
+Produced from [Wayfinder: /90s hi-fi kitsch and skill-note content spec](https://github.com/afurusawa/andrewfurusawa/issues/35). The map closed into this implementable package and shipped; it is orthogonal to the homepage rebuild.

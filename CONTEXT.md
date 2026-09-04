@@ -28,6 +28,14 @@ _Avoid_: secret, hidden, private, gated
 The real portfolio content — identity, skills, work, contact. Substance is shared across presentations; chrome is not.
 _Avoid_: content (too broad), copy
 
+**Capabilities page**:
+The authored one-page offer — What I do, Where I help, Recent work, How I work — that is the source of homepage substance and section shape. It is not a presentation, not a downloadable product, and not a second site.
+_Avoid_: resume, CV, about page, capabilities deck
+
+**Offer**:
+The professional proposition the homepage makes — who the work is for and what they can hire Andrew to do. The capabilities page is the source of the current offer. Distinct from chrome and from the skills catalogue.
+_Avoid_: pitch, brand, value prop
+
 **Chrome**:
 The decorative frame a presentation wraps around substance — banners, nav bevels, panes, dividers, footer, texture. Chrome carries the period character; substance stays readable underneath it.
 _Avoid_: styling, decoration, theme
@@ -51,6 +59,14 @@ _Avoid_: case study (promises a narrative this site does not tell), portfolio pi
 **Featured work**:
 The curated handful of projects a presentation chooses to show — a section label, never a property of a project. Capped at three by design: a project is not marked featured, it is simply in the set or absent from it.
 _Avoid_: selected work, highlights, portfolio
+
+**Outcome**:
+A concrete result of a project — what was done and what it produced. Substance, shared across presentations. A project holds a list, possibly empty; each outcome may carry an optional figure the homepage prints large. The bar is concreteness: "did X, which resulted in Y" passes, "worked hard on X" does not.
+_Avoid_: achievement, accomplishment (both attach to a person, not a project), metric, impact, highlight, bullet
+
+**Domain**:
+The industry a project was delivered into — Healthcare, Consumer IoT, Education. Substance, one short free-text label per project, not drawn from a catalogue. It carries the range the homepage no longer claims in prose, so a reader who does not recognise a client still places the work.
+_Avoid_: industry (used interchangeably in conversation, but the field is `domain`), sector, vertical, category (taken by the skills catalogue)
 
 ### Skills and notes
 
