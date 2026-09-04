@@ -3,7 +3,11 @@ import {
   socialProfileLinks,
   type ProfileLink,
 } from "../config/profileLinks";
-import { featuredWork } from "../config/featuredWork";
+import {
+  featuredWork,
+  formatProjectPeriod,
+  formatProjectRole,
+} from "../config/featuredWork";
 import { getSkillCatalogue } from "../lib/skillCatalogue";
 import {
   getSkillDirectory,
@@ -151,9 +155,9 @@ export default function NinetiesExperiment() {
                 <li className={styles.workItem} key={project.slug}>
                   <h3 className={styles.workTitle}>{project.title}</h3>
                   <p className={styles.workMeta}>
-                    <span>{project.role}</span>
+                    <span>{formatProjectRole(project)}</span>
                     <span aria-hidden="true"> · </span>
-                    <span>{project.period}</span>
+                    <span>{formatProjectPeriod(project)}</span>
                   </p>
                   <p>{project.blurb}</p>
                   <ul

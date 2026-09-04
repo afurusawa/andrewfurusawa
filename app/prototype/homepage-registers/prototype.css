@@ -1,0 +1,120 @@
+/* PROTOTYPE chrome only — the switcher bar and the "this is a prototype" strip.
+   Nothing here belongs to any variant's design. */
+
+.phr-switcher {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  background: #111111;
+  color: #ffffff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 35%);
+}
+
+.phr-switcher button {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.phr-switcher button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.phr-banner {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  padding: 0.375rem 0.75rem;
+  background: #111111;
+  color: #ffffff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.phr-swatches {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+.phr-swatches span {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+}
+
+.phr-swatches i {
+  width: 1px;
+  height: 0.75rem;
+  background: rgb(255 255 255 / 35%);
+}
+
+.phr-switcher__scheme {
+  width: auto !important;
+  padding: 0 0.65rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/*
+ * PROTOTYPE type isolation.
+ *
+ * app/globals.css styles h1/h2/h3/p as bare element selectors (colour, family,
+ * weight, letter-spacing, text-transform) for the current homepage's type
+ * system. Tailwind v4 emits utilities inside `@layer utilities`, and any
+ * unlayered rule outranks every layer regardless of specificity — so those
+ * global rules beat the variants' own classes, uppercasing headings and
+ * repainting them. These registers are explicitly not built on the current
+ * homepage, so neutralise the global rules here and re-assert, unlayered, the
+ * small set of utilities the variants actually rely on.
+ */
+[data-variant] :where(h1, h2, h3, p) {
+  font-family: inherit;
+  font-style: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  font-weight: inherit;
+}
+
+/* globals only forces colour on h1/h2 — leave h3/p to their own utilities. */
+[data-variant] :where(h1, h2) {
+  color: inherit;
+}
+
+[data-variant] .font-\[family-name\:var\(--phr-display\)\] {
+  font-family: var(--phr-display);
+}
+[data-variant] .font-\[family-name\:var\(--phr-serif\)\] {
+  font-family: var(--phr-serif);
+}
+[data-variant] .font-\[family-name\:var\(--phr-mono\)\] {
+  font-family: var(--phr-mono);
+}
+[data-variant] .font-\[family-name\:var\(--phr-sans\)\] {
+  font-family: var(--phr-sans);
+}
+[data-variant] .font-medium {
+  font-weight: 500;
+}
+[data-variant] .font-semibold {
+  font-weight: 600;
+}
