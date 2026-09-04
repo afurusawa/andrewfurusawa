@@ -1,22 +1,26 @@
 /**
  * PROTOTYPE — the one piece of F worth keeping: the engagement timeline,
- * drawn from the real `period` strings on `featuredWork`. Lifted out of
- * VariantF in round 3 so H, I and J can each draw it their own way.
+ * drawn from the structured dates on `featuredWork`. Lifted out of VariantF
+ * in round 3 so H, I and J can each draw it their own way.
  */
+import type { FeaturedProjectPeriod } from "../../config/featuredWork";
 
 export const AXIS_START = 2017;
-export const AXIS_END = 2026;
+// Keep a full year of headroom so a project that starts this year has a
+// visible bar while `present` remains the right edge of the prototype axis.
+export const AXIS_END = 2027;
 
 /** Tick labels; AXIS_END renders as "now". */
-export const AXIS_YEARS = [2017, 2019, 2021, 2023, 2026];
+export const AXIS_YEARS = [2017, 2019, 2021, 2023, 2026, 2027];
 
-/** "2020–2024" / "2025–present" -> [start, end] on the axis. */
-export function span(period: string): [number, number] {
-  const match = period.match(/(\d{4})\D+(\d{4}|present)/i);
-  if (!match) return [AXIS_START, AXIS_END];
-  const start = Number(match[1]);
-  const end = match[2].toLowerCase() === "present" ? AXIS_END : Number(match[2]);
-  return [start, end];
+/** Convert a project's structured dates to the prototype's axis span. */
+export function span(
+  project: FeaturedProjectPeriod,
+): [number, number] {
+  return [
+    project.start,
+    project.end === "present" ? AXIS_END : project.end,
+  ];
 }
 
 /** Position of a year on the axis, 0–100. */
@@ -28,5 +32,8 @@ export function pct(year: number) {
 export const METRICS: Record<string, { value: string; caption: string }> = {
   milktracker: { value: "10", caption: "hospitals live on one codebase" },
   "blossom-groconnect": { value: "70%", caption: "faster load for 20k+ users" },
-  "ai-education-platform": { value: "1", caption: "platform, ground up" },
+  "ai-debate-practice": {
+    value: "<1 wk",
+    caption: "working prototype in under a week",
+  },
 };

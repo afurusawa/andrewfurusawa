@@ -8,6 +8,10 @@
  */
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import {
+  formatProjectPeriod,
+  formatProjectRole,
+} from "../../../config/featuredWork";
 import type { Palette, StageTokens } from "../palettes";
 import {
   contact,
@@ -327,7 +331,7 @@ export default function VariantH({ palette }: { palette: Palette }) {
 
             <div className="mt-7 space-y-2">
               {recentWork.projects.map((project, i) => {
-                const [start, end] = span(project.period);
+                const [start, end] = span(project);
                 return (
                   <div key={project.slug} className="flex items-center gap-4">
                     <span
@@ -386,7 +390,7 @@ export default function VariantH({ palette }: { palette: Palette }) {
                         palette.muted
                       }
                     >
-                      {project.period} · {project.role}
+                      {formatProjectPeriod(project)} · {formatProjectRole(project)}
                     </p>
                   </div>
                   <p className={"mt-3 max-w-prose text-[0.9375rem] leading-relaxed " + palette.body}>
