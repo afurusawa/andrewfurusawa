@@ -84,35 +84,37 @@ function ColourPanel() {
     >
       <span className="colour-panel__ghost pointer-events-none absolute -right-6 bottom-24 select-none font-display text-[13rem] leading-none tracking-tight text-white/[0.07]" />
 
-      <div className="relative">
-        <div className="flex items-center gap-4">
-          <Image
-            src={portrait.src}
-            alt=""
-            width={portrait.width}
-            height={portrait.height}
-            sizes="56px"
-            className="h-14 w-14 rounded-full object-cover ring-2 ring-white/40"
-          />
-          <div>
-            <p className="font-display text-xl tracking-tight">{identity.name}</p>
-            <p className="mt-0.5 font-mono text-xs uppercase tracking-[0.2em]">
-              {identity.line}
+      <div className="colour-panel__identity relative">
+        <div className="min-h-0 overflow-hidden">
+          <div className="flex items-center gap-4">
+            <Image
+              src={portrait.src}
+              alt=""
+              width={portrait.width}
+              height={portrait.height}
+              sizes="56px"
+              className="h-14 w-14 rounded-full object-cover ring-2 ring-white/40"
+            />
+            <div>
+              <p className="font-display text-xl tracking-tight">{identity.name}</p>
+              <p className="mt-0.5 font-mono text-xs uppercase tracking-[0.2em]">
+                {identity.line}
+              </p>
+            </div>
+          </div>
+          <div className="mt-4 flex items-center gap-2.5 border-t border-white/15 pt-4">
+            <Image
+              src={cspoBadge.src}
+              alt=""
+              width={cspoBadge.width}
+              height={cspoBadge.height}
+              sizes="32px"
+              className="h-8 w-8 shrink-0"
+            />
+            <p className="font-mono text-xs uppercase tracking-[0.14em]">
+              {identity.credential}
             </p>
           </div>
-        </div>
-        <div className="mt-4 flex items-center gap-2.5 border-t border-white/15 pt-4">
-          <Image
-            src={cspoBadge.src}
-            alt=""
-            width={cspoBadge.width}
-            height={cspoBadge.height}
-            sizes="32px"
-            className="h-8 w-8 shrink-0"
-          />
-          <p className="font-mono text-xs uppercase tracking-[0.14em]">
-            {identity.credential}
-          </p>
         </div>
       </div>
 
@@ -201,7 +203,7 @@ function WhatIDo() {
     <section id={section.id} aria-labelledby="what-heading">
       <ColourCard section={section} index={0} />
       <div className="px-6 py-12 md:px-12 lg:py-20">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-start" data-homepage-identity>
           <Image
             src={portrait.src}
             alt={portrait.alt}
