@@ -12,7 +12,7 @@ import {
   identity,
   portrait,
   recentWorkLeadIn,
-  whatIDo,
+  whatIDoSteps,
   whereIHelp,
   type HomepageSection,
 } from "../../config/homepage";
@@ -249,9 +249,16 @@ function WhatIDo() {
         >
           {section.label}
         </h2>
-        <p className="mt-5 max-w-prose text-[0.9375rem] leading-relaxed text-body">
-          {whatIDo}
-        </p>
+        <ul className="mt-8 grid gap-6 md:grid-cols-3">
+          {whatIDoSteps.map((step) => (
+            <li key={step.title} className="border-t-2 border-ink-what py-5">
+              <h3 className="font-display text-2xl tracking-tight">{step.title}</h3>
+              <p className="mt-2 text-[0.9375rem] leading-relaxed text-body">
+                {step.body}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
