@@ -65,16 +65,25 @@ describe("homepage copy", () => {
       lede:
         "I turn ambiguous requirements into shipped software. I run discovery with the people who use the product, write the user stories and acceptance criteria that keep a team pointed at the right thing, and stay close enough to the code to know what a request actually costs.",
       credentialLine:
-        "12+ years shipping multi-platform mobile and web software across healthcare, consumer IoT, and eduction.",
+        "12+ years shipping multi-platform mobile and web software across healthcare, consumer IoT, and education.",
       credential: "Certified Scrum Product Owner · Scrum Alliance, 2026",
     });
   });
 
   it("locks What I do, Where I help, and How I work", () => {
     expect(whatIDoSteps).toEqual([
-      { title: "Clarify", body: "Discovery, user research, usability testing" },
-      { title: "Define", body: "Wireframes, PRDs, acceptance criteria" },
-      { title: "Deliver", body: "Production code, tests, documentation, handoff" },
+      {
+        title: "Clarify",
+        items: ["Discovery", "User research", "Usability testing"],
+      },
+      {
+        title: "Define",
+        items: ["Wireframes", "PRDs", "Acceptance criteria"],
+      },
+      {
+        title: "Deliver",
+        items: ["Production code", "Tests", "Documentation", "Handoff"],
+      },
     ]);
     expect(whereIHelp.quote).toBe(
       "Most wasted engineering effort traces back to a requirement everyone thought they understood the same way.",

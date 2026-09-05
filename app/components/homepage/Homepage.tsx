@@ -225,9 +225,6 @@ function WhatIDo() {
             </p>
           </div>
         </div>
-        <p className="lede mt-7 max-w-prose text-xl leading-relaxed text-body">
-          {identity.lede}
-        </p>
         <p className="mt-5 max-w-prose text-[0.9375rem] leading-relaxed text-body">
           {identity.credentialLine}
         </p>
@@ -246,17 +243,22 @@ function WhatIDo() {
         </div>
         <h2
           id="what-heading"
-          className="mt-12 border-t border-strong-hairline pt-7 font-display text-2xl tracking-tight"
+          className="mt-12 border-t border-strong-hairline pt-7 font-display text-xl leading-relaxed tracking-tight"
         >
           {whatIDoHeading}
         </h2>
+        <p className="lede mt-7 max-w-prose text-xl leading-relaxed text-body">
+          {identity.lede}
+        </p>
         <ul className="mt-8 grid gap-6 md:grid-cols-3">
           {whatIDoSteps.map((step) => (
             <li key={step.title} className="border-t-2 border-ink-what py-5">
               <h3 className="font-display text-2xl tracking-tight">{step.title}</h3>
-              <p className="mt-2 text-[0.9375rem] leading-relaxed text-body">
-                {step.body}
-              </p>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-[0.9375rem] leading-relaxed text-body">
+                {step.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>
