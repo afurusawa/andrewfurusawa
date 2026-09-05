@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
+/* Dark is a class the visitor opted into, never the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --font-header: 'DM Serif Display', serif;
-  --font-header-style: italic;
-  --font-header-weight: bold;
-  --font-h3: 'Contrail One', serif;
-  --font-h3-style: italic;
-  --font-h3-weight: normal;
-  --font-body: 'Spectral', serif;
+  /* Portfolio roles map only to the four families loaded by its root. */
+  --font-header: var(--font-fraunces), serif;
+  --font-header-style: normal;
+  --font-header-weight: 400;
+  --font-h3: var(--font-plex-mono), monospace;
+  --font-h3-style: normal;
+  --font-h3-weight: 400;
+  --font-body: var(--font-newsreader), serif;
   --font-body-style: normal;
-  --font-body-weight: normal;
+  --font-body-weight: 400;
   --letter-spacing: 0em;
   --text-transform: none;
   --color-primary: #111f27;
@@ -17,15 +21,6 @@
 }
 
 .dark {
-  --font-header: 'VT323', monospace;
-  --font-header-style: normal;
-  --font-header-weight: lighter;
-  --font-h3: 'Contrail One', serif;
-  --font-h3-style: normal;
-  --font-h3-weight: lighter;
-  --font-body: 'VT323', monospace;
-  --font-body-style: normal;
-  --font-body-weight: normal;
   --letter-spacing: 0.05em;
   --text-transform: uppercase;
   --color-primary: #2ac932;
@@ -33,43 +28,13 @@
 }
 
 @theme inline {
-  /* --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono); */
+  /* The four locked latin families, loaded once by the portfolio root. */
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-newsreader);
+  --font-display: var(--font-fraunces);
+  --font-mono: var(--font-plex-mono);
 }
 
-
-@keyframes swirl {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-swirl {
-  animation: swirl 15s ease infinite;
-  background: linear-gradient(45deg, #FCFAF3, #E6EFFF, #F3E8FF, #FFF5E6, #FCFAF3);
-  background-size: 400%;
-}
-
-.dark .animate-swirl {
-  background: linear-gradient(45deg, #0d1111, #10171f, #1d1527, #1a130e, #0d1111);
-  background-size: 400%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-swirl {
-    animation: none;
-  }
-}
 
 .sr-only {
   position: absolute;
@@ -93,7 +58,7 @@ input:focus-visible {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
 
 h1,
@@ -156,4 +121,41 @@ input {
 
 .dark button:hover svg {
   color: #22c55e;
+}
+/* Theme control. Fixed top right and identical at every breakpoint; both icons
+   ship in the DOM and `.dark` picks which one shows. */
+.themeControl {
+  display: none;
+}
+
+.themeControl--ready {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: #171717;
+  cursor: pointer;
+}
+
+.dark .themeControl--ready {
+  color: #f5f5f5;
+}
+
+.themeControl__icon--sun {
+  display: none;
+}
+
+.dark .themeControl__icon--moon {
+  display: none;
+}
+
+.dark .themeControl__icon--sun {
+  display: block;
 }

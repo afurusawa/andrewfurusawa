@@ -4,7 +4,7 @@
 
 **Stack:** Next.js 15 App Router, React 19, TypeScript 5, Tailwind v4 (PostCSS), react-icons, Vitest, Vercel Speed Insights. Skill notes add a build-time Markdown pipeline: `gray-matter` plus `unified`/`remark-parse`/`remark-rehype`/`rehype-sanitize`/`rehype-stringify`. Those six run in server components only and reach no browser bundle, so they cost nothing against the initial-JS budget — no MDX, no GFM, no raw HTML.
 
-_Last updated: 2026-08-13. Update this map when architecture or ownership changes in a way that matters._
+_Last updated: 2026-09-04. Update this map when architecture or ownership changes in a way that matters._
 
 This file is orientation: how the system is shaped and why. For *where a file lives*, use [`agent-context-map.md`](agent-context-map.md). For *what is being worked on now*, use [`../PLAN.md`](../PLAN.md). For *what a word means*, use [`../CONTEXT.md`](../CONTEXT.md).
 
@@ -18,7 +18,7 @@ This file is orientation: how the system is shaped and why. For *where a file li
 | `/90s/[...missing]` | `app/90s/[...missing]/` | Never renders — calls `notFound()` so every stray path under `/90s` gets the experiment's 404 rather than the global one |
 | `/prototype/90s-shell` | `app/prototype/` | Throwaway; kept for reference, not a product surface |
 
-The **route-group seam is the whole architecture**. `app/layout.tsx` is deliberately slim — `<html>`, fonts, global CSS, Speed Insights, and metadata, nothing visual. Portfolio chrome (background animation, theme toggle, page padding) lives in the `(portfolio)` group so it cannot leak onto `/90s`; the experiment's chrome lives entirely in `app/90s/nineties.module.css` behind a single `.experiment` class.
+The **route-group seam is the whole architecture**. There is no shared `app/layout.tsx`. `app/(portfolio)/layout.tsx` and `app/90s/layout.tsx` are separate root layouts, each with its own `<html>` and `<body>`. The portfolio shell owns its four-font stack, `next-themes` provider, theme control, global CSS, and page padding. The experiment root loads only its own VT323 face and preflight; its chrome lives entirely in `app/90s/nineties.module.css` behind a single `.experiment` class. Throwaway routes have their own root in `app/prototype/layout.tsx`.
 
 **Anything added to the root layout appears on both presentations.** That is almost never what you want.
 
@@ -47,8 +47,8 @@ Both presentations read the same data and share none of their chrome.
 
 - **Tests are colocated `*.test.ts` next to the module.** Vitest runs in a `node` environment and only collects `app/**/*.test.ts` (`vitest.config.mts`). There is no DOM or component testing — which is *why* logic belongs in `app/lib/` and content in `app/config/`, where it is reachable.
 - **`npm test` runs the suite; `npm run dev` uses Turbopack.** A plugin Turbopack can't take is a real constraint, not a detail.
-- **Server components by default.** Only four client components exist (`ThemeToggle`, `SkillTile`, `SkillsFilter`, `SkillsFilterContext`) — interactive islands, deliberately budgeted. A fifth `"use client"` needs a reason.
-- **Theming is a `.dark` class on `<html>`** driving CSS variables in `app/globals.css`, toggled client-side from `localStorage`. `/90s` opts out of all of it.
+- **Server components by default.** The portfolio theme provider and control form one client boundary. The existing skills-filter islands remain until the homepage rebuild replaces the old homepage.
+- **Theming is a `.dark` class on the portfolio `<html>`** driven by `next-themes` and stored under the `theme` key. `/90s` has its own root and no theme provider or theme script.
 - **Performance is budgeted:** mobile p75 LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1; ≤ 500 KB initial transfer, ≤ 150 KB initial JS. A new dependency or font is a budget decision.
 - **WCAG 2.2 AA on every route**, kitsch included. Motion respects `prefers-reduced-motion`.
 
