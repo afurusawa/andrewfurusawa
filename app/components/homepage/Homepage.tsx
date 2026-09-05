@@ -243,7 +243,7 @@ function WhatIDo() {
         </div>
         <h2
           id="what-heading"
-          className="mt-12 border-t border-strong-hairline pt-7 font-display text-xl leading-relaxed tracking-tight"
+          className="mt-12 border-t border-strong-hairline pt-7 font-display text-3xl leading-tight tracking-tight md:text-4xl"
         >
           {whatIDoHeading}
         </h2>
