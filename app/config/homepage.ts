@@ -20,6 +20,9 @@ export const whatIDoSteps = [
   { title: "Deliver", body: "Production code, tests, documentation, handoff" },
 ] as const;
 
+export const whatIDoHeading =
+  "Make the problem clear before the code gets expensive.";
+
 export const whereIHelp = {
   quote:
     "Most wasted engineering effort traces back to a requirement everyone thought they understood the same way.",

@@ -3,6 +3,7 @@ import {
   homepageSections,
   howIWork,
   identity,
+  whatIDoHeading,
   whatIDoSteps,
   whereIHelp,
 } from "./homepage";
@@ -21,6 +22,12 @@ describe("homepage copy", () => {
   it("keeps the What I do panel caption compact", () => {
     expect(homepageSections[0].caption).toBe(
       "Product decisions to production code",
+    );
+  });
+
+  it("gives the What I do content a distinct heading", () => {
+    expect(whatIDoHeading).toBe(
+      "Make the problem clear before the code gets expensive.",
     );
   });
 

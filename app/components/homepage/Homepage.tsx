@@ -12,6 +12,7 @@ import {
   identity,
   portrait,
   recentWorkLeadIn,
+  whatIDoHeading,
   whatIDoSteps,
   whereIHelp,
   type HomepageSection,
@@ -247,7 +248,7 @@ function WhatIDo() {
           id="what-heading"
           className="mt-12 border-t border-strong-hairline pt-7 font-display text-2xl tracking-tight"
         >
-          {section.label}
+          {whatIDoHeading}
         </h2>
         <ul className="mt-8 grid gap-6 md:grid-cols-3">
           {whatIDoSteps.map((step) => (
