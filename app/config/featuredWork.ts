@@ -23,11 +23,14 @@ export function formatProjectPeriod(
   return `${project.start}\u2013${project.end}`;
 }
 
-/** Format the experiment's role/client line without duplicating its join rule. */
+/** Join role to an optional client. Default comma is the experiment's line. */
 export function formatProjectRole(
   project: Pick<FeaturedProject, "role" | "client">,
+  separator = ", ",
 ): string {
-  return project.client ? `${project.role}, ${project.client}` : project.role;
+  return project.client
+    ? `${project.role}${separator}${project.client}`
+    : project.role;
 }
 
 /**

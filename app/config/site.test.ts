@@ -11,9 +11,13 @@ describe("site config", () => {
     expect(SITE_URL).toBe("https://andrewfurusawa.dev");
   });
 
-  it("exposes portfolio title and description for metadata", () => {
-    expect(SITE_TITLE).toContain("Andrew Furusawa");
-    expect(SITE_DESCRIPTION.toLowerCase()).toContain("front-end");
+  it("exposes the locked offer title and description for metadata", () => {
+    expect(SITE_TITLE).toBe(
+      "Andrew Furusawa · Product & Software Delivery Consulting",
+    );
+    expect(SITE_DESCRIPTION).toBe(
+      "I take software products from concept to production in weeks, not quarters, with the engineering discipline a full team would run.",
+    );
   });
 
   it("builds absolute URLs from the production origin", () => {

@@ -1,0 +1,4 @@
+/* The experiment takes the reset and nothing else. Its design is CSS Modules
+   in `nineties.module.css`; it uses no utility classes and no portfolio
+   tokens, so pulling the full framework here would only add weight. */
+@import "tailwindcss/preflight.css" layer(base);

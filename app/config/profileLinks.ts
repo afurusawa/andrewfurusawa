@@ -8,11 +8,9 @@ export type ProfileLink = {
   label: string;
   Icon: IconType;
   openInNewTab: boolean;
-  /** Icon-only hero control styling; omitted for contact-only channels. */
-  heroClassName?: string;
 };
 
-/** Professional social profiles used in the hero and contact section. */
+/** Professional social profiles used in contact clusters. */
 export const socialProfileLinks: readonly ProfileLink[] = [
   {
     href: "https://github.com/afurusawa",
@@ -20,8 +18,6 @@ export const socialProfileLinks: readonly ProfileLink[] = [
     label: "github.com/afurusawa",
     Icon: SiGithub,
     openInNewTab: true,
-    heroClassName:
-      "transition-all duration-300 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200",
   },
   {
     href: "https://linkedin.com/in/afurusawa",
@@ -29,8 +25,6 @@ export const socialProfileLinks: readonly ProfileLink[] = [
     label: "linkedin.com/in/afurusawa",
     Icon: FaLinkedin,
     openInNewTab: true,
-    heroClassName:
-      "transition-all duration-300 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300",
   },
 ];
 

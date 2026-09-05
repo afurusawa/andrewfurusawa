@@ -6,26 +6,17 @@
 
 **The issue tracker is canonical.** This file is the readable snapshot; where the two disagree, GitHub wins. `docs/agents/issue-tracker.md` records how maps, tickets, blocking, and the frontier are expressed here.
 
-_Last updated: 2026-09-04._
+_Last updated: 2026-09-05._
 
 ## Active Slice
 
 **In flight:** nothing.
 
-**Takeable now** (frontier — no open blockers):
-
-- [Reshape shared featured work and /90s consumption](https://github.com/afurusawa/andrewfurusawa/issues/82)
-- [Split presentation roots; adopt next-themes and portfolio type](https://github.com/afurusawa/andrewfurusawa/issues/83)
+**Takeable now** (frontier — no open blockers): none. Spec #81 children are done. Remaining work is the spec's named leftovers, not tickets.
 
 ## Backlog
 
-Children of [Spec #81](https://github.com/afurusawa/andrewfurusawa/issues/81), not of the closed wayfinder map:
-
-- [Lock site metadata and the built share image](https://github.com/afurusawa/andrewfurusawa/issues/84) — blocked by #83
-- [Rebuild / as Loaded Stage](https://github.com/afurusawa/andrewfurusawa/issues/85) — blocked by #82, #83
-- [Cold mobile performance acceptance for rebuilt /](https://github.com/afurusawa/andrewfurusawa/issues/86) — blocked by #85
-
-**Allowed leftovers the spec already named:** colour panel split ratio, ghost-numeral size/bleed, internal-scroll mechanism; mobile colour-card check on a real phone; static Fraunces cut file for the share image.
+**Allowed leftovers the spec already named:** colour panel split ratio, ghost-numeral size/bleed, internal-scroll mechanism; mobile colour-card check on a real phone.
 
 ## Completed Ledger
 
@@ -47,6 +38,11 @@ One line per finished decision. Detail lives in the linked ticket — zoom there
 - [Lock the dark palette for the colour panel](https://github.com/afurusawa/andrewfurusawa/issues/78)
 - [Set the performance budget for the rebuilt homepage chrome](https://github.com/afurusawa/andrewfurusawa/issues/79)
 - [Prototype the exact dark-scheme values for the colour panel](https://github.com/afurusawa/andrewfurusawa/issues/80)
+- [Reshape shared featured work and /90s consumption](https://github.com/afurusawa/andrewfurusawa/issues/82) — shipped in `c061e2e`
+- [Split presentation roots; adopt next-themes and portfolio type](https://github.com/afurusawa/andrewfurusawa/issues/83) — shipped in `5f7a266`
+- [Lock site metadata and the built share image](https://github.com/afurusawa/andrewfurusawa/issues/84)
+- [Rebuild / as Loaded Stage](https://github.com/afurusawa/andrewfurusawa/issues/85)
+- [Cold mobile performance acceptance for rebuilt /](https://github.com/afurusawa/andrewfurusawa/issues/86)
 
 ### [/90s v2 spec](https://github.com/afurusawa/andrewfurusawa/issues/51) — closed
 
