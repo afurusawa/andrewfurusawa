@@ -14,7 +14,6 @@ _Last updated: 2026-09-04._
 
 **Takeable now** (frontier — no open blockers):
 
-- [Reshape shared featured work and /90s consumption](https://github.com/afurusawa/andrewfurusawa/issues/82)
 - [Split presentation roots; adopt next-themes and portfolio type](https://github.com/afurusawa/andrewfurusawa/issues/83)
 
 ## Backlog
@@ -22,7 +21,7 @@ _Last updated: 2026-09-04._
 Children of [Spec #81](https://github.com/afurusawa/andrewfurusawa/issues/81), not of the closed wayfinder map:
 
 - [Lock site metadata and the built share image](https://github.com/afurusawa/andrewfurusawa/issues/84) — blocked by #83
-- [Rebuild / as Loaded Stage](https://github.com/afurusawa/andrewfurusawa/issues/85) — blocked by #82, #83
+- [Rebuild / as Loaded Stage](https://github.com/afurusawa/andrewfurusawa/issues/85) — blocked by #83
 - [Cold mobile performance acceptance for rebuilt /](https://github.com/afurusawa/andrewfurusawa/issues/86) — blocked by #85
 
 **Allowed leftovers the spec already named:** colour panel split ratio, ghost-numeral size/bleed, internal-scroll mechanism; mobile colour-card check on a real phone; static Fraunces cut file for the share image.
@@ -47,6 +46,7 @@ One line per finished decision. Detail lives in the linked ticket — zoom there
 - [Lock the dark palette for the colour panel](https://github.com/afurusawa/andrewfurusawa/issues/78)
 - [Set the performance budget for the rebuilt homepage chrome](https://github.com/afurusawa/andrewfurusawa/issues/79)
 - [Prototype the exact dark-scheme values for the colour panel](https://github.com/afurusawa/andrewfurusawa/issues/80)
+- [Reshape shared featured work and /90s consumption](https://github.com/afurusawa/andrewfurusawa/issues/82) — shipped in `c061e2e`
 
 ### [/90s v2 spec](https://github.com/afurusawa/andrewfurusawa/issues/51) — closed
 
