@@ -96,8 +96,7 @@ export const homepageSections: readonly HomepageSection[] = [
   {
     id: "what",
     label: "What I do",
-    caption:
-      "I take software products from concept to production in weeks instead of quarters, running the engineering process a full team would use.",
+    caption: "Product decisions to production code",
     figures: [
       { value: "12+", label: "years shipping software" },
       { value: "3", label: "industries: healthcare, IoT, education" },
