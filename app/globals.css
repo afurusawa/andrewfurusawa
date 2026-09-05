@@ -247,6 +247,23 @@ body {
   transition-duration: 500ms;
 }
 
+@media (min-width: 64rem) {
+  .colour-panel__identity {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition-property: grid-template-rows, opacity, transform;
+    transition-duration: 350ms;
+  }
+
+  .homepage[data-panel-identity="visible"] .colour-panel__identity {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .colour-panel__ghost::before {
   content: var(--panel-numeral);
 }
@@ -293,6 +310,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .colour-panel,
+  .colour-panel__identity,
   .progress-seg,
   .section-index__rule {
     transition-duration: 0s;

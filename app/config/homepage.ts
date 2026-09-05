@@ -6,15 +6,31 @@
 export const identity = {
   name: "Andrew Furusawa",
   line: "Product & Software Delivery Consulting",
-  location: "Inland Empire, CA · Remote",
-  lede: "I've worked both sides — product owner and engineer. So I can take either seat, or hold both when the work needs one person to.",
+  location: "Inland Empire, CA",
+  lede:
+    "I turn ambiguous requirements into shipped software. I run discovery with the people who use the product, write the user stories and acceptance criteria that keep a team pointed at the right thing, and stay close enough to the code to know what a request actually costs.",
   credentialLine:
-    "12+ years shipping multi-platform mobile and web software. B.S. Information & Computer Science, UC Irvine.",
+    "12+ years shipping multi-platform mobile and web software across healthcare, consumer IoT, and education.",
   credential: "Certified Scrum Product Owner · Scrum Alliance, 2026",
 } as const;
 
-export const whatIDo =
-  "I take software products from concept to production in weeks instead of quarters, running the engineering process a full team would use. Agentic coding and LLM-assisted workflows set the pace. Scoped requirements, written acceptance criteria, code review, and test coverage are what keep it solid. Speed and quality are the same problem, not a tradeoff. What I hand off is something your engineers can own.";
+export const whatIDoSteps = [
+  {
+    title: "Clarify",
+    items: ["Discovery", "User research", "Usability testing"],
+  },
+  {
+    title: "Define",
+    items: ["Wireframes", "PRDs", "Acceptance criteria"],
+  },
+  {
+    title: "Deliver",
+    items: ["Production code", "Tests", "Documentation", "Handoff"],
+  },
+] as const;
+
+export const whatIDoHeading =
+  "Make the problem clear before the code gets expensive.";
 
 export const whereIHelp = {
   quote:
@@ -96,8 +112,7 @@ export const homepageSections: readonly HomepageSection[] = [
   {
     id: "what",
     label: "What I do",
-    caption:
-      "I take software products from concept to production in weeks instead of quarters, running the engineering process a full team would use.",
+    caption: "Product decisions to production code",
     figures: [
       { value: "12+", label: "years shipping software" },
       { value: "3", label: "industries: healthcare, IoT, education" },

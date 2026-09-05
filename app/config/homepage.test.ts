@@ -3,7 +3,8 @@ import {
   homepageSections,
   howIWork,
   identity,
-  whatIDo,
+  whatIDoHeading,
+  whatIDoSteps,
   whereIHelp,
 } from "./homepage";
 
@@ -16,6 +17,18 @@ describe("homepage copy", () => {
       "How I work",
       "Contact",
     ]);
+  });
+
+  it("keeps the What I do panel caption compact", () => {
+    expect(homepageSections[0].caption).toBe(
+      "Product decisions to production code",
+    );
+  });
+
+  it("gives the What I do content a distinct heading", () => {
+    expect(whatIDoHeading).toBe(
+      "Make the problem clear before the code gets expensive.",
+    );
   });
 
   it("locks colour-panel figure pairs and drops them on Contact", () => {
@@ -48,18 +61,30 @@ describe("homepage copy", () => {
     expect(identity).toEqual({
       name: "Andrew Furusawa",
       line: "Product & Software Delivery Consulting",
-      location: "Inland Empire, CA · Remote",
-      lede: "I've worked both sides — product owner and engineer. So I can take either seat, or hold both when the work needs one person to.",
+      location: "Inland Empire, CA",
+      lede:
+        "I turn ambiguous requirements into shipped software. I run discovery with the people who use the product, write the user stories and acceptance criteria that keep a team pointed at the right thing, and stay close enough to the code to know what a request actually costs.",
       credentialLine:
-        "12+ years shipping multi-platform mobile and web software. B.S. Information & Computer Science, UC Irvine.",
+        "12+ years shipping multi-platform mobile and web software across healthcare, consumer IoT, and education.",
       credential: "Certified Scrum Product Owner · Scrum Alliance, 2026",
     });
   });
 
   it("locks What I do, Where I help, and How I work", () => {
-    expect(whatIDo).toBe(
-      "I take software products from concept to production in weeks instead of quarters, running the engineering process a full team would use. Agentic coding and LLM-assisted workflows set the pace. Scoped requirements, written acceptance criteria, code review, and test coverage are what keep it solid. Speed and quality are the same problem, not a tradeoff. What I hand off is something your engineers can own.",
-    );
+    expect(whatIDoSteps).toEqual([
+      {
+        title: "Clarify",
+        items: ["Discovery", "User research", "Usability testing"],
+      },
+      {
+        title: "Define",
+        items: ["Wireframes", "PRDs", "Acceptance criteria"],
+      },
+      {
+        title: "Deliver",
+        items: ["Production code", "Tests", "Documentation", "Handoff"],
+      },
+    ]);
     expect(whereIHelp.quote).toBe(
       "Most wasted engineering effort traces back to a requirement everyone thought they understood the same way.",
     );
