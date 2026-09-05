@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
-import { portfolioFontClassName } from "./fonts";
+import { NEWSREADER_SRC, portfolioFontClassName } from "./fonts";
 import { ThemeColorMeta, ThemeControl, ThemeRoot } from "./theme";
 
 /**
@@ -16,11 +16,23 @@ export function PortfolioShell({ children }: { children: ReactNode }) {
     // `next-themes` writes the class before paint, so the server markup and the
     // hydrated markup differ on `<html>` by design.
     <html lang="en" suppressHydrationWarning className={portfolioFontClassName}>
+      <head>
+        <link
+          rel="preload"
+          href={NEWSREADER_SRC}
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         <ThemeRoot>
           <ThemeColorMeta />
+          <a href="#record" className="skip-link">
+            Skip to content
+          </a>
           <ThemeControl />
-          <main className="min-h-screen p-4 sm:p-8 lg:p-16">{children}</main>
+          {children}
           <SpeedInsights />
         </ThemeRoot>
       </body>

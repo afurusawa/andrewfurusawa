@@ -4,37 +4,130 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Portfolio roles map only to the four families loaded by its root. */
-  --font-header: var(--font-fraunces), serif;
-  --font-header-style: normal;
-  --font-header-weight: 400;
-  --font-h3: var(--font-plex-mono), monospace;
-  --font-h3-style: normal;
-  --font-h3-weight: 400;
-  --font-body: var(--font-newsreader), serif;
-  --font-body-style: normal;
-  --font-body-weight: 400;
-  --letter-spacing: 0em;
-  --text-transform: none;
-  --color-primary: #111f27;
-  --color-secondary: #FF4A1C;
+  --paper: #ffffff;
+  --heading: var(--color-neutral-900);
+  --body: var(--color-neutral-700);
+  --label: var(--color-neutral-500);
+  --hairline: var(--color-neutral-200);
+  --strong-hairline: var(--color-neutral-900);
+  --band: var(--color-neutral-50);
+  --track: var(--color-neutral-200);
+  --axis: var(--color-neutral-900);
+  --chip-border: var(--color-neutral-300);
+  --chip-ink: var(--color-neutral-600);
+
+  --field-what: var(--color-emerald-800);
+  --field-where: var(--color-blue-800);
+  --field-work: var(--color-violet-900);
+  --field-how: var(--color-amber-700);
+  --field-contact: var(--color-rose-800);
+
+  --ink-what: var(--color-emerald-800);
+  --ink-where: var(--color-blue-800);
+  --ink-work: var(--color-violet-900);
+  --ink-how: var(--color-amber-700);
+  --ink-contact: var(--color-rose-800);
+
+  --ghost-what: var(--color-emerald-100);
+  --ghost-where: var(--color-blue-100);
+  --ghost-work: var(--color-violet-100);
+  --ghost-how: var(--color-amber-100);
+  --ghost-contact: var(--color-rose-100);
+
+  --lane-1: var(--color-teal-600);
+  --lane-2: var(--color-indigo-500);
+  --lane-3: var(--color-amber-600);
+
+  --panel-ink: #ffffff;
+  --panel-ghost: rgb(255 255 255 / 0.07);
+  --panel-rule: #ffffff;
+  --panel-border: rgb(255 255 255 / 0.15);
+  --panel-ring: rgb(255 255 255 / 0.4);
 }
 
 .dark {
-  --letter-spacing: 0.05em;
-  --text-transform: uppercase;
-  --color-primary: #2ac932;
-  --color-secondary: #0F1A20;
+  --paper: #0a0a0a;
+  --heading: var(--color-neutral-100);
+  --body: var(--color-neutral-300);
+  --label: var(--color-neutral-400);
+  --hairline: var(--color-neutral-800);
+  --strong-hairline: var(--color-neutral-100);
+  --band: var(--color-neutral-900);
+  --track: var(--color-neutral-800);
+  --axis: var(--color-neutral-100);
+  --chip-border: var(--color-neutral-700);
+  --chip-ink: var(--color-neutral-300);
+
+  --ink-what: var(--color-emerald-300);
+  --ink-where: var(--color-blue-300);
+  --ink-work: var(--color-violet-300);
+  --ink-how: var(--color-amber-300);
+  --ink-contact: var(--color-rose-300);
+
+  --ghost-what: var(--color-emerald-950);
+  --ghost-where: var(--color-blue-950);
+  --ghost-work: var(--color-violet-950);
+  --ghost-how: var(--color-amber-950);
+  --ghost-contact: var(--color-rose-950);
+}
+
+@font-face {
+  font-family: Newsreader;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/newsreader-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: Newsreader Fallback;
+  src: local("Times New Roman");
+  ascent-override: 69.68%;
+  descent-override: 25.12%;
+  line-gap-override: 0%;
+  size-adjust: 105.48%;
 }
 
 @theme inline {
-  /* The four locked latin families, loaded once by the portfolio root. */
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-newsreader);
+  --font-serif: "Newsreader", "Newsreader Fallback", serif;
   --font-display: var(--font-fraunces);
   --font-mono: var(--font-plex-mono);
-}
 
+  --color-paper: var(--paper);
+  --color-heading: var(--heading);
+  --color-body: var(--body);
+  --color-label: var(--label);
+  --color-hairline: var(--hairline);
+  --color-strong-hairline: var(--strong-hairline);
+  --color-band: var(--band);
+  --color-track: var(--track);
+  --color-axis: var(--axis);
+  --color-chip-border: var(--chip-border);
+  --color-chip-ink: var(--chip-ink);
+  --color-field-what: var(--field-what);
+  --color-field-where: var(--field-where);
+  --color-field-work: var(--field-work);
+  --color-field-how: var(--field-how);
+  --color-field-contact: var(--field-contact);
+  --color-ink-what: var(--ink-what);
+  --color-ink-where: var(--ink-where);
+  --color-ink-work: var(--ink-work);
+  --color-ink-how: var(--ink-how);
+  --color-ink-contact: var(--ink-contact);
+  --color-ghost-what: var(--ghost-what);
+  --color-ghost-where: var(--ghost-where);
+  --color-ghost-work: var(--ghost-work);
+  --color-ghost-how: var(--ghost-how);
+  --color-ghost-contact: var(--ghost-contact);
+  --color-lane-1: var(--lane-1);
+  --color-lane-2: var(--lane-2);
+  --color-lane-3: var(--lane-3);
+  --color-panel-ink: var(--panel-ink);
+}
 
 .sr-only {
   position: absolute;
@@ -50,80 +143,43 @@
 
 a:focus-visible,
 button:focus-visible,
-input:focus-visible {
-  outline: 2px solid var(--color-primary);
+input:focus-visible,
+.skip-link:focus {
+  outline: 2px solid #ffffff;
   outline-offset: 3px;
+  box-shadow: 0 0 0 5px #171717;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 200;
+  padding: 0.5rem 0.75rem;
+  background: #171717;
+  color: #ffffff;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.875rem;
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: none;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--paper);
+  color: var(--heading);
   font-family: var(--font-inter), sans-serif;
 }
 
-h1,
-h2 {
-  color: var(--color-primary);
-  font-family: var(--font-header);
-  font-style: var(--font-header-style);
-  font-weight: var(--font-header-weight);
-  letter-spacing: var(--letter-spacing);
-  text-transform: var(--text-transform);
+/* LCP node: a network webfont here inflates lab LCP. Size-adjusted Times matches Newsreader. */
+.lede {
+  font-family: "Newsreader Fallback", "Times New Roman", serif;
 }
 
-h3,
-.hero-role {
-  font-family: var(--font-h3);
-  font-style: var(--font-h3-style);
-  font-weight: var(--font-h3-weight);
-  text-transform: uppercase;
-}
-
-p {
-  font-family: var(--font-body);
-  font-style: var(--font-body-style);
-  font-weight: var(--font-body-weight);
-  letter-spacing: var(--letter-spacing);
-  text-transform: var(--text-transform);
-}
-
-p.hero-role {
-  font-family: var(--font-h3);
-  font-style: var(--font-h3-style);
-  font-weight: var(--font-h3-weight);
-  letter-spacing: normal;
-  text-transform: uppercase;
-}
-
-input {
-  color: var(--color-primary);
-  font-family: var(--font-body);
-  font-style: var(--font-body-style);
-  font-weight: var(--font-body-weight);
-  letter-spacing: var(--letter-spacing);
-  text-transform: var(--text-transform);
-  border-color: var(--color-primary);
-}
-
-/* Dark mode icon and element styling */
-.dark svg {
-  color: #2ac932;
-}
-
-.dark h3,
-.dark .hero-role {
-  color: #2ac932;
-}
-
-.dark button svg {
-  transition: color 0.2s ease;
-}
-
-.dark button:hover svg {
-  color: #22c55e;
-}
-/* Theme control. Fixed top right and identical at every breakpoint; both icons
-   ship in the DOM and `.dark` picks which one shows. */
+/* Theme control. Fixed top right, above the colour panel; both icons ship
+   in the DOM and `.dark` picks which one shows. */
 .themeControl {
   display: none;
 }
@@ -138,14 +194,10 @@ input {
   justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
-  border: 1px solid currentColor;
-  background: transparent;
-  color: #171717;
+  border: 1px solid var(--heading);
+  background: var(--paper);
+  color: var(--heading);
   cursor: pointer;
-}
-
-.dark .themeControl--ready {
-  color: #f5f5f5;
 }
 
 .themeControl__icon--sun {
@@ -158,4 +210,111 @@ input {
 
 .dark .themeControl__icon--sun {
   display: block;
+}
+
+/* Loaded Stage: sticky colour panel, data-section paints the field. */
+.homepage {
+  --panel-field: var(--field-what);
+  --panel-numeral: "01";
+  background: var(--paper);
+  color: var(--heading);
+}
+
+.homepage[data-section="where"] {
+  --panel-field: var(--field-where);
+  --panel-numeral: "02";
+}
+
+.homepage[data-section="work"] {
+  --panel-field: var(--field-work);
+  --panel-numeral: "03";
+}
+
+.homepage[data-section="how"] {
+  --panel-field: var(--field-how);
+  --panel-numeral: "04";
+}
+
+.homepage[data-section="contact"] {
+  --panel-field: var(--field-contact);
+  --panel-numeral: "05";
+}
+
+.colour-panel {
+  background-color: var(--panel-field);
+  color: var(--panel-ink);
+  transition-property: background-color;
+  transition-duration: 500ms;
+}
+
+.colour-panel__ghost::before {
+  content: var(--panel-numeral);
+}
+
+.panel-copy {
+  display: none;
+}
+
+.homepage[data-section="what"] .panel-copy[data-id="what"],
+.homepage[data-section="where"] .panel-copy[data-id="where"],
+.homepage[data-section="work"] .panel-copy[data-id="work"],
+.homepage[data-section="how"] .panel-copy[data-id="how"],
+.homepage[data-section="contact"] .panel-copy[data-id="contact"] {
+  display: block;
+}
+
+.section-index__rule {
+  width: 0.75rem;
+  transition-property: width;
+  transition-duration: 500ms;
+}
+
+.homepage[data-section="what"] .section-index li[data-id="what"] .section-index__rule,
+.homepage[data-section="where"] .section-index li[data-id="where"] .section-index__rule,
+.homepage[data-section="work"] .section-index li[data-id="work"] .section-index__rule,
+.homepage[data-section="how"] .section-index li[data-id="how"] .section-index__rule,
+.homepage[data-section="contact"] .section-index li[data-id="contact"] .section-index__rule {
+  width: 2rem;
+}
+
+.progress-seg {
+  opacity: 0.2;
+  transition-property: opacity;
+  transition-duration: 500ms;
+}
+
+.homepage[data-section="what"] .progress-seg:nth-child(-n + 1),
+.homepage[data-section="where"] .progress-seg:nth-child(-n + 2),
+.homepage[data-section="work"] .progress-seg:nth-child(-n + 3),
+.homepage[data-section="how"] .progress-seg:nth-child(-n + 4),
+.homepage[data-section="contact"] .progress-seg:nth-child(-n + 5) {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .colour-panel,
+  .progress-seg,
+  .section-index__rule {
+    transition-duration: 0s;
+  }
+}
+
+/* No-JS floor: each section's colour card is the field colour. Hide the
+   observer-driven sticky panel and collapse the split so those cards show. */
+@media (scripting: none) and (min-width: 64rem) {
+  .homepage-grid {
+    display: block !important;
+  }
+
+  .colour-panel {
+    display: none !important;
+  }
+
+  .colour-card {
+    display: block !important;
+  }
+
+  .progress-bar {
+    display: flex !important;
+  }
 }

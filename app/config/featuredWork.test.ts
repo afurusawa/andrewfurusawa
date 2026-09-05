@@ -98,6 +98,15 @@ describe("featuredWork config", () => {
         client: "AngelEye Health",
       }),
     ).toBe("Lead front-end developer, AngelEye Health");
+    expect(
+      formatProjectRole(
+        {
+          role: "Lead front-end developer",
+          client: "AngelEye Health",
+        },
+        " · ",
+      ),
+    ).toBe("Lead front-end developer · AngelEye Health");
   });
 
   it("gives every project a non-empty blurb, domain, role, and unique slug", () => {

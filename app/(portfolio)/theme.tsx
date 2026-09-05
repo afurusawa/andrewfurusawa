@@ -11,7 +11,10 @@ import { useEffect, useState, type ReactNode } from "react";
  * OS prefers dark — hence `enableSystem={false}`.
  */
 
-/** Paper in each scheme, mirrored by the hand-written `theme-color` meta. */
+/**
+ * Paper in each scheme, mirrored by the hand-written `theme-color` meta.
+ * Keep in step with `--paper` on `:root` / `.dark` in `globals.css`.
+ */
 export const PAPER_LIGHT = "#ffffff";
 export const PAPER_DARK = "#0a0a0a";
 

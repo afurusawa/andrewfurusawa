@@ -24,4 +24,11 @@ describe("profileLinks", () => {
       expect(link.label.length).toBeGreaterThan(0);
     }
   });
+
+  it("does not publish a phone number", () => {
+    const hrefs = [...socialProfileLinks, ...contactLinks].map(
+      (link) => link.href,
+    );
+    expect(hrefs.some((href) => href.startsWith("tel:"))).toBe(false);
+  });
 });
