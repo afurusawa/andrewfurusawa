@@ -49,7 +49,7 @@ export function Homepage() {
       <div className="homepage-grid min-h-screen lg:grid lg:grid-cols-[42%_58%]">
         <ProgressBar />
         <ColourPanel />
-        <main id="record">
+        <main id="record" tabIndex={-1}>
           <WhatIDo />
           <WhereIHelp />
           <RecentWork />
@@ -343,9 +343,18 @@ function RecentWork() {
           })}
           <div className="flex gap-4">
             <span className="w-28 shrink-0 md:w-40" aria-hidden="true" />
-            <div className="flex flex-1 justify-between border-t border-axis pt-2 font-mono text-[0.6875rem] tracking-[0.1em] text-label">
-              {AXIS_YEARS.map((year) => (
-                <span key={year}>{year === AXIS_END ? "now" : year}</span>
+            <div className="flex min-w-0 flex-1 justify-between border-t border-axis pt-2 font-mono text-[0.6875rem] tracking-[0.1em] text-label">
+              {AXIS_YEARS.map((year, index) => (
+                <span
+                  key={year}
+                  className={
+                    index > 0 && index < AXIS_YEARS.length - 1
+                      ? "hidden sm:inline"
+                      : undefined
+                  }
+                >
+                  {year === AXIS_END ? "now" : year}
+                </span>
               ))}
             </div>
           </div>
@@ -465,7 +474,7 @@ function Contact() {
                   aria-label={link.ariaLabel}
                   target={link.openInNewTab ? "_blank" : undefined}
                   rel={link.openInNewTab ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-3 text-base text-body hover:text-ink-contact"
+                  className="flex items-center gap-3 text-base text-body underline decoration-1 underline-offset-4 hover:text-ink-contact"
                 >
                   <Icon aria-hidden="true" className="h-4 w-4" />
                   {link.label}
