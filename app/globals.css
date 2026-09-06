@@ -8,6 +8,7 @@
   --heading: var(--color-neutral-900);
   --body: var(--color-neutral-700);
   --label: var(--color-neutral-500);
+  --metadata: var(--color-neutral-600);
   --hairline: var(--color-neutral-200);
   --strong-hairline: var(--color-neutral-900);
   --band: var(--color-neutral-50);
@@ -50,6 +51,7 @@
   --heading: var(--color-neutral-100);
   --body: var(--color-neutral-300);
   --label: var(--color-neutral-400);
+  --metadata: var(--color-neutral-300);
   --hairline: var(--color-neutral-800);
   --strong-hairline: var(--color-neutral-100);
   --band: var(--color-neutral-900);
@@ -101,6 +103,7 @@
   --color-heading: var(--heading);
   --color-body: var(--body);
   --color-label: var(--label);
+  --color-metadata: var(--metadata);
   --color-hairline: var(--hairline);
   --color-strong-hairline: var(--strong-hairline);
   --color-band: var(--band);

@@ -217,10 +217,10 @@ function WhatIDo() {
             <h1 className="font-display text-[2rem] leading-[1.05] tracking-tight md:text-5xl">
               {identity.name}
             </h1>
-            <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-label">
+            <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-body">
               {identity.line}
             </p>
-            <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-label">
+            <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em] text-body">
               {identity.location}
             </p>
           </div>
@@ -237,7 +237,7 @@ function WhatIDo() {
             sizes="32px"
             className="h-8 w-8 shrink-0"
           />
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-label">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-body">
             {identity.credential}
           </p>
         </div>
@@ -316,7 +316,7 @@ function RecentWork() {
         <h2 id="work-heading" className="sr-only">
           {section.label}
         </h2>
-        <p className="font-mono text-xs uppercase tracking-[0.24em] text-label">
+        <p className="font-mono text-xs uppercase tracking-[0.24em] text-metadata">
           {recentWorkLeadIn}
         </p>
 
@@ -381,7 +381,7 @@ function RecentWork() {
                   {formatProjectPeriod(project)}
                 </p>
               </div>
-              <p className="mt-1 font-mono text-xs uppercase tracking-[0.14em] text-label">
+              <p className="mt-1 font-mono text-xs uppercase tracking-[0.14em] text-metadata">
                 {formatProjectRole(project, " · ")}
               </p>
               <p className="mt-3 max-w-prose text-[0.9375rem] leading-relaxed text-body">
