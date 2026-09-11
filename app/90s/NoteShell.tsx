@@ -19,13 +19,17 @@ export function NoteShell({
 }) {
   return (
     <main className={styles.stage}>
+      <a className={styles.skipLink} href="#note-content">
+        Skip to content
+      </a>
+
       <header className={styles.banner}>
         <p className={styles.noteSiteName}>{HUB_HEADING}</p>
       </header>
 
       <ExperimentNav hrefBase="/90s" current="skills" />
 
-      <article className={styles.noteWindow}>
+      <article className={styles.noteWindow} id="note-content">
         <div className={styles.noteWindowBar} aria-hidden="true">
           <span>{windowPath}</span>
           <span>□ ×</span>

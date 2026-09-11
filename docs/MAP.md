@@ -18,7 +18,7 @@ This file is orientation: how the system is shaped and why. For *where a file li
 | `/90s/[...missing]` | `app/90s/[...missing]/` | Never renders — calls `notFound()` so every stray path under `/90s` gets the experiment's 404 rather than the global one |
 | unmatched URL | `app/global-not-found.tsx` | Yes as a 404 — no presentation root, so it owns its own `<html>` / `<body>` |
 
-The **route-group seam is the whole architecture**. There is no shared `app/layout.tsx`. `app/(portfolio)/layout.tsx` and `app/90s/layout.tsx` are separate root layouts, each with its own `<html>` and `<body>`. The portfolio shell owns its four-font stack, `next-themes` provider, theme control, skip link, and global CSS. The experiment root loads only its own VT323 face and preflight; its chrome lives entirely in `app/90s/nineties.module.css` behind a single `.experiment` class. Throwaway routes have their own root in `app/prototype/layout.tsx`.
+The **route-group seam is the whole architecture**. There is no shared `app/layout.tsx`. `app/(portfolio)/layout.tsx` and `app/90s/layout.tsx` are separate root layouts, each with its own `<html>` and `<body>`. The portfolio shell owns its four-font stack, `next-themes` provider, theme control, skip link, and global CSS. The experiment root loads only its own VT323 and Press Start 2P faces and preflight; its chrome lives entirely in `app/90s/nineties.module.css` behind a single `.experiment` class. Throwaway routes have their own root in `app/prototype/layout.tsx`.
 
 **Anything added to the root layout appears on both presentations.** That is almost never what you want.
 
@@ -30,7 +30,7 @@ Both presentations read the same data and share none of their chrome.
 |----------|-------|-------------|
 | `Skill` (`app/config/skills.ts`) | `{ slug, name, icon, category }` | `/` work stack tags, `/90s` directory |
 | `FeaturedProject` (`app/config/featuredWork.ts`) | shared work records; `formatProjectPeriod` / `formatProjectRole` | `/` recent work, `/90s` work strip |
-| Homepage copy (`app/config/homepage.ts`) | identity cluster, spine, colour-panel figures | `/` only |
+| Homepage copy (`app/config/homepage.ts`) | identity cluster, spine, colour-panel figures | `/` and `/90s` (colour-panel figures remain `/` only) |
 | `ProfileLink` (`app/config/profileLinks.ts`) | `{ href, ariaLabel, label, Icon, openInNewTab }` | `/` contact, `/90s` contact |
 | Site identity (`app/config/site.ts`) | `SITE_URL`, `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `absoluteUrl()` | portfolio metadata, `robots.ts`, `sitemap.ts`, the built share image |
 | `pathHeaders` (`app/config/securityHeaders.ts`) | security tuples on `/:path*`; `X-Robots-Tag` on `/90s` and `/90s/:path*` | `next.config.ts` |
@@ -43,7 +43,7 @@ Both presentations read the same data and share none of their chrome.
 
 `slug` is authored, never derived — `/90s/skills/<slug>` must survive a display-name change. `category` is a closed union (Frontend · Mobile · Backend · Tooling · Design) in `CATEGORY_ORDER`; `/` ignores it. See [Prefactor the shared skills catalogue with authored slugs and categories](https://github.com/afurusawa/andrewfurusawa/issues/52).
 
-**Decided, not yet built:** v2 hub chrome pack is one tape under-construction graphic plus three 88×31 badges; the starfield stays CSS; CSS stand-ins must not ship. See [Define hi-fi chrome inventory and assets for /90s v2](https://github.com/afurusawa/andrewfurusawa/issues/41).
+**Current hub chrome:** the v2 pack is one tape under-construction graphic plus three 88×31 badges; the starfield stays CSS; the pack is hub-only theater. See [Define hi-fi chrome inventory and assets for /90s v2](https://github.com/afurusawa/andrewfurusawa/issues/41).
 
 ## Conventions
 

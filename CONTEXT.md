@@ -47,8 +47,13 @@ _Avoid_: fake feature, mock, stub
 **Kitsch**:
 The deliberate period excess of the experiment's chrome, held on a short leash so it never costs readability or WCAG 2.2 AA.
 
+**Daemonforge**:
+The experiment's current visual identity — a GeoCities-collage presentation of the portfolio with a black stage, light body copy, and restrained period kitsch.
+_Avoid_: Neon Cyber Basement (the historical identity)
+
 **Neon Cyber Basement**:
-The experiment's dark visual identity — pure neons on near-black, pixel-terminal body type, an Impact-class display face. Its light counterpart, **Neon Cyber Dayroom**, is a reference mood only and is not a shipped presentation.
+The historical name for the experiment's earlier dark visual identity. It is not the current name of `/90s`; **Neon Cyber Dayroom** remains an unshipped reference mood.
+_Avoid_: using it as the current identity
 
 ### Work
 

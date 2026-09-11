@@ -20,8 +20,8 @@ _Last updated: 2026-09-05._
 | `app/(portfolio)/page.tsx` | The public homepage `/`. |
 | `app/(portfolio)/not-found.tsx` | Portfolio not-found boundary inside the portfolio root and provider. |
 | `app/(portfolio)/error.tsx` | Portfolio error boundary inside the portfolio root and provider. |
-| `app/90s/layout.tsx` | Experiment root layout with its own `<html>`, `<body>`, VT323 face, preflight, and metadata. |
-| `app/90s/fonts.ts` | Experiment-only VT323 font loader. |
+| `app/90s/layout.tsx` | Experiment root layout with its own `<html>`, `<body>`, VT323 and Press Start 2P faces, preflight, and metadata. |
+| `app/90s/fonts.ts` | Experiment-only VT323 and Press Start 2P font loader. |
 | `app/90s/experiment.css` | Experiment-only preflight import. |
 | `app/90s/page.tsx` | The `/90s` page. |
 | `app/90s/metadata.ts` | Experiment layout unfurl + `noindex`; hub and note canonicals live on their pages. |
@@ -34,7 +34,7 @@ _Last updated: 2026-09-05._
 | `app/global-not-found.tsx` | Full-document 404 for URLs that match no presentation route. Owns `<html>` / `<body>` because there is no shared root layout (`experimental.globalNotFound`). |
 | `app/prototype/layout.tsx` | Throwaway root layout for prototype routes. |
 | `app/prototype/90s-shell/` | Throwaway shell variants A–D behind `?variant=`. Reference only. |
-| `public/90s/` | The hub kitsch pack — under-construction tape plus three 88×31 badges. Hub-only theater, ≤40KB, never rendered on a note route. |
+| `public/90s/` | The hub kitsch pack — under-construction tape, three 88×31 badges, and the experiment-owned western portrait. Hub-only assets, ≤80KB total, never rendered on a note route. |
 | `scripts/generate-90s-pack.mjs` | Draws `public/90s/`. Provenance for the pack; run it rather than hand-editing an asset. |
 
 ## Content and configuration
