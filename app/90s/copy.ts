@@ -62,7 +62,7 @@ export const PANE_GARNISH = {
 
 export const WEBRING = {
   title: "Webring",
-  body: "This ring is theater: no working links, just a circle in the margins.",
+  body: "No links here: this ring is theater, just a circle in the margins.",
 } as const;
 
 export const WORK_TABLE = {

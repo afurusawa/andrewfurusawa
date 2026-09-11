@@ -271,7 +271,10 @@ export default function NinetiesExperiment() {
                   />
                 </Window>
 
-                <aside className={`${styles.window} ${styles.newsWindow}`}>
+                <aside
+                  className={`${styles.window} ${styles.newsWindow}`}
+                  aria-hidden="true"
+                >
                   <div className={styles.windowBar}>
                     <h2>{WHATS_NEW_TITLE}</h2>
                     <span>{WHATS_NEW_LABEL}</span>
