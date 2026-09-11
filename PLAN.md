@@ -6,7 +6,7 @@
 
 **The issue tracker is canonical.** This file is the readable snapshot; where the two disagree, GitHub wins. `docs/agents/issue-tracker.md` records how maps, tickets, blocking, and the frontier are expressed here.
 
-_Last updated: 2026-09-05._
+_Last updated: 2026-09-11._
 
 ## Active Slice
 
@@ -43,6 +43,7 @@ One line per finished decision. Detail lives in the linked ticket — zoom there
 - [Lock site metadata and the built share image](https://github.com/afurusawa/andrewfurusawa/issues/84)
 - [Rebuild / as Loaded Stage](https://github.com/afurusawa/andrewfurusawa/issues/85)
 - [Cold mobile performance acceptance for rebuilt /](https://github.com/afurusawa/andrewfurusawa/issues/86)
+- [Improve portfolio accessibility and contrast](https://github.com/afurusawa/andrewfurusawa/pull/90) — shipped in `101953c`
 
 ### [/90s v2 spec](https://github.com/afurusawa/andrewfurusawa/issues/51) — closed
 
