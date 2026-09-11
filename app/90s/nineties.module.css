@@ -410,6 +410,58 @@ a.skillTileNoted:focus-visible,
   margin-bottom: 0;
 }
 
+.offerHeading {
+  margin: 0 0 1rem;
+  color: var(--cyan);
+  font-family: var(--font-display);
+  font-size: max(1.35rem, var(--text-floor));
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.offerList {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.offerItem {
+  padding-top: 0.65rem;
+  border-top: 2px solid var(--green);
+}
+
+.offerItemTitle {
+  margin: 0;
+  color: var(--cyan);
+  font-family: var(--font-display);
+  font-size: max(1.2rem, var(--text-floor));
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.offerItems {
+  margin: 0.35rem 0 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.offerItems li {
+  margin-top: 0.2rem;
+}
+
+.offerQuote {
+  margin: 0 0 1rem;
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--magenta);
+  color: #e9fff0;
+  font-family: var(--font-display);
+  font-size: max(1.3rem, var(--text-floor));
+  line-height: 1.25;
+}
+
 /* Featured work: a light strip of cards, no images and no project links. */
 .workList {
   display: flex;

@@ -8,6 +8,7 @@ import {
   formatProjectPeriod,
   formatProjectRole,
 } from "../config/featuredWork";
+import { homepageSections } from "../config/homepage";
 import { getSkillCatalogue } from "../lib/skillCatalogue";
 import {
   getSkillDirectory,
@@ -16,15 +17,20 @@ import {
 } from "../lib/skillDirectory";
 import { ExperimentNav } from "./ExperimentNav";
 import {
-  ABOUT_PARAGRAPHS,
-  CONTACT_LEAD_IN,
-  EYEBROW,
+  ARRIVED_LINE,
   FOOTER,
+  HANDLE,
   HUB_HEADING,
   PANE_GARNISH,
-  ROLE,
   SKILLS_HELPER,
   WORK_HELPER,
+  homepageContactLeadIn,
+  homepageHowIWork,
+  homepageIdentity,
+  homepageRecentWorkLeadIn,
+  homepageWhatIDoHeading,
+  homepageWhatIDoSteps,
+  homepageWhereIHelp,
 } from "./copy";
 import { ninetiesHubMetadata } from "./metadata";
 import styles from "./nineties.module.css";
@@ -88,11 +94,12 @@ export default function NinetiesExperiment() {
   return (
     <main className={styles.stage}>
       <header className={styles.banner}>
-        <p className={styles.eyebrow} aria-hidden="true">
-          {EYEBROW}
-        </p>
         <h1>{HUB_HEADING}</h1>
-        <p className={styles.tagline}>{ROLE}</p>
+        <p className={styles.tagline}>
+          {homepageIdentity.name}, {HANDLE}
+        </p>
+        <p className={styles.microcopy}>{homepageIdentity.line}</p>
+        <p className={styles.microcopy}>{homepageIdentity.location}</p>
       </header>
 
       <ExperimentNav hitCount={cosmeticHitCount} />
@@ -118,19 +125,20 @@ export default function NinetiesExperiment() {
       </div>
 
       <div className={styles.panes}>
-        <section className={styles.pane} id="about" aria-labelledby="about-heading">
+        <section className={styles.pane} id="welcome" aria-labelledby="welcome-heading">
           <div className={styles.paneBar}>
-            <h2 id="about-heading">
+            <h2 id="welcome-heading">
               <span aria-hidden="true">:: </span>
-              About
+              Welcome
               <span aria-hidden="true"> ::</span>
             </h2>
-            <span aria-hidden="true">{PANE_GARNISH.about}</span>
+            <span aria-hidden="true">{PANE_GARNISH.welcome}</span>
           </div>
           <div className={styles.paneBody}>
-            {ABOUT_PARAGRAPHS.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            <p>{ARRIVED_LINE}</p>
+            <p>{homepageIdentity.lede}</p>
+            <p>{homepageIdentity.credentialLine}</p>
+            <p className={styles.microcopy}>{homepageIdentity.credential}</p>
             <ProfileLinkList
               links={socialProfileLinks}
               className={styles.socialLinks}
@@ -139,16 +147,65 @@ export default function NinetiesExperiment() {
           </div>
         </section>
 
+        <section className={styles.pane} id="what" aria-labelledby="what-heading">
+          <div className={styles.paneBar}>
+            <h2 id="what-heading">
+              <span aria-hidden="true">:: </span>
+              {homepageSections[0].label}
+              <span aria-hidden="true"> ::</span>
+            </h2>
+          </div>
+          <div className={styles.paneBody}>
+            <h3 className={styles.offerHeading}>{homepageWhatIDoHeading}</h3>
+            <ul className={styles.offerList}>
+              {homepageWhatIDoSteps.map((step) => (
+                <li className={styles.offerItem} key={step.title}>
+                  <h4 className={styles.offerItemTitle}>{step.title}</h4>
+                  <ul className={styles.offerItems}>
+                    {step.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className={styles.pane} id="where" aria-labelledby="where-heading">
+          <div className={styles.paneBar}>
+            <h2 id="where-heading">
+              <span aria-hidden="true">:: </span>
+              {homepageSections[1].label}
+              <span aria-hidden="true"> ::</span>
+            </h2>
+          </div>
+          <div className={styles.paneBody}>
+            <blockquote className={styles.offerQuote}>
+              {homepageWhereIHelp.quote}
+            </blockquote>
+            <ul className={styles.offerList}>
+              {homepageWhereIHelp.items.map((item) => (
+                <li className={styles.offerItem} key={item.title}>
+                  <h3 className={styles.offerItemTitle}>{item.title}</h3>
+                  <p>{item.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         <section className={`${styles.pane} ${styles.workPane}`} id="work" aria-labelledby="work-heading">
           <div className={styles.paneBar}>
             <h2 id="work-heading">
               <span aria-hidden="true">:: </span>
-              Work
+              {homepageSections[2].label}
               <span aria-hidden="true"> ::</span>
             </h2>
             <span aria-hidden="true">{PANE_GARNISH.work}</span>
           </div>
           <div className={styles.paneBody}>
+            <p className={styles.microcopy}>{homepageRecentWorkLeadIn}</p>
             <p className={styles.microcopy}>{WORK_HELPER}</p>
             <ul className={styles.workList}>
               {featuredWork.map((project) => (
@@ -186,6 +243,26 @@ export default function NinetiesExperiment() {
                       );
                     })}
                   </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className={styles.pane} id="how" aria-labelledby="how-heading">
+          <div className={styles.paneBar}>
+            <h2 id="how-heading">
+              <span aria-hidden="true">:: </span>
+              {homepageSections[3].label}
+              <span aria-hidden="true"> ::</span>
+            </h2>
+          </div>
+          <div className={styles.paneBody}>
+            <ul className={styles.offerList}>
+              {homepageHowIWork.map((item) => (
+                <li className={styles.offerItem} key={item.title}>
+                  <h3 className={styles.offerItemTitle}>{item.title}</h3>
+                  <p>{item.body}</p>
                 </li>
               ))}
             </ul>
@@ -256,13 +333,13 @@ export default function NinetiesExperiment() {
           <div className={styles.paneBar}>
             <h2 id="contact-heading">
               <span aria-hidden="true">:: </span>
-              Contact
+              {homepageSections[4].label}
               <span aria-hidden="true"> ::</span>
             </h2>
             <span aria-hidden="true">{PANE_GARNISH.contact}</span>
           </div>
           <div className={styles.paneBody}>
-            <p className={styles.microcopy}>{CONTACT_LEAD_IN}</p>
+            <p className={styles.microcopy}>{homepageContactLeadIn}</p>
             <ProfileLinkList
               links={contactLinks}
               className={styles.contactLinks}

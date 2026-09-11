@@ -1,8 +1,11 @@
 import styles from "./nineties.module.css";
 
 const NAVIGATION_ITEMS = [
-  { id: "about", label: "About" },
+  { id: "welcome", label: "Welcome" },
+  { id: "what", label: "What I do" },
+  { id: "where", label: "Where I help" },
   { id: "work", label: "Work" },
+  { id: "how", label: "How I work" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
 ] as const;

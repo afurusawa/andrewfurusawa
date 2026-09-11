@@ -18,22 +18,20 @@ describe("/90s metadata", () => {
   });
 
   it("sets an explicit experiment unfurl that does not inherit the public portfolio", () => {
-    expect(ninetiesMetadata.title).toBe(
-      "Andrew Furusawa · Neon Cyber Basement",
-    );
+    expect(ninetiesMetadata.title).toBe("Daemonforge · Andrew Furusawa");
     expect(ninetiesMetadata.description).toBe(
       "Nothing links here. You arrived by URL, which is the idea.",
     );
     expect(ninetiesMetadata.openGraph).toEqual({
       type: "website",
-      title: "Andrew Furusawa · Neon Cyber Basement",
+      title: "Daemonforge · Andrew Furusawa",
       description:
         "Nothing links here. You arrived by URL, which is the idea.",
       images: [],
     });
     expect(ninetiesMetadata.twitter).toEqual({
       card: "summary",
-      title: "Andrew Furusawa · Neon Cyber Basement",
+      title: "Daemonforge · Andrew Furusawa",
       description:
         "Nothing links here. You arrived by URL, which is the idea.",
       images: [],
