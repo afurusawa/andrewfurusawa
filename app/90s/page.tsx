@@ -277,7 +277,9 @@ export default function NinetiesExperiment() {
                     <span>{WHATS_NEW_LABEL}</span>
                   </div>
                   <div className={styles.windowBody}>
-                    <p className={styles.newStamp}>{WHATS_NEW_STAMP}</p>
+                    <p className={styles.newStamp} aria-hidden="true">
+                      {WHATS_NEW_STAMP}
+                    </p>
                     <ul className={styles.newsList}>
                       {WHATS_NEW.map((item) => (
                         <li key={item}>{item}</li>
