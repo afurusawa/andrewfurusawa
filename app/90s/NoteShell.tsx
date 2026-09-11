@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { EYEBROW, HUB_HEADING, NOTE_FOOTER } from "./copy";
+import { HUB_HEADING, NOTE_FOOTER } from "./copy";
 import { ExperimentNav } from "./ExperimentNav";
 import styles from "./nineties.module.css";
 
@@ -20,9 +20,6 @@ export function NoteShell({
   return (
     <main className={styles.stage}>
       <header className={styles.banner}>
-        <p className={styles.eyebrow} aria-hidden="true">
-          {EYEBROW}
-        </p>
         <p className={styles.noteSiteName}>{HUB_HEADING}</p>
       </header>
 

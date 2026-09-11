@@ -1,20 +1,25 @@
-export const HUB_HEADING = "Andrew Furusawa";
-export const EYEBROW = "Neon Cyber Basement";
-export const ROLE = "Front-End Developer";
+export {
+  contactLeadIn as homepageContactLeadIn,
+  howIWork as homepageHowIWork,
+  identity as homepageIdentity,
+  recentWorkLeadIn as homepageRecentWorkLeadIn,
+  whatIDoHeading as homepageWhatIDoHeading,
+  whatIDoSteps as homepageWhatIDoSteps,
+  whereIHelp as homepageWhereIHelp,
+} from "../config/homepage";
 
-export const ABOUT_PARAGRAPHS = [
-  "Nothing links here. You arrived by URL, which is the idea.",
-  "I'm a front-end developer, twelve years in, most of it taking web applications from discovery through release and then living with them afterwards. The part I like is the middle — turning a vague requirement into something people can actually click.",
-  "The skills below aren't a checklist. Where I have something worth saying about a tool, it's a link: where I used it, why it fit, and what it taught me.",
-] as const;
+export const SITE_NAME = "Daemonforge";
+export const HANDLE = "Autonomancer";
+export const HUB_HEADING = SITE_NAME;
+
+export const ARRIVED_LINE =
+  "Nothing links here. You arrived by URL, which is the idea.";
 
 export const WORK_HELPER =
   "Client work, so there's nothing public to link. The stacks below are.";
 
 export const SKILLS_HELPER =
   "Skills with a note are links. The rest are here for the record.";
-
-export const CONTACT_LEAD_IN = "Email is best:";
 
 /** Link back to the directory — the breadcrumb's counterpart after a note. */
 export const BACK_TO_DIRECTORY = "Back to the skills directory";
@@ -27,7 +32,7 @@ export const NOTE_MISSING_LEAD = "That note doesn't exist.";
 export const NOTE_MISSING_LINK = `${BACK_TO_DIRECTORY}.`;
 
 export const PANE_GARNISH = {
-  about: "Welcome, traveler",
+  welcome: "Welcome, traveler",
   work: "Now shipping",
   skills: "Signal acquired",
   contact: "Open channels",

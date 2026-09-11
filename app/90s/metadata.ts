@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import type { RenderedSkillNote } from "../lib/skillCatalogue";
+import { ARRIVED_LINE, SITE_NAME, homepageIdentity } from "./copy";
 
-const unfurlTitle = "Andrew Furusawa · Neon Cyber Basement";
-const unfurlDescription =
-  "Nothing links here. You arrived by URL, which is the idea.";
+const unfurlTitle = `${SITE_NAME} · ${homepageIdentity.name}`;
+const unfurlDescription = ARRIVED_LINE;
 
 /** Layout metadata: robots and unfurl. Canonical lives on the hub page. */
 export const ninetiesMetadata: Metadata = {
