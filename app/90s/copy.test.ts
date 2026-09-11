@@ -12,6 +12,7 @@ import {
   ARRIVED_LINE,
   BACK_TO_DIRECTORY,
   HANDLE,
+  HUB_PORTRAIT,
   homepageContactLeadIn,
   homepageHowIWork,
   homepageIdentity,
@@ -24,6 +25,7 @@ import {
   NOTE_MISSING_LINK,
   SITE_NAME,
   SKILLS_HELPER,
+  WHATS_NEW,
   WORK_HELPER,
 } from "./copy";
 
@@ -38,6 +40,20 @@ describe("/90s voice-law copy", () => {
     expect(ARRIVED_LINE).toBe(
       "Nothing links here. You arrived by URL, which is the idea.",
     );
+  });
+
+  it("keeps the portrait and What's New box in experiment chrome", () => {
+    expect(HUB_PORTRAIT).toEqual({
+      src: "/90s/autonomancer-western.jpg",
+      width: 400,
+      height: 400,
+      alt: "Andrew Furusawa, the Autonomancer",
+    });
+    expect(WHATS_NEW).toEqual([
+      "New window, same signal.",
+      "Notes are now connected to the directory.",
+      "Construction continues at the edge of the map.",
+    ]);
   });
 
   it("consumes the homepage offer instead of forking its fields", () => {
