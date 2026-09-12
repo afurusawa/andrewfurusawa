@@ -1,3 +1,4 @@
+import { getPublishedBlogEntries } from "../lib/blogCatalogue";
 import styles from "./nineties.module.css";
 
 const NAVIGATION_ITEMS = [
@@ -10,7 +11,7 @@ const NAVIGATION_ITEMS = [
   { id: "contact", label: "Contact" },
 ] as const;
 
-export type NavSection = (typeof NAVIGATION_ITEMS)[number]["id"];
+export type NavSection = (typeof NAVIGATION_ITEMS)[number]["id"] | "writing";
 
 /**
  * The experiment nav. The hub links to its own sections; a note route links
@@ -25,9 +26,18 @@ export function ExperimentNav({
   hrefBase?: string;
   current?: NavSection;
 }) {
+  const items =
+    getPublishedBlogEntries().length > 0
+      ? [
+          ...NAVIGATION_ITEMS.slice(0, 5),
+          { id: "writing" as const, label: "Writing" },
+          ...NAVIGATION_ITEMS.slice(5),
+        ]
+      : NAVIGATION_ITEMS;
+
   return (
     <nav className={styles.navigation} aria-label="Experiment sections">
-      {NAVIGATION_ITEMS.map((item) => (
+      {items.map((item) => (
         <a
           className={styles.navigationLink}
           href={`${hrefBase}#${item.id}`}

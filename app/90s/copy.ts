@@ -41,6 +41,15 @@ export const WORK_HELPER =
 export const SKILLS_HELPER =
   "Skills with a note are links. The rest are here for the record.";
 
+export const WRITING_HELPER =
+  "Same pieces as the public site. The link leaves Daemonforge.";
+
+export const WRITING_TABLE = {
+  caption: "Writing by title and date",
+  title: "Title",
+  date: "Date",
+} as const;
+
 export const WEBRING = {
   kicker: "MEMBER OF",
   name: "The Daemonforge Web Ring",

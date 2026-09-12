@@ -1,12 +1,8 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import matter from "gray-matter";
-import rehypeSanitize from "rehype-sanitize";
-import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
 import { skills, type Skill } from "../config/skills";
+import { frontmatterString, renderMarkdownHtml } from "./markdown";
 
 /** Where skill notes live. The filename is the only skill association. */
 export const NOTES_DIRECTORY = join(process.cwd(), "content", "skills");
@@ -38,17 +34,6 @@ export type RenderedSkillNote = {
   updated?: string;
   html: string;
 };
-
-function frontmatterString(value: unknown): string | undefined {
-  // YAML turns a bare date into a Date; keep the day, drop the clock.
-  if (value instanceof Date) {
-    return value.toISOString().slice(0, 10);
-  }
-
-  return typeof value === "string" && value.trim() !== ""
-    ? value.trim()
-    : undefined;
-}
 
 /**
  * Parse one note file. `summary` is required — it is both the directory teaser
@@ -148,19 +133,9 @@ export function getPublishedNoteSlugs(): string[] {
     .map((skill) => skill.slug);
 }
 
-/**
- * Compile note Markdown to sanitized HTML. Standard Markdown only — no GFM and
- * no raw HTML, which the default sanitize schema strips on the way through.
- */
+/** Compile note Markdown to sanitized HTML. Shared pipeline with blog entries. */
 export async function renderNoteHtml(markdown: string): Promise<string> {
-  const file = await unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeSanitize)
-    .use(rehypeStringify)
-    .process(markdown);
-
-  return String(file);
+  return renderMarkdownHtml(markdown);
 }
 
 /**
