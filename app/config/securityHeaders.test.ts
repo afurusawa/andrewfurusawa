@@ -29,7 +29,7 @@ describe("securityHeaders", () => {
     expect(byKey["Content-Security-Policy"]).toContain("frame-ancestors 'none'");
   });
 
-  it("sends X-Robots-Tag on the experiment paths only", () => {
+  it("sends X-Robots-Tag on the experiment and authoring paths", () => {
     const bySource = Object.fromEntries(
       pathHeaders.map((entry) => [
         entry.source,
@@ -41,6 +41,8 @@ describe("securityHeaders", () => {
 
     expect(bySource["/90s"]["X-Robots-Tag"]).toBe("noindex, nofollow");
     expect(bySource["/90s/:path*"]["X-Robots-Tag"]).toBe("noindex, nofollow");
+    expect(bySource["/keystatic"]["X-Robots-Tag"]).toBe("noindex, nofollow");
+    expect(bySource["/keystatic/:path*"]["X-Robots-Tag"]).toBe("noindex, nofollow");
     expect(bySource["/:path*"]["X-Robots-Tag"]).toBeUndefined();
   });
 

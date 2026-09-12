@@ -26,6 +26,7 @@ import {
   SITE_NAME,
   SKILLS_HELPER,
   WEBRING,
+  WRITING_HELPER,
   WHATS_NEW,
   WORK_HELPER,
 } from "./copy";
@@ -78,6 +79,12 @@ describe("/90s voice-law copy", () => {
   it("explains link-free work with the locked helper", () => {
     expect(WORK_HELPER).toBe(
       "Client work, so there's nothing public to link. The stacks below are.",
+    );
+  });
+
+  it("warns that writing links leave the experiment", () => {
+    expect(WRITING_HELPER).toBe(
+      "Same pieces as the public site. The link leaves Daemonforge.",
     );
   });
 

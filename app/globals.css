@@ -322,6 +322,70 @@ body {
 
 /* No-JS floor: each section's colour card is the field colour. Hide the
    observer-driven sticky panel and collapse the split so those cards show. */
+.blog-body h2,
+.blog-body h3,
+.blog-body h4 {
+  margin-top: 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--heading);
+}
+
+.blog-body h2 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.blog-body h3 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.blog-body p,
+.blog-body ul,
+.blog-body ol {
+  margin-top: 0.85rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--body);
+}
+
+.blog-body a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.blog-body code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.blog-body pre {
+  margin-top: 1rem;
+  overflow-x: auto;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--hairline);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.blog-body pre code {
+  font-size: inherit;
+}
+
+.blog-body blockquote {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--strong-hairline);
+}
+
+.blog-body img {
+  margin-top: 1rem;
+  max-width: 100%;
+  height: auto;
+}
+
 @media (scripting: none) and (min-width: 64rem) {
   .homepage-grid {
     display: block !important;

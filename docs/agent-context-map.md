@@ -2,7 +2,7 @@
 
 Path inventory. **Read the one section you need, not the whole file.** For why the system is shaped this way, read [`MAP.md`](MAP.md) instead.
 
-_Last updated: 2026-09-12._
+_Last updated: 2026-09-11._
 
 ## Routes and layouts
 
@@ -18,6 +18,12 @@ _Last updated: 2026-09-12._
 | `app/(portfolio)/opengraph-image.tsx` | Built share card for `/` — Recent work field, `violet-900`, always dark. |
 | `app/(portfolio)/share-portrait.jpg` | Portrait used by the share image. |
 | `app/(portfolio)/page.tsx` | The public homepage `/`. |
+| `app/(portfolio)/blog/page.tsx` | Public writing index `/blog`. |
+| `app/(portfolio)/blog/[slug]/page.tsx` | A public blog entry. `generateStaticParams` from published slugs; `dynamicParams = false`. |
+| `app/(portfolio)/blog/BlogIndex.tsx` | Listing chrome for `/blog`. |
+| `app/rss.xml/route.ts` | RSS of published blog entries. |
+| `app/keystatic/` | Local Keystatic admin. Own root layout. Production 404. |
+| `app/api/keystatic/[...params]/route.ts` | Keystatic local-mode filesystem API. Production 404. |
 | `app/(portfolio)/not-found.tsx` | Portfolio not-found boundary inside the portfolio root and provider. |
 | `app/(portfolio)/error.tsx` | Portfolio error boundary inside the portfolio root and provider. |
 | `app/90s/layout.tsx` | Experiment root layout with its own `<html>`, `<body>`, VT323 and Press Start 2P faces, preflight, and metadata. |
@@ -51,6 +57,9 @@ Everything here is data, not markup. New content belongs in this directory, neve
 | `app/config/site.ts` | `SITE_URL`, `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `absoluteUrl()`. |
 | `app/config/securityHeaders.ts` | Response headers, consumed by `next.config.ts`. |
 | `content/skills/` | The skill notes, one Markdown file per catalogue slug. A file here is what publishes a note; a filename with no catalogue slug fails the build. |
+| `content/blog/` | Blog entries, one Markdown file per slug. `draft: true` keeps a file off the public set. |
+| `keystatic.config.ts` | Keystatic collection schema. Authoring only; presentations do not import this. |
+| `public/blog/` | Images referenced from blog Markdown. |
 
 ## Logic
 
@@ -59,7 +68,9 @@ No React — this is what the node-environment test runner can reach. Pure funct
 | Path | Holds |
 |------|-------|
 | `app/lib/workTimeline.ts` | Shared-axis span and percent for the homepage work chart. |
+| `app/lib/markdown.ts` | Shared frontmatter coercion and sanitized Markdown → HTML. Used by skill notes and blog entries. |
 | `app/lib/skillCatalogue.ts` | The one join: catalogue skills plus the notes on disk, and the Markdown pipeline that renders one. The publish set is owned here; nothing else re-derives it. Touches the filesystem, so it is build-time only. |
+| `app/lib/blogCatalogue.ts` | Blog files on disk, draft filter, date sort, public hrefs. Touches the filesystem, so it is build-time only. Presentations must not import Keystatic. |
 | `app/lib/skillDirectory.ts` | The `/90s` skills directory shape — the catalogue grouped by category. Reads the join, never the filesystem. |
 
 ## Components (modern presentation only)
@@ -79,7 +90,7 @@ Server components unless marked. `app/90s/` must not import from here.
 | `public/portrait.jpg` | Homepage portrait. |
 | `public/cspo-badge.png` | CSPO badge in the identity cluster. |
 | `app/robots.ts` | Crawler rules, sitemap and host declarations. Tested. |
-| `app/sitemap.ts` | Sitemap entries — `/` only. Tested. |
+| `app/sitemap.ts` | Sitemap entries — `/`, plus `/blog` and published slugs when writing exists. Tested. |
 | `next.config.ts` | Applies `pathHeaders`: security on `/:path*`, `X-Robots-Tag` on `/90s` and `/90s/:path*`. |
 | `vitest.config.mts` | node environment, collects `app/**/*.test.ts` only. |
 | `postcss.config.mjs`, `app/globals.css` | Tailwind v4 entry and the light/dark CSS-variable themes. |

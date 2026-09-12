@@ -98,6 +98,20 @@ _Avoid_: published posts, live pages
 The full list of skills as displayed — every skill appears, whether or not a note exists for it. Only skills in the publish set are links.
 _Avoid_: index, registry (a registry is the set of pages, not of skills)
 
+### Writing
+
+**Blog entry**:
+One dated piece of writing, shared as substance across presentations. Lives as `content/blog/<slug>.md`. Canonical URL is on the modern presentation (`/blog/<slug>`). Distinct from a skill note: a note is bound to one catalogue skill and lives only inside the experiment.
+_Avoid_: article (too journalistic), essay (promises a form this site does not require)
+
+**Draft**:
+A blog entry with `draft: true`. The file exists, and local Keystatic can edit it, but listings, sitemap, RSS, and public routes ignore it until the flag is cleared and the change is pushed.
+_Avoid_: unpublished (vague), private (nothing here is access-controlled)
+
+**Keystatic**:
+The local authoring UI at `/keystatic`. It writes blog files into the repo. It is not a presentation, not a hosted CMS, and not how the public site reads posts. Production 404s it.
+_Avoid_: CMS (too broad — there is no hosted content store), admin (collides with a product-admin mental model)
+
 **Category**:
 A named grouping of skills in the catalogue. Every skill has exactly one. The experiment's directory sections the tile wall by it; other presentations may ignore it.
 _Avoid_: tag (implies many), folder, bucket

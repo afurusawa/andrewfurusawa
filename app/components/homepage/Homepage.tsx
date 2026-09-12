@@ -25,6 +25,11 @@ import {
   axisPercent,
   projectSpan,
 } from "../../lib/workTimeline";
+import {
+  blogEntryHref,
+  getBlogTeasers,
+  type BlogEntry,
+} from "../../lib/blogCatalogue";
 import { ColourPanelObserver } from "./ColourPanelObserver";
 
 const skillNameBySlug = new Map(skills.map((skill) => [skill.slug, skill.name]));
@@ -44,6 +49,8 @@ function pad(index: number): string {
 }
 
 export function Homepage() {
+  const writing = getBlogTeasers();
+
   return (
     <ColourPanelObserver>
       <div className="homepage-grid min-h-screen lg:grid lg:grid-cols-[42%_58%]">
@@ -54,6 +61,7 @@ export function Homepage() {
           <WhereIHelp />
           <RecentWork />
           <HowIWork />
+          <Writing entries={writing} />
           <Contact />
         </main>
       </div>
@@ -446,6 +454,56 @@ function HowIWork() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function Writing({ entries }: { entries: readonly BlogEntry[] }) {
+  if (entries.length === 0) {
+    return null;
+  }
+
+  return (
+    <section id="writing" aria-labelledby="writing-heading">
+      <div className="px-6 py-12 md:px-12 lg:py-20">
+        <h2
+          id="writing-heading"
+          className="font-display text-3xl leading-tight tracking-tight md:text-4xl"
+        >
+          Writing
+        </h2>
+        <ul className="mt-8">
+          {entries.map((entry) => (
+            <li
+              key={entry.slug}
+              className="border-t border-hairline py-6 first:border-t-0 first:pt-0"
+            >
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-metadata">
+                <time dateTime={entry.date}>{entry.date}</time>
+              </p>
+              <h3 className="mt-2 font-display text-xl tracking-tight">
+                <a
+                  href={blogEntryHref(entry.slug)}
+                  className="hover:underline hover:decoration-1 hover:underline-offset-4"
+                >
+                  {entry.title}
+                </a>
+              </h3>
+              <p className="mt-2 max-w-prose text-[0.9375rem] leading-relaxed text-body">
+                {entry.summary}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-2 font-mono text-xs uppercase tracking-[0.14em]">
+          <a
+            href="/blog"
+            className="underline decoration-1 underline-offset-4 hover:text-heading"
+          >
+            All writing
+          </a>
+        </p>
       </div>
     </section>
   );

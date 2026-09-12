@@ -67,6 +67,18 @@ export const pathHeaders: {
     source: "/90s/:path*",
     headers: [experimentRobotsHeader],
   },
+  {
+    source: "/keystatic",
+    headers: [experimentRobotsHeader],
+  },
+  {
+    source: "/keystatic/:path*",
+    headers: [experimentRobotsHeader],
+  },
+  {
+    source: "/api/keystatic/:path*",
+    headers: [experimentRobotsHeader],
+  },
 ];
 
 export const requiredSecurityHeaderNames = securityHeaders.map(

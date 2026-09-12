@@ -5,6 +5,7 @@ import {
   formatProjectRole,
 } from "../config/featuredWork";
 import { cspoBadge } from "../config/homepage";
+import { blogEntryHref, getBlogTeasers } from "../lib/blogCatalogue";
 import { getSkillCatalogue } from "../lib/skillCatalogue";
 import {
   getSkillDirectory,
@@ -24,6 +25,8 @@ import {
   WHATS_NEW,
   WORK_HELPER,
   WORK_TABLE,
+  WRITING_HELPER,
+  WRITING_TABLE,
   homepageContactLeadIn,
   homepageHowIWork,
   homepageIdentity,
@@ -42,6 +45,7 @@ const catalogueBySlug = new Map(
 );
 
 const skillDirectory = getSkillDirectory();
+const writing = getBlogTeasers();
 
 function ProfileLinkButtons({ links }: { links: readonly ProfileLink[] }) {
   return (
@@ -302,6 +306,49 @@ export default function NinetiesExperiment() {
               </td>
             </tr>
           ))}
+          {writing.length > 0 ? (
+            <>
+              <tr>
+                <td colSpan={2} className={styles.sectionBar} id="writing">
+                  <h2>
+                    <span aria-hidden="true">:: </span>
+                    Writing
+                    <span aria-hidden="true"> ::</span>
+                  </h2>
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={2} className={styles.workWrap}>
+                  <p className={styles.helper}>{WRITING_HELPER}</p>
+                  <table className={styles.work}>
+                    <caption className={styles.srOnly}>
+                      {WRITING_TABLE.caption}
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">{WRITING_TABLE.title}</th>
+                        <th scope="col">{WRITING_TABLE.date}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {writing.map((entry) => (
+                        <tr key={entry.slug}>
+                          <td>
+                            <a href={blogEntryHref(entry.slug)}>
+                              <strong>{entry.title}</strong>
+                            </a>
+                          </td>
+                          <td>
+                            <time dateTime={entry.date}>{entry.date}</time>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </>
+          ) : null}
           <tr>
             <td colSpan={2} className={styles.skills} id="skills">
               <h2>Skills</h2>

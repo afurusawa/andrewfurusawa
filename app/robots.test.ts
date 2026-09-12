@@ -9,6 +9,7 @@ describe("robots", () => {
     expect(manifest.rules).toEqual({
       userAgent: "*",
       allow: "/",
+      disallow: ["/keystatic", "/api/keystatic"],
     });
   });
 });
