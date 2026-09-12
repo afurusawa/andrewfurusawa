@@ -4,7 +4,7 @@
 
 **Stack:** Next.js 15 App Router, React 19, TypeScript 5, Tailwind v4 (PostCSS), react-icons, Vitest, Vercel Speed Insights. Skill notes add a build-time Markdown pipeline: `gray-matter` plus `unified`/`remark-parse`/`remark-rehype`/`rehype-sanitize`/`rehype-stringify`. Those six run in server components only and reach no browser bundle, so they cost nothing against the initial-JS budget — no MDX, no GFM, no raw HTML.
 
-_Last updated: 2026-09-05. Update this map when architecture or ownership changes in a way that matters._
+_Last updated: 2026-09-11. Update this map when architecture or ownership changes in a way that matters._
 
 This file is orientation: how the system is shaped and why. For *where a file lives*, use [`agent-context-map.md`](agent-context-map.md). For *what is being worked on now*, use [`../PLAN.md`](../PLAN.md). For *what a word means*, use [`../CONTEXT.md`](../CONTEXT.md).
 
@@ -30,7 +30,7 @@ Both presentations read the same data and share none of their chrome.
 |----------|-------|-------------|
 | `Skill` (`app/config/skills.ts`) | `{ slug, name, icon, category }` | `/` work stack tags, `/90s` directory |
 | `FeaturedProject` (`app/config/featuredWork.ts`) | shared work records; `formatProjectPeriod` / `formatProjectRole` | `/` recent work, `/90s` work strip |
-| Homepage copy (`app/config/homepage.ts`) | identity cluster, spine, colour-panel figures | `/` and `/90s` (colour-panel figures remain `/` only) |
+| Homepage offer (`app/config/homepage.ts`) | identity cluster, What I do, Where I help, Recent work, How I work, Contact | `/` and `/90s` (colour-panel figures remain `/` only) |
 | `ProfileLink` (`app/config/profileLinks.ts`) | `{ href, ariaLabel, label, Icon, openInNewTab }` | `/` contact, `/90s` contact |
 | Site identity (`app/config/site.ts`) | `SITE_URL`, `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `absoluteUrl()` | portfolio metadata, `robots.ts`, `sitemap.ts`, the built share image |
 | `pathHeaders` (`app/config/securityHeaders.ts`) | security tuples on `/:path*`; `X-Robots-Tag` on `/90s` and `/90s/:path*` | `next.config.ts` |

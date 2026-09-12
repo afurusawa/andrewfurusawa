@@ -21,6 +21,7 @@ import {
   homepageWhatIDoSteps,
   homepageWhereIHelp,
   HUB_HEADING,
+  NOTE_DIRECTORY_HREF,
   NOTE_MISSING_LEAD,
   NOTE_MISSING_LINK,
   SITE_NAME,
@@ -94,5 +95,9 @@ describe("/90s voice-law copy", () => {
 
   it("names the escape after a note in plain words", () => {
     expect(BACK_TO_DIRECTORY).toBe("Back to the skills directory");
+  });
+
+  it("points note recovery at the skills directory", () => {
+    expect(NOTE_DIRECTORY_HREF).toBe("/90s#skills");
   });
 });
