@@ -3,7 +3,7 @@ import {
   getPublishedNoteSlugs,
   getRenderedSkillNote,
 } from "../../../lib/skillCatalogue";
-import { BACK_TO_DIRECTORY } from "../../copy";
+import { BACK_TO_DIRECTORY, NOTE_DIRECTORY_HREF } from "../../copy";
 import { ninetiesNoteMetadata } from "../../metadata";
 import { NoteShell } from "../../NoteShell";
 import styles from "../../nineties.module.css";
@@ -45,7 +45,7 @@ export default async function SkillNotePage({
       <nav className={styles.noteBreadcrumb} aria-label="Breadcrumb">
         <a href="/90s">Home</a>
         <span aria-hidden="true">/</span>
-        <a href="/90s#skills">Skills</a>
+        <a href={NOTE_DIRECTORY_HREF}>Skills</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{note.name}</span>
       </nav>
@@ -61,7 +61,7 @@ export default async function SkillNotePage({
       <div className={styles.noteBody}>
         {/* Sanitized at build time by the note pipeline's rehype-sanitize pass. */}
         <div dangerouslySetInnerHTML={{ __html: note.html }} />
-        <a className={styles.noteBack} href="/90s#skills">
+        <a className={styles.noteBack} href={NOTE_DIRECTORY_HREF}>
           {BACK_TO_DIRECTORY}
         </a>
       </div>

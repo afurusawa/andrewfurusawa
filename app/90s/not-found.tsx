@@ -1,4 +1,8 @@
-import { NOTE_MISSING_LEAD, NOTE_MISSING_LINK } from "./copy";
+import {
+  NOTE_DIRECTORY_HREF,
+  NOTE_MISSING_LEAD,
+  NOTE_MISSING_LINK,
+} from "./copy";
 import { NoteShell } from "./NoteShell";
 import styles from "./nineties.module.css";
 
@@ -12,7 +16,8 @@ export default function NinetiesNotFound() {
     <NoteShell windowPath="C:\SKILLS\NOT.FOUND">
       <div className={styles.noteBody}>
         <p>
-          {NOTE_MISSING_LEAD} <a href="/90s#skills">{NOTE_MISSING_LINK}</a>
+          {NOTE_MISSING_LEAD}{" "}
+          <a href={NOTE_DIRECTORY_HREF}>{NOTE_MISSING_LINK}</a>
         </p>
       </div>
     </NoteShell>

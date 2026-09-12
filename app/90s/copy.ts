@@ -42,6 +42,8 @@ export const SKILLS_HELPER =
 
 /** Link back to the directory — the breadcrumb's counterpart after a note. */
 export const BACK_TO_DIRECTORY = "Back to the skills directory";
+/** Canonical hash target for note breadcrumbs and recovery. */
+export const NOTE_DIRECTORY_HREF = "/90s#skills";
 
 /**
  * Unknown note slug. Two sentences: the first is plain text, the second is the

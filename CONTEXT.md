@@ -55,6 +55,10 @@ _Avoid_: Neon Cyber Basement (the historical identity)
 The historical name for the experiment's earlier dark visual identity. It is not the current name of `/90s`; **Neon Cyber Dayroom** remains an unshipped reference mood.
 _Avoid_: using it as the current identity
 
+**Neon Cyber Dayroom**:
+An unshipped reference mood for the experiment; it is not a presentation.
+_Avoid_: treating it as a shipped route or current identity
+
 ### Work
 
 **Project**:
