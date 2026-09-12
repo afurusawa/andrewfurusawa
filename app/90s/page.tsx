@@ -5,7 +5,11 @@ import {
   formatProjectRole,
 } from "../config/featuredWork";
 import { cspoBadge } from "../config/homepage";
-import { blogEntryHref, getBlogTeasers } from "../lib/blogCatalogue";
+import {
+  BLOG_TEASER_LIMIT,
+  blogEntryHref,
+  readBlogEntries,
+} from "../lib/blogCatalogue";
 import { getSkillCatalogue } from "../lib/skillCatalogue";
 import {
   getSkillDirectory,
@@ -22,6 +26,7 @@ import {
   SITE_NAME,
   SKILLS_HELPER,
   WELCOME_TAG,
+  UPDATES_TABLE,
   WHATS_NEW,
   WORK_HELPER,
   WORK_TABLE,
@@ -34,6 +39,7 @@ import {
   homepageWhatIDoSteps,
   homepageWhereIHelp,
 } from "./copy";
+import { kitschDate } from "./kitschDate";
 import { ChromeDivider, HitCounter, HubKitsch, WebRing } from "./kitsch";
 import { ninetiesHubMetadata } from "./metadata";
 import styles from "./nineties.module.css";
@@ -45,7 +51,98 @@ const catalogueBySlug = new Map(
 );
 
 const skillDirectory = getSkillDirectory();
-const writing = getBlogTeasers();
+
+function publishedWriting() {
+  return readBlogEntries()
+    .filter((entry) => !entry.draft)
+    .slice()
+    .sort(
+      (left, right) =>
+        right.date.localeCompare(left.date) || left.slug.localeCompare(right.slug),
+    )
+    .map(({ slug, title, date, summary }) => ({
+      slug,
+      title,
+      date,
+      summary,
+      href: blogEntryHref(slug),
+    }));
+}
+
+function WhatsNew({
+  entries,
+}: {
+  entries: readonly {
+    slug: string;
+    title: string;
+    date: string;
+    summary: string;
+    href: string;
+  }[];
+}) {
+  const stampDate = entries[0] ? kitschDate(entries[0].date) : WHATS_NEW.date;
+
+  return (
+    <>
+      <h2 className={styles.newsStamp}>
+        <span aria-hidden="true">★ </span>
+        {WHATS_NEW.heading}
+        <span aria-hidden="true"> ★</span>
+      </h2>
+      <p className={styles.newsUpdated}>
+        {WHATS_NEW.lastUpdated} {stampDate}
+      </p>
+      <table
+        className={styles.newsLog}
+        border={1}
+        cellPadding={4}
+        cellSpacing={1}
+      >
+        <caption className={styles.srOnly}>{UPDATES_TABLE.caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{UPDATES_TABLE.date}</th>
+            <th scope="col">{UPDATES_TABLE.entry}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {entries.length === 0 ? (
+            <tr>
+              <td colSpan={2}>{WHATS_NEW.more}</td>
+            </tr>
+          ) : (
+            entries.map((entry, index) => (
+              <tr key={entry.slug}>
+                <td className={styles.newsLogDate}>
+                  <time dateTime={entry.date}>{kitschDate(entry.date)}</time>
+                </td>
+                <td>
+                  {index === 0 ? (
+                    <span className={styles.newsGif}>{WHATS_NEW.newBadge}</span>
+                  ) : null}
+                  <a href={entry.href}>
+                    <b>{entry.title}</b>
+                  </a>
+                  <small className={styles.newsLogSummary}>{entry.summary}</small>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
+      <div className={styles.newsSite}>
+        <b>
+          {WHATS_NEW.siteNews} · {WHATS_NEW.date}
+        </b>
+        <br />
+        {WHATS_NEW.items.join(" ")}
+      </div>
+      {entries.length > 0 ? (
+        <p className={styles.newsLeave}>{WRITING_HELPER}</p>
+      ) : null}
+    </>
+  );
+}
 
 function ProfileLinkButtons({ links }: { links: readonly ProfileLink[] }) {
   return (
@@ -76,7 +173,8 @@ function ProfileLinkButtons({ links }: { links: readonly ProfileLink[] }) {
 }
 
 export default function NinetiesExperiment() {
-  const latestTitle = featuredWork[0]?.title;
+  const published = publishedWriting();
+  const writing = published.slice(0, BLOG_TEASER_LIMIT);
 
   return (
     <main className={styles.stage} id="main">
@@ -133,27 +231,7 @@ export default function NinetiesExperiment() {
               </div>
             </td>
             <td className={`${styles.card} ${styles.newsCard}`}>
-              <div className={styles.news} aria-hidden="true">
-                <div className={styles.newsHead}>
-                  <img src="/90s/saturn.png" alt="" width={52} height={31} />
-                  <p className={styles.newsStamp}>★ {WHATS_NEW.heading}</p>
-                </div>
-                <p>{WHATS_NEW.date}</p>
-                <ul>
-                  {WHATS_NEW.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                  {latestTitle ? (
-                    <li>
-                      <span className={`${styles.newsNew} ${styles.blink}`}>
-                        New!{" "}
-                      </span>
-                      {latestTitle}
-                    </li>
-                  ) : null}
-                </ul>
-                <p>{WHATS_NEW.more}</p>
-              </div>
+              <WhatsNew entries={published} />
             </td>
           </tr>
           <tr>

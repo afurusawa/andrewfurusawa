@@ -2,7 +2,7 @@
 
 Path inventory. **Read the one section you need, not the whole file.** For why the system is shaped this way, read [`MAP.md`](MAP.md) instead.
 
-_Last updated: 2026-09-11._
+_Last updated: 2026-09-12._
 
 ## Routes and layouts
 
@@ -34,6 +34,7 @@ _Last updated: 2026-09-11._
 | `app/90s/skills/[slug]/page.tsx` | A skill note. `generateStaticParams` from the publish set, `dynamicParams = false`. |
 | `app/90s/ExperimentNav.tsx` | Welcome · What I do · Where I help · Work · How I work · Skills · Contact nav, shared by the hub, the notes, and the 404. |
 | `app/90s/kitsch.tsx` | Hub-only theater: hit counter, construction banner, badges, chrome bar, webring. |
+| `app/90s/kitschDate.ts` | ISO date to a GeoCities `M/D/YY` stamp for the hub Updates log. |
 | `app/90s/NoteShell.tsx` | The outer shell a note and the 404 share — banner, nav, one Document Window, footer. |
 | `app/90s/not-found.tsx` | The experiment's own 404 — same shell, recovery in the last sentence. |
 | `app/90s/[...missing]/page.tsx` | Catches every unknown path under `/90s` and calls `notFound()`, so the router's own rejection of an unmatched slug can't escape to the global 404. |

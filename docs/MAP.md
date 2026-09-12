@@ -4,7 +4,7 @@
 
 **Stack:** Next.js 15 App Router, React 19, TypeScript 5, Tailwind v4 (PostCSS), react-icons, Vitest, Vercel Speed Insights. Markdown (skill notes and blog entries) compiles with `gray-matter` plus `unified`/`remark-parse`/`remark-rehype`/`rehype-sanitize`/`rehype-stringify`. Those six run in server components only and reach no browser bundle, so they cost nothing against the initial-JS budget — no MDX, no GFM, no raw HTML. Keystatic (`@keystatic/core`, `@keystatic/next`, `@markdoc/markdoc`) is authoring-only and never imported by a presentation.
 
-_Last updated: 2026-09-11. Update this map when architecture or ownership changes in a way that matters._
+_Last updated: 2026-09-12. Update this map when architecture or ownership changes in a way that matters._
 
 This file is orientation: how the system is shaped and why. For *where a file lives*, use [`agent-context-map.md`](agent-context-map.md). For *what is being worked on now*, use [`../PLAN.md`](../PLAN.md). For *what a word means*, use [`../CONTEXT.md`](../CONTEXT.md).
 
@@ -13,7 +13,7 @@ This file is orientation: how the system is shaped and why. For *where a file li
 | Route | Owned by | Public? |
 |-------|----------|---------|
 | `/` | `app/(portfolio)/` + `app/components/` | Yes — indexed, in the sitemap |
-| `/blog`, `/blog/[slug]` | `app/(portfolio)/blog/` | Yes — indexed when a post is published; teasers on `/` and `/90s` |
+| `/blog`, `/blog/[slug]` | `app/(portfolio)/blog/` | Yes — indexed when a post is published; teasers on `/`; Updates log and Writing table on `/90s` |
 | `/rss.xml` | `app/rss.xml/route.ts` | Yes — published posts only |
 | `/keystatic` | `app/keystatic/` | Local authoring UI. Production 404. `noindex`. Not in the sitemap |
 | `/90s` | `app/90s/` alone | Soft secret — crawl-allowed, `X-Robots-Tag` `noindex, nofollow`, not in the sitemap |
@@ -39,13 +39,13 @@ Both presentations read the same data and share none of their chrome.
 | `pathHeaders` (`app/config/securityHeaders.ts`) | security tuples on `/:path*`; `X-Robots-Tag` on `/90s`, `/keystatic`, and `/api/keystatic` | `next.config.ts` |
 | `SkillNote` (`app/lib/skillCatalogue.ts`) | `{ slug, summary, updated?, body }`, parsed from `content/skills/<slug>.md` | the note route |
 | `CatalogueSkill` (`app/lib/skillCatalogue.ts`) | `Skill & { hasNote, summary? }` — the one join of catalogue and notes | `/90s` tiles and stack tags, the note route |
-| `BlogEntry` (`app/lib/blogCatalogue.ts`) | `{ slug, title, date, summary, draft, body }`, parsed from `content/blog/<slug>.md` | `/blog`, homepage and `/90s` teasers, RSS, sitemap |
+| `BlogEntry` (`app/lib/blogCatalogue.ts`) | `{ slug, title, date, summary, draft, body }`, parsed from `content/blog/<slug>.md` | `/blog`, homepage teasers, `/90s` Updates log and Writing table, RSS, sitemap |
 
 `app/90s/` imports *data* from `app/config/` and *nothing* from `app/components/`. Share substance, never chrome — if a change makes the experiment import a portfolio component, the change is wrong.
 
 **A note publishes by existing.** `content/skills/<slug>.md` is the whole publish decision — no `draft` flag, no list to keep in step. `getSkillCatalogue()` is the only place catalogue and notes meet; a file whose slug names no catalogue skill throws there, which fails `next build` rather than shipping a hub link to a 404.
 
-**A blog entry publishes when it is not a draft.** Keystatic writes `content/blog/<slug>.md` (local save, then git push). `draft: true` keeps the file off listings, sitemap, RSS, and `generateStaticParams`. Canonical URLs live on the modern presentation (`/blog/<slug>`). The experiment may tease the same records and link *out* to those URLs. The modern presentation still does not link *into* `/90s`.
+**A blog entry publishes when it is not a draft.** Keystatic writes `content/blog/<slug>.md` (local save, then git push). `draft: true` keeps the file off listings, sitemap, RSS, and `generateStaticParams`. Canonical URLs live on the modern presentation (`/blog/<slug>`). The experiment lists the same records in the hub Updates box and the Writing table, and links *out* to those URLs. The modern presentation still does not link *into* `/90s`.
 
 `slug` is authored, never derived — `/90s/skills/<slug>` must survive a display-name change. `category` is a closed union (Frontend · Mobile · Backend · Tooling · Design) in `CATEGORY_ORDER`; `/` ignores it. See [Prefactor the shared skills catalogue with authored slugs and categories](https://github.com/afurusawa/andrewfurusawa/issues/52).
 

@@ -27,12 +27,15 @@ export const HUB_PORTRAIT = {
   alt: "Andrew Furusawa, the Autonomancer",
 } as const;
 
-/** What's New is period theater, not another work record. */
+/** Site news theater, plus the writing log in the same box. */
 export const WHATS_NEW = {
-  heading: "New Stuff!",
+  heading: "Updates",
   date: "9/10/26",
   items: ["Daemonforge is online.", "The Autonomancer is in."],
   more: "More coming soon...",
+  lastUpdated: "Last updated",
+  siteNews: "Site news",
+  newBadge: "NEW!",
 } as const;
 
 export const WORK_HELPER =
@@ -48,6 +51,12 @@ export const WRITING_TABLE = {
   caption: "Writing by title and date",
   title: "Title",
   date: "Date",
+} as const;
+
+export const UPDATES_TABLE = {
+  caption: "Writing by date and title",
+  date: "Date",
+  entry: "Entry",
 } as const;
 
 export const WEBRING = {
