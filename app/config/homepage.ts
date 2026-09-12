@@ -1,6 +1,7 @@
 /**
- * Locked homepage substance for `/`. Strings are verbatim from
+ * Locked offer substance, consumed by `/` and `/90s`. Strings are verbatim from
  * [Spec: homepage rebuild from the capabilities page](https://github.com/afurusawa/andrewfurusawa/issues/81).
+ * Colour-panel figures, the homepage portrait, and caption machinery stay `/` only.
  */
 
 export const identity = {

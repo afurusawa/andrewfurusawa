@@ -2,7 +2,7 @@
 
 Path inventory. **Read the one section you need, not the whole file.** For why the system is shaped this way, read [`MAP.md`](MAP.md) instead.
 
-_Last updated: 2026-09-05._
+_Last updated: 2026-09-12._
 
 ## Routes and layouts
 
@@ -26,7 +26,8 @@ _Last updated: 2026-09-05._
 | `app/90s/page.tsx` | The `/90s` page. |
 | `app/90s/metadata.ts` | Experiment layout unfurl + `noindex`; hub and note canonicals live on their pages. |
 | `app/90s/skills/[slug]/page.tsx` | A skill note. `generateStaticParams` from the publish set, `dynamicParams = false`. |
-| `app/90s/ExperimentNav.tsx` | The About · Work · Skills · Contact nav, shared by the hub, the notes, and the 404. |
+| `app/90s/ExperimentNav.tsx` | Welcome · What I do · Where I help · Work · How I work · Skills · Contact nav, shared by the hub, the notes, and the 404. |
+| `app/90s/kitsch.tsx` | Hub-only theater: hit counter, construction banner, badges, chrome bar, webring. |
 | `app/90s/NoteShell.tsx` | The outer shell a note and the 404 share — banner, nav, one Document Window, footer. |
 | `app/90s/not-found.tsx` | The experiment's own 404 — same shell, recovery in the last sentence. |
 | `app/90s/[...missing]/page.tsx` | Catches every unknown path under `/90s` and calls `notFound()`, so the router's own rejection of an unmatched slug can't escape to the global 404. |
@@ -34,7 +35,7 @@ _Last updated: 2026-09-05._
 | `app/global-not-found.tsx` | Full-document 404 for URLs that match no presentation route. Owns `<html>` / `<body>` because there is no shared root layout (`experimental.globalNotFound`). |
 | `app/prototype/layout.tsx` | Throwaway root layout for prototype routes. |
 | `app/prototype/90s-shell/` | Throwaway shell variants A–D behind `?variant=`. Reference only. |
-| `public/90s/` | The hub kitsch pack — under-construction tape, three 88×31 badges, and the experiment-owned western portrait. Hub-only assets, ≤80KB total, never rendered on a note route. |
+| `public/90s/` | Hub kitsch pack — tape, 88×31 badges, western portrait, construction graphics, chrome bar. Hub-only theater, never rendered on a note route. |
 | `scripts/generate-90s-pack.mjs` | Draws `public/90s/`. Provenance for the pack; run it rather than hand-editing an asset. |
 
 ## Content and configuration

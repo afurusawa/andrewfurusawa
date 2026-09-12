@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { HUB_HEADING, NOTE_FOOTER } from "./copy";
+import { HUB_HEADING, NOTE_FOOTER, WELCOME_TAG } from "./copy";
 import { ExperimentNav } from "./ExperimentNav";
 import styles from "./nineties.module.css";
 
@@ -18,28 +18,29 @@ export function NoteShell({
   children: ReactNode;
 }) {
   return (
-    <main className={styles.stage}>
-      <a className={styles.skipLink} href="#note-content">
-        Skip to content
-      </a>
+    <main className={styles.stage} id="main">
+      <div className={styles.noteShell}>
+        <header className={styles.noteBanner}>
+          <p className={styles.tag} aria-hidden="true">
+            {WELCOME_TAG}
+          </p>
+          <p className={styles.wordmark}>{HUB_HEADING}</p>
+        </header>
 
-      <header className={styles.banner}>
-        <p className={styles.noteSiteName}>{HUB_HEADING}</p>
-      </header>
+        <ExperimentNav hrefBase="/90s" current="skills" />
 
-      <ExperimentNav hrefBase="/90s" current="skills" />
+        <article className={styles.noteWindow} id="note-content">
+          <div className={styles.noteWindowBar} aria-hidden="true">
+            <span>{windowPath}</span>
+            <span>□ ×</span>
+          </div>
+          {children}
+        </article>
 
-      <article className={styles.noteWindow} id="note-content">
-        <div className={styles.noteWindowBar} aria-hidden="true">
-          <span>{windowPath}</span>
-          <span>□ ×</span>
-        </div>
-        {children}
-      </article>
-
-      <footer className={styles.noteFooter} aria-hidden="true">
-        {NOTE_FOOTER}
-      </footer>
+        <footer className={styles.noteFooter} aria-hidden="true">
+          {NOTE_FOOTER}
+        </footer>
+      </div>
     </main>
   );
 }

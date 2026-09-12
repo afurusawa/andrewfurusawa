@@ -4,7 +4,7 @@
 
 **Stack:** Next.js 15 App Router, React 19, TypeScript 5, Tailwind v4 (PostCSS), react-icons, Vitest, Vercel Speed Insights. Skill notes add a build-time Markdown pipeline: `gray-matter` plus `unified`/`remark-parse`/`remark-rehype`/`rehype-sanitize`/`rehype-stringify`. Those six run in server components only and reach no browser bundle, so they cost nothing against the initial-JS budget — no MDX, no GFM, no raw HTML.
 
-_Last updated: 2026-09-11. Update this map when architecture or ownership changes in a way that matters._
+_Last updated: 2026-09-12. Update this map when architecture or ownership changes in a way that matters._
 
 This file is orientation: how the system is shaped and why. For *where a file lives*, use [`agent-context-map.md`](agent-context-map.md). For *what is being worked on now*, use [`../PLAN.md`](../PLAN.md). For *what a word means*, use [`../CONTEXT.md`](../CONTEXT.md).
 
@@ -43,7 +43,7 @@ Both presentations read the same data and share none of their chrome.
 
 `slug` is authored, never derived — `/90s/skills/<slug>` must survive a display-name change. `category` is a closed union (Frontend · Mobile · Backend · Tooling · Design) in `CATEGORY_ORDER`; `/` ignores it. See [Prefactor the shared skills catalogue with authored slugs and categories](https://github.com/afurusawa/andrewfurusawa/issues/52).
 
-**Current hub chrome:** the v2 pack is one tape under-construction graphic plus three 88×31 badges; the starfield stays CSS; the pack is hub-only theater. See [Define hi-fi chrome inventory and assets for /90s v2](https://github.com/afurusawa/andrewfurusawa/issues/41).
+**Current hub chrome:** Daemonforge GeoCities collage — nested tables, construction tape, 88×31 badges, western portrait, and period graphics. Starfield stays CSS. The pack is hub-only theater.
 
 ## Conventions
 
@@ -56,7 +56,7 @@ Both presentations read the same data and share none of their chrome.
 
 ## Design authority
 
-v1's [`design/90s-experiment-spec.md`](design/90s-experiment-spec.md) is **historical**. It remains binding for the *shipped* `/90s` until v2 is implemented. v2 taste and scope live in a GitHub **spec** issue produced from [Wayfinder: /90s hi-fi kitsch and skill-note content spec](https://github.com/afurusawa/andrewfurusawa/issues/35) — not in a new `docs/design/` file. Before that issue exists, the map and its closed tickets are the record. After v2 ships, the code wins.
+v1's [`design/90s-experiment-spec.md`](design/90s-experiment-spec.md) is **historical**. [Spec: /90s v2 hi-fi kitsch and skill notes](https://github.com/afurusawa/andrewfurusawa/issues/51) still holds for the **soft secret**, the **skill-note** content model, the **catalogue** join, **featured work** as shared **substance**, voice law, theater policy, and discoverability. [Spec: rebuild the experiment as Daemonforge](https://github.com/afurusawa/andrewfurusawa/issues/91) is the source of truth for identity, hub chrome, and kitsch inventory until it ships; after ship, the code wins. Do not write a new file under `docs/design/`.
 
 `adr/` holds architecture decision records. It does not exist yet — nothing has cleared the hard-to-reverse, surprising, real-trade-off bar.
 
