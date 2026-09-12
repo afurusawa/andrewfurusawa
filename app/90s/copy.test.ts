@@ -44,14 +44,14 @@ describe("/90s voice-law copy", () => {
     );
   });
 
-  it("keeps the portrait and What's New box in experiment chrome", () => {
+  it("keeps the portrait and Updates box in experiment chrome", () => {
     expect(HUB_PORTRAIT).toEqual({
       src: "/90s/autonomancer-western.jpg",
       width: 400,
       height: 400,
       alt: "Andrew Furusawa, the Autonomancer",
     });
-    expect(WHATS_NEW.heading).toBe("New Stuff!");
+    expect(WHATS_NEW.heading).toBe("Updates");
     expect(WHATS_NEW.items).toEqual([
       "Daemonforge is online.",
       "The Autonomancer is in.",
