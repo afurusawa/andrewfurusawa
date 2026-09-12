@@ -25,6 +25,7 @@ import {
   NOTE_MISSING_LINK,
   SITE_NAME,
   SKILLS_HELPER,
+  WEBRING,
   WHATS_NEW,
   WORK_HELPER,
 } from "./copy";
@@ -54,6 +55,13 @@ describe("/90s voice-law copy", () => {
       "Notes are now connected to the directory.",
       "Construction continues at the edge of the map.",
     ]);
+  });
+
+  it("describes the webring as explicit no-link theater", () => {
+    expect(WEBRING).toEqual({
+      title: "Webring",
+      body: "No links here: this ring is theater, just a circle in the margins.",
+    });
   });
 
   it("consumes the homepage offer instead of forking its fields", () => {
