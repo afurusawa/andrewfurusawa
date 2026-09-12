@@ -6,7 +6,7 @@ import styles from "./nineties.module.css";
 import { ninetiesMetadata } from "./metadata";
 
 /**
- * Root layout of the experiment: its own `<html>` / `<body>`, its own face, and
+ * Root layout of the experiment: its own `<html>` / `<body>`, its own faces, and
  * no colour-scheme machinery at all. Entering `/90s` must not touch the stored
  * scheme choice, so nothing here reads or writes it.
  */
@@ -21,6 +21,9 @@ export default function NinetiesRootLayout({
   return (
     <html lang="en" className={experimentFontClassName}>
       <body>
+        <a className={styles.skipLink} href="#main">
+          Skip to content
+        </a>
         <div className={styles.experiment}>{children}</div>
         <SpeedInsights />
       </body>

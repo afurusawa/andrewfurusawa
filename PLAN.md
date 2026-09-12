@@ -6,13 +6,13 @@
 
 **The issue tracker is canonical.** This file is the readable snapshot; where the two disagree, GitHub wins. `docs/agents/issue-tracker.md` records how maps, tickets, blocking, and the frontier are expressed here.
 
-_Last updated: 2026-09-11._
+_Last updated: 2026-09-12._
 
 ## Active Slice
 
-**In flight:** nothing.
+**In flight:** [Spec: rebuild the experiment as Daemonforge](https://github.com/afurusawa/andrewfurusawa/issues/91) — fold prototype B's nested-table collage into the shipped hub.
 
-**Takeable now** (frontier — no open blockers): none. Spec #81 children are done. Remaining work is the spec's named leftovers, not tickets.
+**Takeable now** (frontier — no open blockers): none. Spec #81 leftovers remain allowed, not tickets.
 
 ## Backlog
 

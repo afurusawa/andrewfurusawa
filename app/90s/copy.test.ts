@@ -21,7 +21,6 @@ import {
   homepageWhatIDoSteps,
   homepageWhereIHelp,
   HUB_HEADING,
-  NOTE_DIRECTORY_HREF,
   NOTE_MISSING_LEAD,
   NOTE_MISSING_LINK,
   SITE_NAME,
@@ -51,17 +50,18 @@ describe("/90s voice-law copy", () => {
       height: 400,
       alt: "Andrew Furusawa, the Autonomancer",
     });
-    expect(WHATS_NEW).toEqual([
-      "New window, same signal.",
-      "Notes are now connected to the directory.",
-      "Construction continues at the edge of the map.",
+    expect(WHATS_NEW.heading).toBe("New Stuff!");
+    expect(WHATS_NEW.items).toEqual([
+      "Daemonforge is online.",
+      "The Autonomancer is in.",
     ]);
   });
 
   it("describes the webring as explicit no-link theater", () => {
     expect(WEBRING).toEqual({
-      title: "Webring",
-      body: "No links here: this ring is theater, just a circle in the margins.",
+      kicker: "MEMBER OF",
+      name: "The Daemonforge Web Ring",
+      nav: "[ PREV ] [ NEXT ] [ RANDOM ] [ LIST ]",
     });
   });
 
@@ -95,9 +95,5 @@ describe("/90s voice-law copy", () => {
 
   it("names the escape after a note in plain words", () => {
     expect(BACK_TO_DIRECTORY).toBe("Back to the skills directory");
-  });
-
-  it("points note recovery at the skills directory", () => {
-    expect(NOTE_DIRECTORY_HREF).toBe("/90s#skills");
   });
 });

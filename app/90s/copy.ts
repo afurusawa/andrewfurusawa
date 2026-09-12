@@ -11,9 +11,13 @@ export {
 export const SITE_NAME = "Daemonforge";
 export const HANDLE = "Autonomancer";
 export const HUB_HEADING = SITE_NAME;
+export const WELCOME_TAG = "Welcome to";
 
 export const ARRIVED_LINE =
   "Nothing links here. You arrived by URL, which is the idea.";
+
+export const HIT_COUNT = "001337";
+export const HIT_SINCE = "May 12, 1997";
 
 /** The hub portrait is chrome-owned; the public presentation keeps its own. */
 export const HUB_PORTRAIT = {
@@ -24,21 +28,36 @@ export const HUB_PORTRAIT = {
 } as const;
 
 /** What's New is period theater, not another work record. */
-export const WHATS_NEW = [
-  "New window, same signal.",
-  "Notes are now connected to the directory.",
-  "Construction continues at the edge of the map.",
-] as const;
-
-export const WHATS_NEW_TITLE = "What's New";
-export const WHATS_NEW_LABEL = "fresh signal";
-export const WHATS_NEW_STAMP = "NEW!";
+export const WHATS_NEW = {
+  heading: "New Stuff!",
+  date: "9/10/26",
+  items: ["Daemonforge is online.", "The Autonomancer is in."],
+  more: "More coming soon...",
+} as const;
 
 export const WORK_HELPER =
   "Client work, so there's nothing public to link. The stacks below are.";
 
 export const SKILLS_HELPER =
   "Skills with a note are links. The rest are here for the record.";
+
+export const WEBRING = {
+  kicker: "MEMBER OF",
+  name: "The Daemonforge Web Ring",
+  nav: "[ PREV ] [ NEXT ] [ RANDOM ] [ LIST ]",
+} as const;
+
+export const COMING_SOON = "COMING SOON";
+export const PACK_BADGE_NS = "NETSCAPE NOW!";
+export const PACK_BADGE_SITE = "DAEMONFORGE";
+
+export const WORK_TABLE = {
+  caption: "Featured work by project, domain, period, and role",
+  project: "Project",
+  domain: "Domain",
+  period: "Period",
+  role: "Role",
+} as const;
 
 /** Link back to the directory — the breadcrumb's counterpart after a note. */
 export const BACK_TO_DIRECTORY = "Back to the skills directory";
@@ -52,31 +71,8 @@ export const NOTE_DIRECTORY_HREF = "/90s#skills";
 export const NOTE_MISSING_LEAD = "That note doesn't exist.";
 export const NOTE_MISSING_LINK = `${BACK_TO_DIRECTORY}.`;
 
-export const PANE_GARNISH = {
-  welcome: "Welcome, traveler",
-  what: "Services online",
-  where: "Choose your route",
-  work: "Now shipping",
-  how: "Field manual",
-  skills: "Signal acquired",
-  contact: "Open channels",
-} as const;
-
-export const WEBRING = {
-  title: "Webring",
-  body: "No links here: this ring is theater, just a circle in the margins.",
-} as const;
-
-export const WORK_TABLE = {
-  caption: "Featured work by project, domain, period, and role",
-  project: "Project",
-  domain: "Domain",
-  period: "Period",
-  role: "Role",
-} as const;
-
 export const FOOTER =
-  "Best viewed at 1024×768 · Built with notepad energy · No web ring membership";
+  "Best viewed at 800×600 · Built with Notepad · Daemonforge © 1997–2026";
 
 /** The note routes' own footer garnish, aria-hidden and kept to a short mark. */
 export const NOTE_FOOTER = "END OF FILE";

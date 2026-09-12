@@ -48,8 +48,11 @@ _Avoid_: fake feature, mock, stub
 The deliberate period excess of the experiment's chrome, held on a short leash so it never costs readability or WCAG 2.2 AA.
 
 **Daemonforge**:
-The experiment's current visual identity — a GeoCities-collage presentation of the portfolio with a black stage, light body copy, and restrained period kitsch.
+The experiment's current visual identity — a GeoCities-collage presentation of the portfolio with a black stage, light body copy, and restrained period kitsch. The hub `<h1>` is this name.
 _Avoid_: Neon Cyber Basement (the historical identity)
+
+**Autonomancer**:
+Andrew's handle inside Daemonforge. The byline is `{name}, Autonomancer`. Not a job title and not a replacement for the professional line.
 
 **Neon Cyber Basement**:
 The historical name for the experiment's earlier dark visual identity. It is not the current name of `/90s`; **Neon Cyber Dayroom** remains an unshipped reference mood.
