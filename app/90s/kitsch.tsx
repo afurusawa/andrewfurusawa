@@ -1,5 +1,4 @@
 import {
-  COMING_SOON,
   HIT_COUNT,
   HIT_SINCE,
   PACK_BADGE_NS,
@@ -7,8 +6,6 @@ import {
   WEBRING,
 } from "./copy";
 import styles from "./nineties.module.css";
-
-const PACK_TAPE = { src: "/90s/under-construction.svg", width: 480, height: 44 };
 
 const PACK_BADGES = [
   { src: "/90s/badge-html.png" },
@@ -54,31 +51,6 @@ export function PackBadges() {
   );
 }
 
-export function ConstructionBanner() {
-  return (
-    <div className={styles.construction}>
-      <img
-        className={styles.caution}
-        src="/90s/caution.png"
-        alt=""
-        width={56}
-        height={56}
-      />
-      <span className={styles.workerClip}>
-        <img src="/90s/worker.png" alt="" width={48} height={48} />
-      </span>
-      <img
-        className={styles.packTape}
-        src={PACK_TAPE.src}
-        alt=""
-        width={PACK_TAPE.width}
-        height={PACK_TAPE.height}
-      />
-      <span className={styles.stamp}>{COMING_SOON}</span>
-    </div>
-  );
-}
-
 export function ChromeDivider() {
   return (
     <p className={styles.chrome} aria-hidden="true">
@@ -103,7 +75,6 @@ export function WebRing() {
 export function HubKitsch() {
   return (
     <div className={styles.kit} aria-hidden="true">
-      <ConstructionBanner />
       <PackBadges />
     </div>
   );

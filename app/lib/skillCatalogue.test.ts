@@ -46,11 +46,9 @@ describe("skill catalogue join", () => {
     );
   });
 
-  it("publishes Ionic, the first shipping note", () => {
-    expect(getPublishedNoteSlugs()).toContain("ionic");
-    expect(
-      getSkillCatalogue().find((skill) => skill.slug === "ionic")?.summary,
-    ).toMatch(/^Ionic helped me deliver/);
+  it("publishes no notes while the directory is empty", () => {
+    expect(getPublishedNoteSlugs()).toEqual([]);
+    expect(getSkillCatalogue().every((skill) => !skill.hasNote)).toBe(true);
   });
 
   it("keeps every note file on disk joinable to the catalogue", () => {
@@ -100,17 +98,8 @@ describe("skill note rendering", () => {
     expect(html).not.toContain("onclick");
   });
 
-  it("renders the Ionic note with its three sections and no updated line", async () => {
-    const rendered = await getRenderedSkillNote("ionic");
-
-    expect(rendered?.name).toBe("Ionic");
-    expect(rendered?.updated).toBeUndefined();
-    expect(rendered?.html).toContain("<h2>Where I used it</h2>");
-    expect(rendered?.html).toContain("<h2>Why it fit</h2>");
-    expect(rendered?.html).toContain("<h2>What it taught me</h2>");
-  });
-
-  it("has no note for a listed-only skill", async () => {
+  it("has no note for a listed skill or an unknown slug", async () => {
+    expect(await getRenderedSkillNote("ionic")).toBeUndefined();
     expect(await getRenderedSkillNote("html")).toBeUndefined();
     expect(await getRenderedSkillNote("not-a-skill")).toBeUndefined();
   });

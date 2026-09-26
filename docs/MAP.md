@@ -1,10 +1,10 @@
 # Project Map
 
-**What this is:** Andrew Furusawa's personal portfolio at `andrewfurusawa.dev`, deployed on Vercel. One codebase, two **presentations** of the same substance: the public modern portfolio at `/`, and a soft-secret 90s experiment at `/90s`. There is no hosted CMS, no database, and no public API. Content is TypeScript modules under `app/config/`, Markdown under `content/skills/` (skill notes) and `content/blog/` (writing), read at build time. Keystatic is a **local-only** authoring UI at `/keystatic` that writes those blog files; production 404s the admin and its route handler.
+**What this is:** Andrew Furusawa's personal portfolio at `andrewfurusawa.dev`, deployed on Vercel. One codebase, two **presentations** of the same substance: the public modern portfolio at `/`, and a soft-secret 90s experiment at `/90s`. There is no hosted CMS, no database, and no public API. Content is TypeScript modules under `app/config/` and Markdown under `content/blog/` (writing), read at build time. `content/skills/` can still hold a skill note, but the experiment no longer routes or lists one. Keystatic is a **local-only** authoring UI at `/keystatic` that writes those blog files; production 404s the admin and its route handler.
 
 **Stack:** Next.js 15 App Router, React 19, TypeScript 5, Tailwind v4 (PostCSS), react-icons, Vitest, Vercel Speed Insights. Markdown (skill notes and blog entries) compiles with `gray-matter` plus `unified`/`remark-parse`/`remark-rehype`/`rehype-sanitize`/`rehype-stringify`. Those six run in server components only and reach no browser bundle, so they cost nothing against the initial-JS budget — no MDX, no GFM, no raw HTML. Keystatic (`@keystatic/core`, `@keystatic/next`, `@markdoc/markdoc`) is authoring-only and never imported by a presentation.
 
-_Last updated: 2026-09-12. Update this map when architecture or ownership changes in a way that matters._
+_Last updated: 2026-09-24. Update this map when architecture or ownership changes in a way that matters._
 
 This file is orientation: how the system is shaped and why. For *where a file lives*, use [`agent-context-map.md`](agent-context-map.md). For *what is being worked on now*, use [`../PLAN.md`](../PLAN.md). For *what a word means*, use [`../CONTEXT.md`](../CONTEXT.md).
 
@@ -13,11 +13,10 @@ This file is orientation: how the system is shaped and why. For *where a file li
 | Route | Owned by | Public? |
 |-------|----------|---------|
 | `/` | `app/(portfolio)/` + `app/components/` | Yes — indexed, in the sitemap |
-| `/blog`, `/blog/[slug]` | `app/(portfolio)/blog/` | Yes — indexed when a post is published; teasers on `/`; Updates log and Writing table on `/90s` |
+| `/blog`, `/blog/[slug]` | `app/(portfolio)/blog/` | Yes — indexed when a post is published; teasers on `/`; Updates log on `/90s` |
 | `/rss.xml` | `app/rss.xml/route.ts` | Yes — published posts only |
 | `/keystatic` | `app/keystatic/` | Local authoring UI. Production 404. `noindex`. Not in the sitemap |
 | `/90s` | `app/90s/` alone | Soft secret — crawl-allowed, `X-Robots-Tag` `noindex, nofollow`, not in the sitemap |
-| `/90s/skills/[slug]` | `app/90s/skills/[slug]/` | Same soft secret. Prerendered from the publish set; `dynamicParams = false` |
 | `/90s/[...missing]` | `app/90s/[...missing]/` | Never renders — calls `notFound()` so every stray path under `/90s` gets the experiment's 404 rather than the global one |
 | unmatched URL | `app/global-not-found.tsx` | Yes as a 404 — no presentation root, so it owns its own `<html>` / `<body>` |
 
@@ -31,25 +30,25 @@ Both presentations read the same data and share none of their chrome.
 
 | Contract | Shape | Consumed by |
 |----------|-------|-------------|
-| `Skill` (`app/config/skills.ts`) | `{ slug, name, icon, category }` | `/` work stack tags, `/90s` directory |
+| `Skill` (`app/config/skills.ts`) | `{ slug, name, icon, category }` | `/` work stack tags, `/90s` work stack labels |
 | `FeaturedProject` (`app/config/featuredWork.ts`) | shared work records; `formatProjectPeriod` / `formatProjectRole` | `/` recent work, `/90s` work strip |
-| Homepage offer (`app/config/homepage.ts`) | identity cluster, What I do, Where I help, Recent work, How I work, Contact | `/` and `/90s` (colour-panel figures remain `/` only) |
+| Homepage offer (`app/config/homepage.ts`) | identity cluster, What I do, Where I help, Recent work, How I work, Contact | `/` in full. `/90s` uses the identity cluster and the contact lead-in. Colour-panel figures remain `/` only |
 | `ProfileLink` (`app/config/profileLinks.ts`) | `{ href, ariaLabel, label, Icon, openInNewTab }` | `/` contact, `/90s` contact |
 | Site identity (`app/config/site.ts`) | `SITE_URL`, `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `absoluteUrl()` | portfolio metadata, `robots.ts`, `sitemap.ts`, the built share image |
 | `pathHeaders` (`app/config/securityHeaders.ts`) | security tuples on `/:path*`; `X-Robots-Tag` on `/90s`, `/keystatic`, and `/api/keystatic` | `next.config.ts` |
-| `SkillNote` (`app/lib/skillCatalogue.ts`) | `{ slug, summary, updated?, body }`, parsed from `content/skills/<slug>.md` | the note route |
-| `CatalogueSkill` (`app/lib/skillCatalogue.ts`) | `Skill & { hasNote, summary? }` — the one join of catalogue and notes | `/90s` tiles and stack tags, the note route |
-| `BlogEntry` (`app/lib/blogCatalogue.ts`) | `{ slug, title, date, summary, draft, body }`, parsed from `content/blog/<slug>.md` | `/blog`, homepage teasers, `/90s` Updates log and Writing table, RSS, sitemap |
+| `SkillNote` (`app/lib/skillCatalogue.ts`) | `{ slug, summary, updated?, body }`, parsed from `content/skills/<slug>.md` | nothing on a page. The parser remains; the hub does not list or route notes |
+| `CatalogueSkill` (`app/lib/skillCatalogue.ts`) | `Skill & { hasNote, summary? }` — the one join of catalogue and notes | the join itself. `/90s` stack labels read `app/config/skills.ts` directly |
+| `BlogEntry` (`app/lib/blogCatalogue.ts`) | `{ slug, title, date, summary, draft, body }`, parsed from `content/blog/<slug>.md` | `/blog`, homepage teasers, `/90s` Updates log, RSS, sitemap |
 
 `app/90s/` imports *data* from `app/config/` and *nothing* from `app/components/`. Share substance, never chrome — if a change makes the experiment import a portfolio component, the change is wrong.
 
-**A note publishes by existing.** `content/skills/<slug>.md` is the whole publish decision — no `draft` flag, no list to keep in step. `getSkillCatalogue()` is the only place catalogue and notes meet; a file whose slug names no catalogue skill throws there, which fails `next build` rather than shipping a hub link to a 404.
+**A note file no longer publishes a page.** `content/skills/<slug>.md` still parses, and an orphan slug still throws from `getSkillCatalogue()`, but `/90s` does not list notes or route them. The directory is empty.
 
-**A blog entry publishes when it is not a draft.** Keystatic writes `content/blog/<slug>.md` (local save, then git push). `draft: true` keeps the file off listings, sitemap, RSS, and `generateStaticParams`. Canonical URLs live on the modern presentation (`/blog/<slug>`). The experiment lists the same records in the hub Updates box and the Writing table, and links *out* to those URLs. The modern presentation still does not link *into* `/90s`.
+**A blog entry publishes when it is not a draft.** Keystatic writes `content/blog/<slug>.md` (local save, then git push). `draft: true` keeps the file off listings, sitemap, RSS, and `generateStaticParams`. Canonical URLs live on the modern presentation (`/blog/<slug>`). The experiment lists the same records in the hub Updates log and links *out* to those URLs. The modern presentation still does not link *into* `/90s`.
 
-`slug` is authored, never derived — `/90s/skills/<slug>` must survive a display-name change. `category` is a closed union (Frontend · Mobile · Backend · Tooling · Design) in `CATEGORY_ORDER`; `/` ignores it. See [Prefactor the shared skills catalogue with authored slugs and categories](https://github.com/afurusawa/andrewfurusawa/issues/52).
+`slug` is authored, never derived. `category` is a closed union (Frontend · Mobile · Backend · Tooling · Design) in `CATEGORY_ORDER`; `/` ignores it, and `/90s` no longer sections a directory by it. See [Prefactor the shared skills catalogue with authored slugs and categories](https://github.com/afurusawa/andrewfurusawa/issues/52).
 
-**Current hub chrome:** Daemonforge GeoCities collage — nested tables, construction tape, 88×31 badges, western portrait, and period graphics. Starfield stays CSS. The pack is hub-only theater.
+**Current hub chrome:** Daemonforge GeoCities collage — nested tables, three outset nav buttons, a principle marquee, western portrait, 88×31 badges under the welcome row, and period graphics. No construction banner and no skills wall. Starfield stays CSS. The pack is hub-only theater.
 
 ## Conventions
 

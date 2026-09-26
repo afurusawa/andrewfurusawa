@@ -13,8 +13,20 @@ export const HANDLE = "Autonomancer";
 export const HUB_HEADING = SITE_NAME;
 export const WELCOME_TAG = "Welcome to";
 
+/** Unfurl description. The hub does not render this line. */
 export const ARRIVED_LINE =
   "Nothing links here. You arrived by URL, which is the idea.";
+
+/** Principles that crawl above the welcome card. */
+export const HUB_QUOTES = [
+  "An agent is only as fast as the requirement it was handed.",
+  "The making can be multiplied. What is worth making cannot.",
+  "Speed without judgment is a faster wrong turn.",
+] as const;
+
+/** Experiment-only welcome card. The public homepage keeps its own lede. */
+export const HUB_CREDO =
+  "The ideal product owner knows what is worth building and why. The ideal designer makes that tangible and usable. The ideal engineer builds it efficiently and soundly. But those roles are often missing, so I work across the gap, with an agent fleet to keep the build running.";
 
 export const HIT_COUNT = "001337";
 export const HIT_SINCE = "May 12, 1997";
@@ -65,7 +77,6 @@ export const WEBRING = {
   nav: "[ PREV ] [ NEXT ] [ RANDOM ] [ LIST ]",
 } as const;
 
-export const COMING_SOON = "COMING SOON";
 export const PACK_BADGE_NS = "NETSCAPE NOW!";
 export const PACK_BADGE_SITE = "DAEMONFORGE";
 
@@ -77,17 +88,13 @@ export const WORK_TABLE = {
   role: "Role",
 } as const;
 
-/** Link back to the directory — the breadcrumb's counterpart after a note. */
-export const BACK_TO_DIRECTORY = "Back to the skills directory";
-/** Canonical hash target for note breadcrumbs and recovery. */
-export const NOTE_DIRECTORY_HREF = "/90s#skills";
-
 /**
- * Unknown note slug. Two sentences: the first is plain text, the second is the
- * real link, so the recovery is the link text rather than a bare "here".
+ * Unknown path under /90s. Two sentences: the first is plain text, the second
+ * is the real link, so the recovery is the link text rather than a bare "here".
  */
-export const NOTE_MISSING_LEAD = "That note doesn't exist.";
-export const NOTE_MISSING_LINK = `${BACK_TO_DIRECTORY}.`;
+export const NOT_FOUND_LEAD = "That page doesn't exist.";
+export const NOT_FOUND_LINK = "Back to Daemonforge.";
+export const NOT_FOUND_HREF = "/90s";
 
 export const FOOTER =
   "Best viewed at 800×600 · Built with Notepad · Daemonforge © 1997–2026";

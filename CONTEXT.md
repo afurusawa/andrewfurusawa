@@ -87,21 +87,21 @@ One named technology in the portfolio's professional skills list, shared by ever
 _Avoid_: technology, tool, tag
 
 **Skill note**:
-First-person writing about one skill within the experiment — where it was used, why it fit at the time, what it taught. One note per skill at most, and only for skills with something to say. Deliberately not documentation: a note is considered and partial, never a reference.
+A retired experiment essay bound to one catalogue skill. The parser still accepts `content/skills/<slug>.md`. The hub does not list notes or route them. Writing lives in blog entries.
 _Avoid_: dispatch (collides with the Redux/React reducer verb), post (implies a dated feed), README (promises reference documentation, not experience)
 
 **Publish set**:
-The skills that have a note. Always a strict subset of the catalogue, and expected to stay one — a skill without a note is the normal case, not a gap.
+The skills that have a note file. Empty. A skill without a note is the normal case. Nothing on `/90s` links from this set.
 _Avoid_: published posts, live pages
 
 **Catalogue**:
-The full list of skills as displayed — every skill appears, whether or not a note exists for it. Only skills in the publish set are links.
+The full list of skills as shared data. Featured-work stack labels read the names. The experiment does not display the list as a directory.
 _Avoid_: index, registry (a registry is the set of pages, not of skills)
 
 ### Writing
 
 **Blog entry**:
-One dated piece of writing, shared as substance across presentations. Lives as `content/blog/<slug>.md`. Canonical URL is on the modern presentation (`/blog/<slug>`). Distinct from a skill note: a note is bound to one catalogue skill and lives only inside the experiment.
+One dated piece of writing, shared as substance across presentations. Lives as `content/blog/<slug>.md`. Canonical URL is on the modern presentation (`/blog/<slug>`). Distinct from a retired skill note, which was bound to one catalogue skill.
 _Avoid_: article (too journalistic), essay (promises a form this site does not require)
 
 **Draft**:
@@ -113,7 +113,7 @@ The local authoring UI at `/keystatic`. It writes blog files into the repo. It i
 _Avoid_: CMS (too broad — there is no hosted content store), admin (collides with a product-admin mental model)
 
 **Category**:
-A named grouping of skills in the catalogue. Every skill has exactly one. The experiment's directory sections the tile wall by it; other presentations may ignore it.
+A named grouping of skills in the catalogue. Every skill has exactly one. The experiment no longer sections a directory by it; other presentations may ignore it.
 _Avoid_: tag (implies many), folder, bucket
 
 ### Planning

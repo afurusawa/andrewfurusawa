@@ -1,48 +1,23 @@
-import { getPublishedBlogEntries } from "../lib/blogCatalogue";
 import styles from "./nineties.module.css";
 
 const NAVIGATION_ITEMS = [
-  { id: "welcome", label: "Welcome" },
-  { id: "what", label: "What I do" },
-  { id: "where", label: "Where I help" },
   { id: "work", label: "Work" },
-  { id: "how", label: "How I work" },
-  { id: "skills", label: "Skills" },
+  { id: "writing", label: "Writing" },
   { id: "contact", label: "Contact" },
 ] as const;
 
-export type NavSection = (typeof NAVIGATION_ITEMS)[number]["id"] | "writing";
-
 /**
- * The experiment nav. The hub links to its own sections; a note route links
- * back to `/90s#…` so the reader is never a dead end, and marks the section
- * it came from as current.
+ * The experiment nav. The hub links to its own sections; a nested route links
+ * back to `/90s#…` so the reader is never a dead end.
  */
-export function ExperimentNav({
-  hrefBase = "",
-  current,
-}: {
-  /** `""` on the hub, `"/90s"` from a nested route. */
-  hrefBase?: string;
-  current?: NavSection;
-}) {
-  const items =
-    getPublishedBlogEntries().length > 0
-      ? [
-          ...NAVIGATION_ITEMS.slice(0, 5),
-          { id: "writing" as const, label: "Writing" },
-          ...NAVIGATION_ITEMS.slice(5),
-        ]
-      : NAVIGATION_ITEMS;
-
+export function ExperimentNav({ hrefBase = "" }: { hrefBase?: string }) {
   return (
     <nav className={styles.navigation} aria-label="Experiment sections">
-      {items.map((item) => (
+      {NAVIGATION_ITEMS.map((item) => (
         <a
           className={styles.navigationLink}
           href={`${hrefBase}#${item.id}`}
           key={item.id}
-          aria-current={item.id === current ? "page" : undefined}
         >
           {item.label}
         </a>
