@@ -47,12 +47,12 @@ describe("skill directory", () => {
     expect(mobile?.skills.find((s) => s.slug === "cordova")?.hasNote).toBe(false);
   });
 
-  it("shows Ionic as the only noted skill in the shipping directory", () => {
+  it("ships no noted skills while the notes directory is empty", () => {
     const noted = getSkillDirectory().flatMap((group) =>
       group.skills.filter((skill) => skill.hasNote).map((skill) => skill.slug),
     );
 
-    expect(noted).toEqual(["ionic"]);
+    expect(noted).toEqual([]);
   });
 
   it("drops a category with no skills rather than heading an empty group", () => {

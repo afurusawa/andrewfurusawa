@@ -30,19 +30,18 @@ _Last updated: 2026-09-12._
 | `app/90s/fonts.ts` | Experiment-only VT323 and Press Start 2P font loader. |
 | `app/90s/experiment.css` | Experiment-only preflight import. |
 | `app/90s/page.tsx` | The `/90s` page. |
-| `app/90s/metadata.ts` | Experiment layout unfurl + `noindex`; hub and note canonicals live on their pages. |
-| `app/90s/skills/[slug]/page.tsx` | A skill note. `generateStaticParams` from the publish set, `dynamicParams = false`. |
-| `app/90s/ExperimentNav.tsx` | Welcome · What I do · Where I help · Work · How I work · Skills · Contact nav, shared by the hub, the notes, and the 404. |
-| `app/90s/kitsch.tsx` | Hub-only theater: hit counter, construction banner, badges, chrome bar, webring. |
+| `app/90s/metadata.ts` | Experiment layout unfurl + `noindex`; the hub canonical lives on the hub page. |
+| `app/90s/ExperimentNav.tsx` | Work · Writing · Contact button nav, shared by the hub and the 404. Writing jumps to the Updates column. |
+| `app/90s/kitsch.tsx` | Hub-only theater: hit counter, badges, chrome bar, webring. |
 | `app/90s/kitschDate.ts` | ISO date to a GeoCities `M/D/YY` stamp for the hub Updates log. |
-| `app/90s/NoteShell.tsx` | The outer shell a note and the 404 share — banner, nav, one Document Window, footer. |
+| `app/90s/NoteShell.tsx` | The 404 shell — banner, nav, one Document Window, footer. |
 | `app/90s/not-found.tsx` | The experiment's own 404 — same shell, recovery in the last sentence. |
 | `app/90s/[...missing]/page.tsx` | Catches every unknown path under `/90s` and calls `notFound()`, so the router's own rejection of an unmatched slug can't escape to the global 404. |
 | `app/90s/nineties.module.css` | All experiment chrome. Nothing else styles `/90s`. |
 | `app/global-not-found.tsx` | Full-document 404 for URLs that match no presentation route. Owns `<html>` / `<body>` because there is no shared root layout (`experimental.globalNotFound`). |
 | `app/prototype/layout.tsx` | Throwaway root layout for prototype routes. |
 | `app/prototype/90s-shell/` | Throwaway shell variants A–D behind `?variant=`. Reference only. |
-| `public/90s/` | Hub kitsch pack — tape, 88×31 badges, western portrait, construction graphics, chrome bar. Hub-only theater, never rendered on a note route. |
+| `public/90s/` | Hub kitsch pack — 88×31 badges, western portrait, chrome bar. Construction graphics remain in the pack and are not rendered. |
 | `scripts/generate-90s-pack.mjs` | Draws `public/90s/`. Provenance for the pack; run it rather than hand-editing an asset. |
 
 ## Content and configuration
@@ -57,7 +56,7 @@ Everything here is data, not markup. New content belongs in this directory, neve
 | `app/config/profileLinks.ts` | Social and contact links — `ProfileLink`. |
 | `app/config/site.ts` | `SITE_URL`, `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `absoluteUrl()`. |
 | `app/config/securityHeaders.ts` | Response headers, consumed by `next.config.ts`. |
-| `content/skills/` | The skill notes, one Markdown file per catalogue slug. A file here is what publishes a note; a filename with no catalogue slug fails the build. |
+| `content/skills/` | Skill-note Markdown, one file per catalogue slug. The directory is empty: a file still joins in `skillCatalogue.ts`, and a filename with no catalogue slug fails the build, but `/90s` does not route it. |
 | `content/blog/` | Blog entries, one Markdown file per slug. `draft: true` keeps a file off the public set. |
 | `keystatic.config.ts` | Keystatic collection schema. Authoring only; presentations do not import this. |
 | `public/blog/` | Images referenced from blog Markdown. |
@@ -72,7 +71,7 @@ No React — this is what the node-environment test runner can reach. Pure funct
 | `app/lib/markdown.ts` | Shared frontmatter coercion and sanitized Markdown → HTML. Used by skill notes and blog entries. |
 | `app/lib/skillCatalogue.ts` | The one join: catalogue skills plus the notes on disk, and the Markdown pipeline that renders one. The publish set is owned here; nothing else re-derives it. Touches the filesystem, so it is build-time only. |
 | `app/lib/blogCatalogue.ts` | Blog files on disk, draft filter, date sort, public hrefs. Touches the filesystem, so it is build-time only. Presentations must not import Keystatic. |
-| `app/lib/skillDirectory.ts` | The `/90s` skills directory shape — the catalogue grouped by category. Reads the join, never the filesystem. |
+| `app/lib/skillDirectory.ts` | Catalogue grouped by category. The hub no longer renders this directory. |
 
 ## Components (modern presentation only)
 

@@ -1,23 +1,18 @@
-import {
-  NOTE_DIRECTORY_HREF,
-  NOTE_MISSING_LEAD,
-  NOTE_MISSING_LINK,
-} from "./copy";
+import { NOT_FOUND_HREF, NOT_FOUND_LEAD, NOT_FOUND_LINK } from "./copy";
 import { NoteShell } from "./NoteShell";
 import styles from "./nineties.module.css";
 
 /**
- * The experiment's own 404, reached by an unknown note slug or any other stray
- * path under /90s. Same shell as a note, plain pane inside, and the recovery is
- * the last sentence rather than a bare "here".
+ * The experiment's own 404, reached by any stray path under /90s. Plain pane
+ * inside the shell, and the recovery is the last sentence rather than a bare
+ * "here".
  */
 export default function NinetiesNotFound() {
   return (
-    <NoteShell windowPath="C:\SKILLS\NOT.FOUND">
+    <NoteShell windowPath="C:\DAEMON\NOT.FOUND">
       <div className={styles.noteBody}>
         <p>
-          {NOTE_MISSING_LEAD}{" "}
-          <a href={NOTE_DIRECTORY_HREF}>{NOTE_MISSING_LINK}</a>
+          {NOT_FOUND_LEAD} <a href={NOT_FOUND_HREF}>{NOT_FOUND_LINK}</a>
         </p>
       </div>
     </NoteShell>

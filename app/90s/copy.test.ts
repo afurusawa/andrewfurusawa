@@ -10,9 +10,10 @@ import {
 } from "../config/homepage";
 import {
   ARRIVED_LINE,
-  BACK_TO_DIRECTORY,
   HANDLE,
+  HUB_CREDO,
   HUB_PORTRAIT,
+  HUB_QUOTES,
   homepageContactLeadIn,
   homepageHowIWork,
   homepageIdentity,
@@ -21,8 +22,9 @@ import {
   homepageWhatIDoSteps,
   homepageWhereIHelp,
   HUB_HEADING,
-  NOTE_MISSING_LEAD,
-  NOTE_MISSING_LINK,
+  NOT_FOUND_HREF,
+  NOT_FOUND_LEAD,
+  NOT_FOUND_LINK,
   SITE_NAME,
   SKILLS_HELPER,
   WEBRING,
@@ -38,9 +40,20 @@ describe("/90s voice-law copy", () => {
     expect(HANDLE).toBe("Autonomancer");
   });
 
-  it("keeps the arrived line as experiment-only garnish", () => {
+  it("keeps the arrived line as the unfurl description", () => {
     expect(ARRIVED_LINE).toBe(
       "Nothing links here. You arrived by URL, which is the idea.",
+    );
+  });
+
+  it("states the hub principles and the welcome credo", () => {
+    expect(HUB_QUOTES).toEqual([
+      "An agent is only as fast as the requirement it was handed.",
+      "The making can be multiplied. What is worth making cannot.",
+      "Speed without judgment is a faster wrong turn.",
+    ]);
+    expect(HUB_CREDO).toBe(
+      "The ideal product owner knows what is worth building and why. The ideal designer makes that tangible and usable. The ideal engineer builds it efficiently and soundly. But those roles are often missing, so I work across the gap, with an agent fleet to keep the build running.",
     );
   });
 
@@ -94,13 +107,10 @@ describe("/90s voice-law copy", () => {
     );
   });
 
-  it("states the unknown note with the locked copy, the link last", () => {
-    expect(`${NOTE_MISSING_LEAD} ${NOTE_MISSING_LINK}`).toBe(
-      "That note doesn't exist. Back to the skills directory.",
+  it("recovers an unknown path to the hub, with the link last", () => {
+    expect(`${NOT_FOUND_LEAD} ${NOT_FOUND_LINK}`).toBe(
+      "That page doesn't exist. Back to Daemonforge.",
     );
-  });
-
-  it("names the escape after a note in plain words", () => {
-    expect(BACK_TO_DIRECTORY).toBe("Back to the skills directory");
+    expect(NOT_FOUND_HREF).toBe("/90s");
   });
 });

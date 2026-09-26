@@ -1,56 +1,49 @@
 import { contactLinks, type ProfileLink } from "../config/profileLinks";
+import { skills } from "../config/skills";
 import {
   featuredWork,
   formatProjectPeriod,
   formatProjectRole,
 } from "../config/featuredWork";
-import { cspoBadge } from "../config/homepage";
-import {
-  BLOG_TEASER_LIMIT,
-  blogEntryHref,
-  readBlogEntries,
-} from "../lib/blogCatalogue";
-import { getSkillCatalogue } from "../lib/skillCatalogue";
-import {
-  getSkillDirectory,
-  groupCountLabel,
-  skillNoteHref,
-} from "../lib/skillDirectory";
+import { blogEntryHref, readBlogEntries } from "../lib/blogCatalogue";
 import { ExperimentNav } from "./ExperimentNav";
 import {
-  ARRIVED_LINE,
   FOOTER,
   HANDLE,
+  HUB_CREDO,
   HUB_HEADING,
   HUB_PORTRAIT,
-  SITE_NAME,
-  SKILLS_HELPER,
+  HUB_QUOTES,
   WELCOME_TAG,
   UPDATES_TABLE,
   WHATS_NEW,
   WORK_HELPER,
   WORK_TABLE,
   WRITING_HELPER,
-  WRITING_TABLE,
   homepageContactLeadIn,
-  homepageHowIWork,
   homepageIdentity,
-  homepageWhatIDoHeading,
-  homepageWhatIDoSteps,
-  homepageWhereIHelp,
 } from "./copy";
 import { kitschDate } from "./kitschDate";
-import { ChromeDivider, HitCounter, HubKitsch, WebRing } from "./kitsch";
+import { ChromeDivider, HitCounter, PackBadges, WebRing } from "./kitsch";
 import { ninetiesHubMetadata } from "./metadata";
 import styles from "./nineties.module.css";
 
 export const metadata = ninetiesHubMetadata;
 
-const catalogueBySlug = new Map(
-  getSkillCatalogue().map((skill) => [skill.slug, skill]),
-);
+const skillNames = new Map(skills.map((skill) => [skill.slug, skill.name]));
 
-const skillDirectory = getSkillDirectory();
+const quoteLine = `${HUB_QUOTES.join(" · ")} · `;
+
+function QuoteMarquee() {
+  return (
+    <div className={styles.marquee}>
+      <p className={styles.marqueeTrack}>
+        <span>{quoteLine}</span>
+        <span aria-hidden="true">{quoteLine}</span>
+      </p>
+    </div>
+  );
+}
 
 function publishedWriting() {
   return readBlogEntries()
@@ -58,7 +51,8 @@ function publishedWriting() {
     .slice()
     .sort(
       (left, right) =>
-        right.date.localeCompare(left.date) || left.slug.localeCompare(right.slug),
+        right.date.localeCompare(left.date) ||
+        left.slug.localeCompare(right.slug),
     )
     .map(({ slug, title, date, summary }) => ({
       slug,
@@ -174,7 +168,6 @@ function ProfileLinkButtons({ links }: { links: readonly ProfileLink[] }) {
 
 export default function NinetiesExperiment() {
   const published = publishedWriting();
-  const writing = published.slice(0, BLOG_TEASER_LIMIT);
 
   return (
     <main className={styles.stage} id="main">
@@ -200,12 +193,11 @@ export default function NinetiesExperiment() {
           </tr>
           <tr>
             <td colSpan={2}>
-              <HubKitsch />
+              <QuoteMarquee />
             </td>
           </tr>
           <tr>
-            <td className={`${styles.card} ${styles.introCard}`} id="welcome">
-              <h2 className={styles.cardTitle}>Welcome to {SITE_NAME}</h2>
+            <td className={`${styles.card} ${styles.introCard}`}>
               <div className={styles.introRow}>
                 <img
                   className={styles.portrait}
@@ -214,89 +206,21 @@ export default function NinetiesExperiment() {
                   width={96}
                   height={96}
                 />
-                <div>
-                  <p>{ARRIVED_LINE}</p>
-                  <p className={styles.lede}>{homepageIdentity.lede}</p>
-                  <p>{homepageIdentity.credentialLine}</p>
-                  <p className={styles.credential}>
-                    <img
-                      src={cspoBadge.src}
-                      alt=""
-                      width={24}
-                      height={24}
-                    />
-                    {homepageIdentity.credential}
-                  </p>
-                </div>
+                <p className={styles.credo}>{HUB_CREDO}</p>
               </div>
             </td>
-            <td className={`${styles.card} ${styles.newsCard}`}>
+            <td className={`${styles.card} ${styles.newsCard}`} id="writing">
               <WhatsNew entries={published} />
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2} className={styles.badgeRow} aria-hidden="true">
+              <PackBadges />
             </td>
           </tr>
           <tr>
             <td colSpan={2}>
               <ChromeDivider />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={2} className={styles.sectionBar} id="what">
-              <h2>
-                <span aria-hidden="true">:: </span>
-                What I do
-                <span aria-hidden="true"> ::</span>
-              </h2>
-              <p>{homepageWhatIDoHeading}</p>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={2} className={styles.stepsCell}>
-              <table className={styles.steps} role="presentation">
-                <tbody>
-                  <tr>
-                    {homepageWhatIDoSteps.map((step) => (
-                      <td key={step.title}>
-                        <h3>{step.title}</h3>
-                        <ul>
-                          {step.items.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </td>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={2} className={styles.quote} id="where">
-              <h2 className={styles.srOnly}>Where I help</h2>
-              <p>{homepageWhereIHelp.quote}</p>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={2} className={styles.helpCell}>
-              <table className={styles.help} role="presentation">
-                <tbody>
-                  <tr>
-                    {homepageWhereIHelp.items.slice(0, 2).map((item) => (
-                      <td key={item.title}>
-                        <h3>{item.title}</h3>
-                        <p>{item.body}</p>
-                      </td>
-                    ))}
-                  </tr>
-                  <tr>
-                    {homepageWhereIHelp.items.slice(2).map((item) => (
-                      <td key={item.title}>
-                        <h3>{item.title}</h3>
-                        <p>{item.body}</p>
-                      </td>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
             </td>
           </tr>
           <tr>
@@ -340,136 +264,17 @@ export default function NinetiesExperiment() {
                           className={styles.stackTags}
                           aria-label={`${project.title} stack`}
                         >
-                          {project.stack.map((slug) => {
-                            const skill = catalogueBySlug.get(slug);
-                            const label = skill?.name ?? slug;
-
-                            return (
-                              <li className={styles.stackTag} key={slug}>
-                                {skill?.hasNote ? (
-                                  <a
-                                    className={styles.stackTagLink}
-                                    href={skillNoteHref(slug)}
-                                  >
-                                    {label}
-                                  </a>
-                                ) : (
-                                  label
-                                )}
-                              </li>
-                            );
-                          })}
+                          {project.stack.map((slug) => (
+                            <li className={styles.stackTag} key={slug}>
+                              {skillNames.get(slug) ?? slug}
+                            </li>
+                          ))}
                         </ul>
                       </td>
                     </tr>,
                   ])}
                 </tbody>
               </table>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={2} className={styles.sectionBar} id="how">
-              <h2>
-                <span aria-hidden="true">:: </span>
-                How I work
-                <span aria-hidden="true"> ::</span>
-              </h2>
-            </td>
-          </tr>
-          {homepageHowIWork.map((item) => (
-            <tr key={item.title}>
-              <td colSpan={2} className={styles.how}>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </td>
-            </tr>
-          ))}
-          {writing.length > 0 ? (
-            <>
-              <tr>
-                <td colSpan={2} className={styles.sectionBar} id="writing">
-                  <h2>
-                    <span aria-hidden="true">:: </span>
-                    Writing
-                    <span aria-hidden="true"> ::</span>
-                  </h2>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={2} className={styles.workWrap}>
-                  <p className={styles.helper}>{WRITING_HELPER}</p>
-                  <table className={styles.work}>
-                    <caption className={styles.srOnly}>
-                      {WRITING_TABLE.caption}
-                    </caption>
-                    <thead>
-                      <tr>
-                        <th scope="col">{WRITING_TABLE.title}</th>
-                        <th scope="col">{WRITING_TABLE.date}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {writing.map((entry) => (
-                        <tr key={entry.slug}>
-                          <td>
-                            <a href={blogEntryHref(entry.slug)}>
-                              <strong>{entry.title}</strong>
-                            </a>
-                          </td>
-                          <td>
-                            <time dateTime={entry.date}>{entry.date}</time>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </>
-          ) : null}
-          <tr>
-            <td colSpan={2} className={styles.skills} id="skills">
-              <h2>Skills</h2>
-              <p className={styles.helper}>{SKILLS_HELPER}</p>
-              {skillDirectory.map((group) => {
-                const headingId = `skills-${group.category.toLowerCase()}`;
-
-                return (
-                  <div className={styles.skillGroup} key={group.category}>
-                    <h3 className={styles.skillGroupHeading} id={headingId}>
-                      {group.category}
-                      <span className={styles.skillGroupCount}>
-                        {groupCountLabel(group)}
-                      </span>
-                    </h3>
-                    <ul className={styles.skillWall} aria-labelledby={headingId}>
-                      {group.skills.map((skill) => (
-                        <li key={skill.slug}>
-                          {skill.hasNote ? (
-                            <a
-                              className={`${styles.skillTile} ${styles.skillTileNoted}`}
-                              href={skillNoteHref(skill.slug)}
-                            >
-                              {skill.name}
-                              <span
-                                className={styles.skillTileFlag}
-                                aria-hidden="true"
-                              >
-                                {" "}
-                                ★
-                              </span>
-                            </a>
-                          ) : (
-                            <span className={styles.skillTile}>
-                              {skill.name}
-                            </span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })}
             </td>
           </tr>
           <tr>

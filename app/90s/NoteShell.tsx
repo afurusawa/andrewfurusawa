@@ -4,9 +4,8 @@ import { ExperimentNav } from "./ExperimentNav";
 import styles from "./nineties.module.css";
 
 /**
- * The outer shell every note route shares — banner, hub nav, one bordered
- * Document Window, footer. The experiment's 404 wears the same shell, so a
- * missing note lands somewhere that still looks like the place it came from.
+ * The outer shell the experiment's 404 wears — banner, hub nav, one bordered
+ * Document Window, footer — so a stray path still looks like Daemonforge.
  *
  * `windowPath` is the fake DOS path on the window bar: garnish, aria-hidden.
  */
@@ -27,7 +26,7 @@ export function NoteShell({
           <p className={styles.wordmark}>{HUB_HEADING}</p>
         </header>
 
-        <ExperimentNav hrefBase="/90s" current="skills" />
+        <ExperimentNav hrefBase="/90s" />
 
         <article className={styles.noteWindow} id="note-content">
           <div className={styles.noteWindowBar} aria-hidden="true">
