@@ -4,6 +4,7 @@
   "private": true,
   "packageManager": "pnpm@11.26.0",
   "scripts": {
+    "prototype:homepage": "next dev --turbopack --port 3000",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
