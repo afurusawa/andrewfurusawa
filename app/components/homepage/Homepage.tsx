@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import {
   featuredWork,
   formatProjectPeriod,
@@ -48,7 +49,19 @@ function pad(index: number): string {
   return String(index + 1).padStart(2, "0");
 }
 
-export function Homepage() {
+type HelpContent = {
+  quote: string;
+  items: readonly { title: string; body: string }[];
+};
+
+/** Optional content slots let the throwaway prototype use the actual design. */
+export function Homepage({
+  openingAction,
+  helpContent = whereIHelp,
+}: {
+  openingAction?: ReactNode;
+  helpContent?: HelpContent;
+} = {}) {
   const writing = getBlogTeasers();
 
   return (
@@ -57,8 +70,8 @@ export function Homepage() {
         <ProgressBar />
         <ColourPanel />
         <main id="record" tabIndex={-1}>
-          <WhatIDo />
-          <WhereIHelp />
+          <WhatIDo openingAction={openingAction} />
+          <WhereIHelp content={helpContent} />
           <RecentWork />
           <HowIWork />
           <Writing entries={writing} />
@@ -205,7 +218,7 @@ function ColourPanelCopy({
   );
 }
 
-function WhatIDo() {
+function WhatIDo({ openingAction }: { openingAction?: ReactNode }) {
   const section = homepageSections[0];
 
   return (
@@ -258,6 +271,7 @@ function WhatIDo() {
         <p className="lede mt-7 max-w-prose text-xl leading-relaxed text-body">
           {identity.lede}
         </p>
+        {openingAction}
         <ul className="mt-8 grid gap-6 md:grid-cols-3">
           {whatIDoSteps.map((step) => (
             <li key={step.title} className="border-t-2 border-ink-what py-5">
@@ -275,7 +289,7 @@ function WhatIDo() {
   );
 }
 
-function WhereIHelp() {
+function WhereIHelp({ content }: { content: HelpContent }) {
   const section = homepageSections[1];
 
   return (
@@ -286,10 +300,10 @@ function WhereIHelp() {
           {section.label}
         </h2>
         <blockquote className="max-w-[22ch] font-display text-3xl leading-tight tracking-tight md:text-4xl">
-          {whereIHelp.quote}
+          {content.quote}
         </blockquote>
         <ul className="mt-10">
-          {whereIHelp.items.map((item, index) => (
+          {content.items.map((item, index) => (
             <li
               key={item.title}
               className="relative flex min-h-[8.5rem] items-center overflow-hidden border-t border-hairline first:border-t-0"

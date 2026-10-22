@@ -1,6 +1,13 @@
 /** PROTOTYPE: proposed copy, deliberately separate from the locked offer. */
 export const variants = [
   {
+    key: "D",
+    name: "Original design + client situations",
+    description: "Retain the existing layout, type, and color panel. Add an opening email action and make the four existing service rows start with concrete client situations.",
+    structure: "Original page order: What I do → Where I help → Recent work → How I work → Writing → Contact",
+    mobile: "Existing layout retained. Situation headings and short explanations use the current numbered rows.",
+  },
+  {
     key: "A",
     name: "Refined split",
     description: "Keep the changing sidebar. Bring the offer, email action, and proof into the opening.",
@@ -24,6 +31,29 @@ export const variants = [
 ] as const;
 
 export type VariantKey = (typeof variants)[number]["key"];
+
+/** C's client language, fitted to the original four service rows for variant D. */
+export const situationalHelp = {
+  quote: "Start with what sounds familiar.",
+  items: [
+    {
+      title: "We know the problem. The scope is still unclear.",
+      body: "I work with stakeholders and real users to turn competing expectations into a shared scope. Discovery, wireframes, user stories, and acceptance criteria make the next step concrete.",
+    },
+    {
+      title: "We need someone who can define it and build it.",
+      body: "I stay with the work from product decisions to production code. Short cycles, code review, tests, and documentation give your team working software it can take over.",
+    },
+    {
+      title: "Our app needs to grow beyond its current stack.",
+      body: "I help teams modernize an existing app or reach web, iOS, and Android from one codebase. The stack fits what your team runs, and the migration keeps delivery moving.",
+    },
+    {
+      title: "We have an AI idea. We need to know if it works.",
+      body: "I test the risky assumption before you commit to a larger build. Feasibility research, prompt architecture, and a working prototype establish what is practical, with a path to production across model providers.",
+    },
+  ],
+} as const;
 
 export const offer = {
   heading: "Make the problem clear before the code gets expensive.",

@@ -1,5 +1,5 @@
 /**
- * THROWAWAY: three structural refinements on the real homepage, /?variant=A|B|C.
+ * THROWAWAY: homepage comparisons on /?variant=D|A|B|C.
  * Question: which hierarchy preserves the site's character while making the
  * offer, evidence, and next action easier to reach, especially on a phone?
  */
@@ -9,8 +9,9 @@ import { featuredWork, formatProjectPeriod, formatProjectRole } from "../../../c
 import { contactLinks } from "../../../config/profileLinks";
 import { skills } from "../../../config/skills";
 import { ColourPanelObserver } from "../ColourPanelObserver";
+import { Homepage } from "../Homepage";
 import { PrototypeSwitcher } from "../../prototype/PrototypeSwitcher";
-import { capabilities, offer, process, variants, type VariantKey } from "./content";
+import { capabilities, offer, process, situationalHelp, variants, type VariantKey } from "./content";
 import styles from "./prototype.module.css";
 
 const skillNames = new Map(skills.map((skill) => [skill.slug, skill.name]));
@@ -23,7 +24,16 @@ const links = [
 ];
 
 export function HomepagePrototype({ variant }: { variant: string }) {
-  const current: VariantKey = variants.find((item) => item.key === variant)?.key ?? "A";
+  const current: VariantKey = variants.find((item) => item.key === variant)?.key ?? "D";
+  if (current === "D") {
+    return (
+      <div data-prototype-variant="D">
+        <PrototypeBrief current={current} />
+        <VariantD />
+        <PrototypeSwitcher current={current} variants={variants} />
+      </div>
+    );
+  }
   return (
     <div className={styles.prototype} data-prototype-variant={current}>
       <PrototypeBrief current={current} />
@@ -42,9 +52,24 @@ function PrototypeBrief({ current }: { current: VariantKey }) {
         <p>{selected.description}</p>
         <p><strong>Page order:</strong> {selected.structure}</p>
         <p><strong>Mobile:</strong> {selected.mobile}</p>
-        <p>All variants: early email action, clickable navigation, concise services, full-width mobile outcomes, precise performance claim, no placeholder writing. Original page: <a href="/">/</a>. No direction selected yet.</p>
+        <p>{current === "D" ? "D keeps the original design and changes only the opening action and Where I help copy. " : "A–C explore early email actions, navigation, concise services, proof, and compact mobile layouts. "}Original page: <a href="/">/</a>. Preference: existing visual design with C’s concrete client language; D is the focused comparison.</p>
       </div>
     </details>
+  );
+}
+
+export function VariantD() {
+  return (
+    <Homepage
+      openingAction={
+        <div className="mt-6">
+          <a href={offer.email} className={styles.faithfulAction}>
+            Tell me what’s stuck <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      }
+      helpContent={situationalHelp}
+    />
   );
 }
 

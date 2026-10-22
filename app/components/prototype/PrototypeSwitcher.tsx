@@ -26,7 +26,7 @@ export function PrototypeSwitcher({
   }, [index, router, searchParams, variants]);
 
   useEffect(() => {
-    console.info("Homepage prototype state", { ...selected, writing: "Hidden until a substantive post is ready", persistence: "URL only" });
+    console.info("Homepage prototype state", { ...selected, persistence: "URL only" });
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (target?.closest("input, textarea, select, [contenteditable]") || event.altKey || event.metaKey || event.ctrlKey) return;
